@@ -1,0 +1,492 @@
+@font-face {
+  font-family: 'ProximaNovaBold';
+  src: url('proximanova-bold-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('proximanova-regular-webfont.woff') format('woff');
+}
+
+:root {
+  --light-purple: #af86ef;
+  --dark-purple: #9083eb;
+  --light-grey: rgb(40, 40, 48);
+  --t-grey: rgba(255, 255, 255, 0.04);
+  --dark-grey: rgb(27, 27, 29);
+  --b-grey: rgba(0, 0, 0, 0.1);
+  --b-grey-border: rgba(255, 255, 255, 0.06);
+  --muted: #6c757d;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 14.4px;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  font-family: 'ProximaNova', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  box-sizing: border-box;
+  background: var(--dark-grey);
+  position: relative;
+  color: white;
+}
+
+/* NAVBAR STYLING */
+
+header {
+  background: linear-gradient(to bottom, var(--light-grey), var(--dark-grey));
+  height: 6.25rem;
+}
+
+header .logo {
+  height: 6.25rem;
+  position: absolute;
+  left: -0.625rem;
+  top: 0;
+}
+
+nav {
+  border-bottom: 0.1875rem solid #1d1e21;
+  text-align: center;
+  position: relative;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.25rem;
+  text-transform: uppercase;
+}
+
+nav span {
+  color: var(--light-purple);
+}
+
+.navigation-menu {
+  max-width: 35rem;
+  padding: 1.15rem 0;
+  margin: 0 auto;
+  color: #3a3a3c;
+  font-size: 0.8125rem;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  align-items: center;
+  justify-items: center;
+}
+
+.nav-menu-item {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  grid-gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.nav-menu-item span {
+  font-weight: 600;
+}
+
+.nav-menu-item i {
+  font-size: 0.75rem;
+}
+
+.nav-menu-item:hover {
+  background: linear-gradient(
+    69deg,
+    var(--dark-purple) 0%,
+    var(--light-purple) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-active {
+  background: linear-gradient(
+    69deg,
+    var(--dark-purple) 0%,
+    var(--light-purple) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.draggable {
+  -webkit-app-region: drag;
+  height: 2.6rem;
+  position: absolute;
+  width: calc(100vw - 10rem);
+  top: 0;
+  left: 0;
+}
+
+.control-bar {
+  position: absolute;
+  right: 1.25rem;
+  top: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  grid-gap: 0.75rem;
+  justify-items: center;
+  box-sizing: border-box;
+  align-items: center;
+  height: 100%;
+}
+
+.control-bar i {
+  font-size: 1rem;
+  margin-top: 0.1563rem;
+}
+
+.notifications {
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  height: 0.5rem;
+  width: 0.5rem;
+  background: rgb(253, 73, 77);
+  background: linear-gradient(
+    to top,
+    rgb(253, 73, 77) 0%,
+    rgb(246, 127, 203) 100%
+  );
+  border-radius: 50%;
+  border: 0.0625rem solid var(--light-grey);
+  top: 0rem;
+  right: -0.0625rem;
+}
+
+.minimize,
+.exit {
+  color: var(--light-purple);
+}
+
+/* END NAVBAR STYLING */
+
+/* BEGIN MAIN STYLING */
+main {
+  height: calc(100vh - 6.25rem);
+  padding: 1rem 2.25rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.0625rem;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+/* END MAIN STYLING */
+
+/* BEGIN DASHBOARD  STYLING */
+.dashboard {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card {
+  background: rgb(34, 34, 39) !important;
+  border: 0.0625rem solid rgba(255, 255, 255, 0.04);
+}
+
+.card-header {
+  background: rgba(34, 34, 39, 0.8);
+}
+
+.card-title h5 {
+  color: white;
+}
+
+.dash-img {
+  height: 3rem;
+}
+
+.form-control {
+  background: var(--b-grey) !important;
+  border: 0.0625rem solid var(--b-grey-border) !important;
+  color: white !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control::placeholder {
+  color: #6c757d !important;
+}
+
+.custom-control {
+  text-align: center;
+  color: #6c757d;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.custom-control-label::before {
+  background: var(--b-grey-border);
+  border: 0.0625rem solid var(--b-grey-border);
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.activity-log {
+  height: calc(100vh - 26.4063rem);
+}
+
+.info-card {
+  height: calc(100% - 20.7813rem);
+}
+
+/* END DASHBOARD STYLING */
+
+/* BEGIN PET TRAINER STYLING */
+
+.pet-table-header {
+  display: grid;
+  grid-template-columns: auto 4.6875rem;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'ProximaNovaBold';
+  border-bottom: 1px solid var(--b-grey-border);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--b-grey-border) !important;
+}
+
+.badge {
+  font-size: 0.625rem;
+}
+
+.snack-table-header {
+  display: grid;
+  grid-template-columns: auto 4.6875rem;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'ProximaNovaBold';
+  border-bottom: 1px solid var(--b-grey-border);
+}
+
+.card-button button {
+  width: 100%;
+}
+
+.energy-stats .dash-img {
+  height: 3rem;
+  width: 2.625rem;
+}
+
+.btn-sm {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.pet-card {
+  display: grid;
+  grid-template-columns: 1.75rem auto 4.6875rem;
+  grid-gap: 0.75rem;
+  font-size: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--b-grey-border);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.pet-snack-card {
+  display: grid;
+  grid-template-columns: min-content auto min-content max-content;
+  grid-gap: 0.625rem;
+  font-size: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--b-grey-border);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.pet-snack-card .btn {
+  font-size: 0.625rem !important;
+}
+
+.pet-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pet-table-rows {
+  height: calc(100vh - 29.6875rem);
+  overflow: scroll;
+}
+
+.xp-icon {
+  height: 1.25rem;
+}
+
+.snack-table-rows {
+  height: calc(100vh - 40.6875rem);
+  overflow: scroll;
+}
+
+.pet-card img {
+  height: 1.25rem;
+}
+
+.pet-snack-school {
+  height: 1.25rem;
+}
+
+.teen {
+  color: #ff6b81;
+}
+
+.adult {
+  color: #fea47f;
+}
+
+.ancient {
+  color: #f6e58d;
+}
+
+.epic {
+  color: #1dd1a1;
+}
+
+.mega {
+  color: #00d2d3;
+}
+
+.ultra {
+  color: #9c88ff;
+}
+
+.pet-name-container {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.625rem;
+}
+
+#pet-exp {
+  font-size: 1rem;
+}
+
+.attribute {
+  display: grid;
+  grid-template-columns: 1.375rem auto 3.75rem;
+  grid-gap: 0.625rem;
+  align-items: center;
+}
+
+.statistic {
+  font-size: 0.6875rem;
+}
+
+.attribute img {
+  height: 1.25rem;
+}
+
+.progress {
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 !important;
+  border-radius: 0.25rem !important;
+}
+
+.progress-group {
+  display: grid;
+}
+
+.progress-group .progress {
+  height: 0.5rem;
+}
+
+.pet-name-container img {
+  height: 2.75rem;
+  margin-right: 0.25rem;
+}
+
+#pet-name {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#pet-type {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dot {
+  height: 0.375rem;
+  width: 0.375rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.green-dot {
+  background: #4cd137;
+}
+
+.red-dot {
+  background: #eb4d4b;
+}
+
+.talent {
+  background: rgba(255, 255, 255, 0.04);
+  height: 1.625rem;
+  max-width: 15rem;
+  display: grid;
+  grid-template-columns: max-content auto;
+  border-radius: 0.25rem;
+  align-items: center;
+  cursor: default;
+  padding: 0rem 0.75rem;
+  grid-gap: 0.75rem;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+}
+
+.attribute .progress {
+  background: linear-gradient(69deg, #9083eb 0%, #b589f4 100%);
+}
+
+.attribute .progress-bar {
+  box-shadow: 0px 0px 0px 2000px #313133;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+.talent-wrapper {
+  display: grid;
+  grid-gap: 0.25rem;
+}
+
+.xp-wrapper {
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.25rem;
+  display: grid;
+  grid-template-columns: min-content auto max-content;
+  align-items: center;
+  grid-gap: 0.75rem;
+}
+
+.xp-wrapper img {
+  height: 2rem;
+}
+/* END PET TRAINER STYLING */
+
+/* GLOBALS */
+::-webkit-scrollbar {
+  display: none;
+}
