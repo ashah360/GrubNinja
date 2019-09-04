@@ -33,7 +33,7 @@ const CharacterSelect = ({ characters }) => {
                     );
                   })
                 ) : (
-                  <p style={{ textAlign: 'center' }} class='mt-4'>
+                  <p style={{ textAlign: 'center' }} className='mt-4'>
                     No Characters Loaded :(
                   </p>
                 )}

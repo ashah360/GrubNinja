@@ -19,9 +19,9 @@ const Dashboard = props => {
     <Fragment>
       <h1 onClick={show}>Dashboard</h1>
       <Rodal
-        width='500'
-        height='300'
-        duration='300'
+        width={500}
+        height={300}
+        duration={300}
         visible={modalState.visible}
         onClose={hide}
       ></Rodal>
