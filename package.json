@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "client": "electron main",
-    "dev": "concurrently \"export BROWSER=NONE && npm start\" \"wait-on http://localhost:3000 && npm run client\"",
+    "dev": "concurrently \"set BROWSER=NONE && npm start\" \"wait-on http://localhost:3000 && npm run client\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
