@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const LoginCard = props => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
+  const { username, password } = formData;
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const login = async (username, password) => {
+    try {
+      await props.handleLogin(username, password);
+    } catch (error) {
+      /*if (error.type === 'connection') {
+        console.log('Retrying...');
+        return login(username, password);
+      }
+      return error.msg + 'hi';*/
+      console.log(error);
+    }
+  };
+
   return (
     <div className='row'>
       <div className='col'>
@@ -9,7 +32,9 @@ const LoginCard = props => {
           <div className='card-body'>
             <div className='row mb-3'>
               <div className='col'>
-                <h5 className='card-title text-uppercase text-muted mb-0'>Login</h5>
+                <h5 className='card-title text-uppercase text-muted mb-0'>
+                  Login
+                </h5>
               </div>
             </div>
             <div className='row'>
@@ -19,6 +44,9 @@ const LoginCard = props => {
                     type='text'
                     className='form-control'
                     placeholder='Username'
+                    name='username'
+                    value={username}
+                    onChange={e => onChange(e)}
                   />
                 </div>
               </div>
@@ -30,6 +58,9 @@ const LoginCard = props => {
                     type='password'
                     className='form-control'
                     placeholder='Password'
+                    name='password'
+                    value={password}
+                    onChange={e => onChange(e)}
                   />
                 </div>
               </div>
@@ -42,7 +73,10 @@ const LoginCard = props => {
                     type='checkbox'
                     id='remember-account'
                   />
-                  <label className='custom-control-label' htmlFor='remember-account'>
+                  <label
+                    className='custom-control-label'
+                    htmlFor='remember-account'
+                  >
                     Remember Me
                   </label>
                 </div>
@@ -50,7 +84,12 @@ const LoginCard = props => {
             </div>
             <div className='row'>
               <div className='col'>
-                <div className='btn btn-primary btn-block'>Login</div>
+                <div
+                  className='btn btn-primary btn-block'
+                  onClick={() => login(username, password)}
+                >
+                  Login
+                </div>
               </div>
             </div>
           </div>

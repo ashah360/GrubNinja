@@ -1,21 +1,17 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOAD_CHARACTERS,
-  LOAD_INVENTORY,
-  SET_JAR,
-  SET_CSID
+  REQUEST_NEW_TOKEN,
+  ACKNOWLEDGE_TOKEN
 } from '../constants/types';
 
 const initialState = {
   username: null,
   password: null,
   isLoggedIn: false,
-  csid: null,
-  characters: [],
-  inventory: [],
-  loading: true,
-  jar: null
+  tokenRefreshRequired: false,
+  initialFetched: false,
+  loading: false
 };
 
 export default function(state = initialState, action) {
@@ -27,38 +23,27 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         isLoggedIn: true,
+        initialFetched: true,
         loading: false
       };
     case LOGIN_FAIL:
       return {
         ...state,
-        username: false,
-        password: false,
-        csid: null,
+        username: null,
+        password: null,
         isLoggedIn: false,
-        loading: false,
-        characters: [],
-        inventory: []
+        tokenRefreshRequired: true,
+        loading: false
       };
-    case LOAD_INVENTORY:
+    case ACKNOWLEDGE_TOKEN:
       return {
         ...state,
-        inventory: payload
+        tokenRefreshRequired: false
       };
-    case LOAD_CHARACTERS:
+    case REQUEST_NEW_TOKEN:
       return {
         ...state,
-        characters: payload
-      };
-    case SET_CSID:
-      return {
-        ...state,
-        csid: payload
-      };
-    case SET_JAR:
-      return {
-        ...state,
-        jar: payload
+        tokenRefreshRequired: true
       };
     default:
       return state;

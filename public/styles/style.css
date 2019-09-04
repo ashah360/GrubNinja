@@ -302,8 +302,35 @@ h1 {
   background: rgba(255, 255, 255, 0.03);
 }
 
+.character-card {
+  display: grid;
+  grid-template-columns: 1.75rem auto;
+  grid-gap: 0.25rem;
+  font-size: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--b-grey-border);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-right: none;
+  border-left: none;
+}
+
+.character-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card-active {
+  background: rgba(255, 255, 255, 0.03);
+}
+
 .pet-table-rows {
   height: calc(100vh - 28.5rem);
+  overflow: scroll;
+}
+
+.char-table-rows {
+  height: calc(100vh - 36.55rem);
   overflow: scroll;
 }
 
@@ -312,6 +339,10 @@ h1 {
 }
 
 .pet-card img {
+  height: 1.25rem;
+}
+
+.character-card img {
   height: 1.25rem;
 }
 
@@ -584,6 +615,13 @@ h5 img {
 }
 
 /* END PET TRAINER STYLING */
+
+/* MODAL STYLING */
+.rodal-dialog {
+  background: rgb(34, 34, 39) !important;
+  border: 2px solid rgba(255, 255, 255, 0.04);
+}
+/* END MODAL STYLING */
 
 /* GLOBALS */
 ::-webkit-scrollbar {

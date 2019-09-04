@@ -24,7 +24,7 @@ function createWindow() {
       nodeIntegration: true,
       preload: __dirname + '/preload.js'
     },
-    frame: true,
+    frame: false,
     show: false
   });
 

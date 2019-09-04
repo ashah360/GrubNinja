@@ -1,29 +1,50 @@
 import parser from 'fast-xml-parser';
 import sanitize from '../util/sanitize';
+import headers from '../constants/headers';
+import store from '../store';
 import { LOGIN_EP } from '../constants/endpoints';
 import {
-  SET_CSID,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  REQUEST_NEW_TOKEN,
+  ACKNOWLEDGE_TOKEN,
   LOAD_CHARACTERS,
   LOAD_INVENTORY,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOAD_MAPS,
+  LOAD_CROWNS,
+  SET_CSID
 } from '../constants/types';
+import {
+  MINIGAME_ID,
+  UDID,
+  PLATFORM,
+  TOKEN_REFRESH_RATE
+} from '../constants/minigame';
+import { MAX_RETRIES } from '../constants/config';
 
-// Login with username and password
-export const login = ({ username, password }) => async (dispatch, getState) => {
+export const login = (username, password) => async (dispatch, getState) => {
   const uri = LOGIN_EP;
+
+  let { session, account } = getState();
+
   const form = {
     password: password,
-    minigameId: 'GrubGuardian',
+    minigameId: MINIGAME_ID,
     username: username,
-    udid: '',
-    platform: 'web'
+    udid: UDID,
+    platform: PLATFORM
   };
 
   try {
-    console.log('trying login');
+    console.log('Attempting Login...');
 
-    const body = await window.request({ method: 'POST', uri, form });
+    const body = await window.request({
+      method: 'POST',
+      uri,
+      jar: session,
+      headers,
+      form
+    });
 
     let data = parser.parse(body, {
       parseNodeValue: false
@@ -31,23 +52,52 @@ export const login = ({ username, password }) => async (dispatch, getState) => {
 
     if (data.Status.Msg === 'Success') {
       console.log('Successfully logged in');
-      console.log(data.CSID);
+
+      if (!account.initialFetched) {
+        // TODO: Request mapsCompleted
+
+        setInterval(() => {
+          console.log('Token marked as expired. New CSID requested.');
+          dispatch({ type: REQUEST_NEW_TOKEN });
+        }, TOKEN_REFRESH_RATE);
+      }
+
+      // Dispatch reducer for account data
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { username, password }
       });
+
+      // Dispatch multiple reducers for user data
       dispatch({
         type: SET_CSID,
         payload: data.CSID
       });
+
       dispatch({
         type: LOAD_CHARACTERS,
         payload: sanitize(data.CharacterData)
       });
+
       dispatch({
         type: LOAD_INVENTORY,
         payload: sanitize(data.Inventory.Item)
       });
+
+      dispatch({
+        type: LOAD_MAPS,
+        payload: sanitize(data.Inventory.Item)
+          .filter(item => item.ItemType === 'MAP_PACK')
+          .map(mapPack => mapPack.Sku)
+      });
+
+      dispatch({
+        type: LOAD_CROWNS,
+        payload: data.Inventory.Crowns
+      });
+
+      dispatch({ type: ACKNOWLEDGE_TOKEN });
+
       return Promise.resolve(data);
     } else {
       dispatch({
@@ -59,6 +109,7 @@ export const login = ({ username, password }) => async (dispatch, getState) => {
     dispatch({
       type: LOGIN_FAIL
     });
-    return Promise.reject(error);
+    console.log(error);
+    return Promise.resolve(store.dispatch(login(username, password)));
   }
 };

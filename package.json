@@ -22,7 +22,7 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "start": "export BROWSER=none && react-scripts start",
+    "start": "react-scripts start",
     "client": "electron main",
     "dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && npm run client\"",
     "build": "react-scripts build",
@@ -48,6 +48,5 @@
     "electron": "^6.0.7",
     "electron-devtools-installer": "^2.2.4",
     "wait-on": "^3.3.0"
-  },
-  "proxy": "https://www.freekigames.com"
+  }
 }

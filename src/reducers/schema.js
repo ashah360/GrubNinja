@@ -1,12 +1,14 @@
 // Redux state schema
 
+// We want to re-use a cookie jar so that our session is maintained
+const session = {}; // request.jar()
+
 // Account and auth details
 const account = {
   username: null, // username
   password: null, // password
   isLoggedIn: false, // bool
   tokenRefreshRequired: false,
-  session: {}, // request.jar()
   loading: true // bool (handles loading animations)
 };
 
@@ -14,20 +16,19 @@ const account = {
 const user = {
   characters: [],
   inventory: [],
-  maps: []
+  maps: [],
+  crowns
 };
 
 // Dynamic storage
 const character = {
   charId: '',
   pets: [],
-  snacks: [],
-  currentEnergy: '',
-  maxEnergy: ''
+  snacks: []
 };
 
 // Active pet
-const activePet = {
+const pet = {
   // ...petData
 };
 
