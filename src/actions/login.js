@@ -1,4 +1,3 @@
-import request from 'request-promise';
 import parser from 'fast-xml-parser';
 import sanitize from '../util/sanitize';
 import { LOGIN_EP } from '../constants/endpoints';
@@ -11,9 +10,8 @@ import {
 } from '../constants/types';
 
 // Login with username and password
-export const login = ({ username, password }) => async dispatch => {
-  let jar = request.jar();
-  const uri = 'https://cors-anywhere.herokuapp.com/' + LOGIN_EP;
+export const login = ({ username, password }) => async (dispatch, getState) => {
+  const uri = LOGIN_EP;
   const form = {
     password: password,
     minigameId: 'GrubGuardian',
@@ -24,15 +22,16 @@ export const login = ({ username, password }) => async dispatch => {
 
   try {
     console.log('trying login');
-    const body = await request({ method: 'POST', uri, jar, form });
+
+    const body = await window.request({ method: 'POST', uri, form });
 
     let data = parser.parse(body, {
       parseNodeValue: false
     }).LoginMinigameResponse;
 
     if (data.Status.Msg === 'Success') {
-      // Attach jar so that it can be used for all subsequent requests
       console.log('Successfully logged in');
+      console.log(data.CSID);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { username, password }

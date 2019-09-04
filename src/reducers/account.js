@@ -2,7 +2,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOAD_CHARACTERS,
-  LOAD_INVENTORY
+  LOAD_INVENTORY,
+  SET_JAR,
+  SET_CSID
 } from '../constants/types';
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   csid: null,
   characters: [],
   inventory: [],
-  loading: true
+  loading: true,
+  jar: null
 };
 
 export default function(state = initialState, action) {
@@ -46,6 +49,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         characters: payload
+      };
+    case SET_CSID:
+      return {
+        ...state,
+        csid: payload
+      };
+    case SET_JAR:
+      return {
+        ...state,
+        jar: payload
       };
     default:
       return state;

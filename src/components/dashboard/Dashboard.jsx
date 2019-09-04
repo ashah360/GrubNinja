@@ -8,12 +8,7 @@ import { login } from '../../actions/login';
 
 import 'rodal/lib/rodal.css';
 
-const Dashboard = () => {
-  const handleLogin = (user, pass) => {
-    console.log('Logging in');
-    login({ username: user, password: pass });
-  };
-
+const Dashboard = props => {
   const [modalState, setModalState] = useState({ visible: false });
 
   const show = () => setModalState({ visible: true });
@@ -21,7 +16,11 @@ const Dashboard = () => {
 
   return (
     <Fragment>
-      <h1 onClick={handleLogin}>Dashboard</h1>
+      <h1
+        onClick={() => props.login({ username: 'ashah7', password: 'ashah7' })}
+      >
+        Dashboard
+      </h1>
       <Rodal visible={modalState.visible} onClose={hide}>
         <div>Content</div>
       </Rodal>

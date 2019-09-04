@@ -1,4 +1,5 @@
 export const SET_CSID = 'SET_CSID';
+export const SET_JAR = 'SET_JAR';
 export const LOAD_CHARACTERS = 'LOAD_CHARACTERS';
 export const LOAD_INVENTORY = 'LOAD_INVENTORY';
 export const LOGIN_FAIL = 'LOGIN_FAIL';

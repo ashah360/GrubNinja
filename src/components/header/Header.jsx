@@ -8,8 +8,8 @@ const Header = props => {
     <header>
       <Nav />
       <NavMenu />
-      <img src={logo} alt='Ninja' class='logo' />
-      <div class='draggable'></div>
+      <img src={logo} alt='Ninja' className='logo' />
+      <div className='draggable'></div>
     </header>
   );
 };
