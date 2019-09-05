@@ -40,13 +40,13 @@ body {
 
 header {
   background: linear-gradient(to bottom, var(--light-grey), var(--dark-grey));
-  height: 6.25rem;
+  height: 100px;
 }
 
 header .logo {
-  height: 6.25rem;
+  height: 100px;
   position: absolute;
-  left: -0.625rem;
+  left: -10px;
   top: 0;
 }
 
@@ -182,7 +182,7 @@ button {
 
 /* BEGIN MAIN STYLING */
 main {
-  height: calc(100vh - 6.25rem);
+  height: calc(100vh - 100px);
   padding: 1rem 2.25rem;
   box-sizing: border-box;
 }
