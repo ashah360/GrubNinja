@@ -20,7 +20,7 @@ const StatRow = props => {
         <StatCard title='Pets Leveled' value='9' img={petIcon} trend='0' />
       </div>
       <div className='col-4'>
-        <StatCard title='Rewards' value='132' img={giftIcon} trend='214 XP' />
+        <StatCard title='Rewards' value='132' img={giftIcon} trend='0' />
       </div>
     </div>
   );

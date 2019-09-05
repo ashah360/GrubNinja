@@ -1,13 +1,22 @@
 import React from 'react';
+import { DASHBOARD, TRAINER } from '../../../constants/path';
 
-const NavMenu = () => {
+const NavMenu = ({ activePath, setActivePath }) => {
   return (
     <section className='navigation-menu'>
-      <a href='#!' className='nav-menu-item menu-active'>
+      <a
+        href='#!'
+        className={`nav-menu-item ${activePath === DASHBOARD && 'menu-active'}`}
+        onClick={() => setActivePath(DASHBOARD)}
+      >
         <i className='fas fa-crown'></i>
         <span>Dashboard</span>
       </a>
-      <a href='#!' className='nav-menu-item'>
+      <a
+        href='#!'
+        className={`nav-menu-item ${activePath === TRAINER && 'menu-active'}`}
+        onClick={() => setActivePath(TRAINER)}
+      >
         <i className='fas fa-paw'></i>
         <span>Trainer</span>
       </a>

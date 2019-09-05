@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 
 const CharacterCard = props => {
   return (
-    <div className='character-card'>
+    <div
+      className={`character-card ${props.activeCharacter === props.charId &&
+        'card-active'}`}
+      onClick={props.onClick}
+    >
       <img
         src={require(`../../../assets/schools/${props.school.toLowerCase()}.png`)}
         alt={props.school}

@@ -17,7 +17,9 @@ const Trainer = props => {
         <div className='col'>
           <TrainingCard />
           <PetSnacks />
-          <div class='btn btn-block btn-primary feed-btn mt-4'>Feed Pet</div>
+          <div className='btn btn-block btn-primary feed-btn mt-4'>
+            Feed Pet
+          </div>
         </div>
       </div>
     </Fragment>

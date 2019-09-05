@@ -2,7 +2,7 @@ import parser from 'fast-xml-parser';
 import sanitize from '../util/sanitize';
 import headers from '../constants/headers';
 import store from '../store';
-import { LOGIN_EP } from '../constants/endpoints';
+import { LOGIN_MINIGAME } from '../constants/endpoints';
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -12,7 +12,8 @@ import {
   LOAD_INVENTORY,
   LOAD_MAPS,
   LOAD_CROWNS,
-  SET_CSID
+  SET_CSID,
+  RESET_JAR
 } from '../constants/types';
 import {
   MINIGAME_ID,
@@ -23,7 +24,9 @@ import {
 import { MAX_RETRIES } from '../constants/config';
 
 export const login = (username, password) => async (dispatch, getState) => {
-  const uri = LOGIN_EP;
+  dispatch({ type: RESET_JAR });
+
+  const uri = LOGIN_MINIGAME;
 
   let { session, account } = getState();
 

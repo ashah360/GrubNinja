@@ -1,9 +1,17 @@
-import React from 'react';
-import CharacterCard from './CharacterCard';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import CharacterCard from './CharacterCard';
 import PropTypes from 'prop-types';
+import { setCharacter, getPetList } from '../../../actions/character';
 
-const CharacterSelect = ({ characters }) => {
+const CharacterSelect = ({ characters, setCharacter, getPetList }) => {
+  const [activeCharacter, setActiveCharacter] = useState('');
+
+  const handleSetCharacter = id => {
+    setCharacter(id);
+    setActiveCharacter(id);
+    getPetList();
+  };
   return (
     <div className='row'>
       <div className='col'>
@@ -21,19 +29,24 @@ const CharacterSelect = ({ characters }) => {
             <div className='col'>
               <div className='char-table-rows'>
                 {characters.length > 0 ? (
-                  characters.map(char => {
+                  characters.map(function(char) {
                     return (
                       <CharacterCard
                         name={char.Name}
                         school={char.School}
                         level={char.Level}
-                        id={char.CharId}
+                        charId={char.CharId}
                         key={char.CharId}
+                        onClick={() => handleSetCharacter(char.CharId)}
+                        activeCharacter={activeCharacter}
                       />
                     );
                   })
                 ) : (
-                  <p style={{ textAlign: 'center' }} className='mt-4'>
+                  <p
+                    style={{ textAlign: 'center', fontSize: '0.875rem' }}
+                    className='mt-4'
+                  >
                     No Characters Loaded :(
                   </p>
                 )}
@@ -47,11 +60,16 @@ const CharacterSelect = ({ characters }) => {
 };
 
 CharacterSelect.propTypes = {
-  characters: PropTypes.array.isRequired
+  characters: PropTypes.array.isRequired,
+  setCharacter: PropTypes.func.isRequired,
+  getPetList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   characters: state.user.characters
 });
 
-export default connect(mapStateToProps)(CharacterSelect);
+export default connect(
+  mapStateToProps,
+  { setCharacter, getPetList }
+)(CharacterSelect);

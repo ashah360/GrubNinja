@@ -12,8 +12,18 @@ import {
   CLEAR_SNACKS
 } from '../constants/types';
 
+const initialDataState = {
+  CharId: null,
+  CharNameId: null,
+  Name: null,
+  Energy: '0',
+  MaxEnergy: '0',
+  School: null,
+  Level: null
+};
+
 const initialState = {
-  data: null, // loaded directly from API, energy data found here too
+  data: initialDataState, // loaded directly from API, energy data found here too
   pets: [], // array of objects
   snacks: [], // array of objects
   loading: false // boolean
@@ -30,7 +40,7 @@ export default function(state = initialState, action) {
       return { ...state, data: { ...state.data, ...payload } };
     case CLEAR_CHARACTER_DATA:
       return {
-        data: null,
+        data: initialDataState,
         pets: [],
         snacks: [],
         loading: false

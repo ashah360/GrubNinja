@@ -64,6 +64,11 @@ nav span {
   color: var(--light-purple);
 }
 
+button {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .navigation-menu {
   max-width: 35rem;
   padding: 1.15rem 0;
@@ -306,7 +311,7 @@ h1 {
   display: grid;
   grid-template-columns: 1.75rem auto;
   grid-gap: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   align-items: center;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--b-grey-border);

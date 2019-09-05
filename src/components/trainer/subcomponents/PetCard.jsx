@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PetCard = props => {
   return (
-    <div className='pet-card'>
+    <div className='pet-card' onClick={props.onClick}>
       <img
         src={require(`../../../assets/schools/${props.school.toLowerCase()}.png`)}
         alt={props.school}

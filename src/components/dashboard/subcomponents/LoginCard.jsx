@@ -7,6 +7,8 @@ const LoginCard = props => {
     password: ''
   });
 
+  const [loginLoading, setLoginLoading] = useState(false);
+
   const { username, password } = formData;
 
   const onChange = e =>
@@ -14,13 +16,12 @@ const LoginCard = props => {
 
   const login = async (username, password) => {
     try {
+      setLoginLoading(true);
       await props.handleLogin(username, password);
+      setLoginLoading(false);
     } catch (error) {
-      /*if (error.type === 'connection') {
-        console.log('Retrying...');
-        return login(username, password);
-      }
-      return error.msg + 'hi';*/
+      // let the user know that there was a login error
+      setLoginLoading(false);
       console.log(error);
     }
   };
@@ -84,12 +85,20 @@ const LoginCard = props => {
             </div>
             <div className='row'>
               <div className='col'>
-                <div
-                  className='btn btn-primary btn-block'
+                <button
+                  className='btn btn-primary btn-block '
+                  disabled={
+                    !(username.length > 0 && password.length > 0) ||
+                    loginLoading
+                  }
                   onClick={() => login(username, password)}
                 >
-                  Login
-                </div>
+                  {loginLoading ? (
+                    <i className='fas fa-circle-notch fa-spin'></i>
+                  ) : (
+                    'Login'
+                  )}
+                </button>
               </div>
             </div>
           </div>

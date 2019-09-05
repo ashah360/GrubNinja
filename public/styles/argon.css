@@ -2540,7 +2540,7 @@
   .btn-primary:not(:disabled):not(.disabled).active,
   .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #8965e0;
+    background-color: #9083eb;
     border-color: #9083eb;
   }
   

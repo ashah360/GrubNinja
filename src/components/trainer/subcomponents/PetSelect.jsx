@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PetCard from './PetCard';
 import PropTypes from 'prop-types';
+import mapLevel from '../../../util/mapLevel';
+import { setPet } from '../../../actions/character';
 
-const PetSelect = props => {
+const PetSelect = ({ petList, setPet }) => {
   return (
     <div className='row mt-4'>
       <div className='col'>
@@ -28,18 +31,28 @@ const PetSelect = props => {
                 <span>Level</span>
               </div>
               <div className='pet-table-rows'>
-                <PetCard
-                  name='Lord Bubba'
-                  type='Freezing Rain Core'
-                  school='Ice'
-                  level='Ancient'
-                />
-                <PetCard
-                  name='Sir Lucy'
-                  type='Stormzilla'
-                  school='Storm'
-                  level='Mega'
-                />
+                {petList.length > 0 ? (
+                  petList.map(pet => {
+                    return (
+                      <PetCard
+                        name={pet.PetName}
+                        type={pet.DisplayName}
+                        school={pet.PetClass}
+                        level={mapLevel(pet.PetLevel)}
+                        petId={pet.PetId}
+                        key={pet.PetId}
+                        onClick={() => setPet(pet.PetId)}
+                      />
+                    );
+                  })
+                ) : (
+                  <p
+                    style={{ textAlign: 'center', fontSize: '0.875rem' }}
+                    className='mt-4'
+                  >
+                    No Pets to Show :(
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -49,6 +62,16 @@ const PetSelect = props => {
   );
 };
 
-PetSelect.propTypes = {};
+PetSelect.propTypes = {
+  petList: PropTypes.array.isRequired,
+  setPet: PropTypes.func.isRequired
+};
 
-export default PetSelect;
+const mapStateToProps = state => ({
+  petList: state.character.pets
+});
+
+export default connect(
+  mapStateToProps,
+  { setPet }
+)(PetSelect);

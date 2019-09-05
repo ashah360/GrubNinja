@@ -7,7 +7,10 @@ const Header = props => {
   return (
     <header>
       <Nav />
-      <NavMenu />
+      <NavMenu
+        setActivePath={props.setActivePath}
+        activePath={props.activePath}
+      />
       <img src={logo} alt='Ninja' className='logo' />
       <div className='draggable'></div>
     </header>
