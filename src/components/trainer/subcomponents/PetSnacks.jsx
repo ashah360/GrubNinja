@@ -7,7 +7,7 @@ const PetSnacks = ({ currentSnacks }) => {
     <div className='row snack-card mt-4'>
       <div className='col'>
         <div id='snack-container'>
-          {currentSnacks.length > 0 ? (
+          {currentSnacks.length ? (
             currentSnacks.map(snack => (
               <Snack
                 name={snack.Name}
