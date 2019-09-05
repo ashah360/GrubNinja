@@ -2,7 +2,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   REQUEST_NEW_TOKEN,
-  ACKNOWLEDGE_TOKEN
+  ACKNOWLEDGE_TOKEN,
+  RESET_ACCOUNT_STATE
 } from '../constants/types';
 
 const initialState = {
@@ -45,6 +46,8 @@ export default function(state = initialState, action) {
         ...state,
         tokenRefreshRequired: true
       };
+    case RESET_ACCOUNT_STATE:
+      return initialState;
     default:
       return state;
   }

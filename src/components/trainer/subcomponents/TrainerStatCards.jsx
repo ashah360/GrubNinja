@@ -4,7 +4,28 @@ import TrainerStatCard from './TrainerStatCard';
 import energyGlobe from '../../../assets/energy.png';
 import petSnack from '../../../assets/Art_Snack.png';
 
-const TrainerStatCards = ({ energyCurrent, energyMax }) => {
+const TrainerStatCards = ({ energyCurrent, energyMax, currentSnacks }) => {
+  const getSnackCount = () => {
+    if (currentSnacks.length > 0) {
+      return currentSnacks.reduce(
+        (acc, current) => acc + parseInt(current.Qty),
+        0
+      );
+    }
+    return 0;
+  };
+
+  const getMegaSnackCount = () => {
+    if (currentSnacks.length > 0) {
+      return currentSnacks.reduce(
+        (acc, current) =>
+          acc + (current.AttrGains.Exp > 17 ? parseInt(current.Qty) : 0),
+        0
+      );
+    }
+    return 0;
+  };
+
   return (
     <div className='row trainer-stat-cards'>
       <TrainerStatCard
@@ -15,9 +36,9 @@ const TrainerStatCards = ({ energyCurrent, energyMax }) => {
       />
       <TrainerStatCard
         title='Snacks'
-        value='427'
+        value={getSnackCount()}
         energy={false}
-        snackQty='52'
+        snackQty={getMegaSnackCount()}
         img={petSnack}
       />
     </div>

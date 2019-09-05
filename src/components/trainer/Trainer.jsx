@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import TrainerStatCards from './subcomponents/TrainerStatCards';
 import PetSelect from './subcomponents/PetSelect';
 import TrainingCard from './subcomponents/TrainingCard';
@@ -11,12 +12,12 @@ const Trainer = props => {
       <h1>Pet Trainer</h1>
       <div className='row'>
         <div className='col-5'>
-          <TrainerStatCards />
+          <TrainerStatCards currentSnacks={props.snacks} />
           <PetSelect />
         </div>
         <div className='col'>
           <TrainingCard />
-          <PetSnacks />
+          <PetSnacks currentSnacks={props.snacks} />
           <div className='btn btn-block btn-primary feed-btn mt-4'>
             Feed Pet
           </div>
@@ -26,6 +27,12 @@ const Trainer = props => {
   );
 };
 
-Trainer.propTypes = {};
+Trainer.propTypes = {
+  snacks: PropTypes.array.isRequired
+};
 
-export default Trainer;
+const mapStateToProps = state => ({
+  snacks: state.character.snacks
+});
+
+export default connect(mapStateToProps)(Trainer);

@@ -11,26 +11,26 @@ const Snack = props => {
       <div className='snack-name'>{props.name}</div>
       <div className='snack-body'>
         <div className='snack-attributes'>
-          {props.strength && (
-            <SnackAttribute name='strength' value={props.strength} />
+          {props.Strength && (
+            <SnackAttribute name='strength' value={props.Strength} />
           )}
 
-          {props.intellect && (
-            <SnackAttribute name='intellect' value={props.intellect} />
+          {props.Intellect && (
+            <SnackAttribute name='intellect' value={props.Intellect} />
           )}
 
-          {props.will && <SnackAttribute name='will' value={props.will} />}
+          {props.Will && <SnackAttribute name='will' value={props.Will} />}
 
-          {props.agility && (
-            <SnackAttribute name='agility' value={props.agility} />
+          {props.Agility && (
+            <SnackAttribute name='agility' value={props.Agility} />
           )}
 
-          {props.power && <SnackAttribute name='power' value={props.power} />}
+          {props.Power && <SnackAttribute name='power' value={props.Power} />}
         </div>
         <div className='snack-description'>
           <div className='snack-xp-container'>
             <img src={expIcon} alt='snack xp' />
-            <div>{props.xp} XP</div>
+            <div>{props.Exp} XP</div>
           </div>
           <div className='snack-school-wrapper'>
             <img

@@ -2,12 +2,15 @@ import parser from 'fast-xml-parser';
 import sanitize from '../util/sanitize';
 import headers from '../constants/headers';
 import store from '../store';
+import { fetchSnacks } from './fetchSnacks';
 import { GET_PET_LIST } from '../constants/endpoints';
 import { MINIGAME_ID } from '../constants/minigame';
 import {
   LOAD_CHARACTER_DATA,
   LOAD_PETS,
-  SET_ACTIVE_PET
+  SET_ACTIVE_PET,
+  SET_CHAR_ID,
+  SET_JAR
 } from '../constants/types';
 
 /**
@@ -27,6 +30,13 @@ export const setCharacter = id => (dispatch, getState) => {
     type: LOAD_CHARACTER_DATA,
     payload: characters.find(char => char.CharId === id) || null
   });
+
+  dispatch({
+    type: SET_CHAR_ID,
+    payload: id
+  });
+
+  store.dispatch(fetchSnacks());
 };
 
 export const setPet = id => (dispatch, getState) => {
@@ -52,6 +62,8 @@ export const setPet = id => (dispatch, getState) => {
 export const getPetList = () => async (dispatch, getState) => {
   const { session, character, game } = getState();
 
+  let jar = session;
+
   let form = {
     charId: character.data.CharId,
     minigameId: MINIGAME_ID,
@@ -62,15 +74,20 @@ export const getPetList = () => async (dispatch, getState) => {
     let body = await window.request({
       method: 'POST',
       uri: GET_PET_LIST,
-      jar: session,
+      jar,
       form
+    });
+
+    dispatch({
+      type: SET_JAR,
+      payload: jar
     });
 
     let petData = parser.parse(body, {
       parseNodeValue: false
     }).GetPetListResponse;
 
-    if (petData.Status.Msg == 'Success') {
+    if (petData.Status.Msg === 'Success') {
       dispatch({
         type: LOAD_PETS,
         payload: sanitize(petData.PetData)

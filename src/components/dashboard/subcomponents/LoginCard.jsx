@@ -16,6 +16,7 @@ const LoginCard = props => {
 
   const login = async (username, password) => {
     try {
+      props.handleResetState();
       setLoginLoading(true);
       await props.handleLogin(username, password);
       setLoginLoading(false);

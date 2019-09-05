@@ -6,6 +6,7 @@ import ActivityLog from './subcomponents/ActivityLog';
 import LoginCard from './subcomponents/LoginCard';
 import CharacterSelect from './subcomponents/CharacterSelect';
 import { login } from '../../actions/login';
+import reset from '../../actions/reset';
 
 import 'rodal/lib/rodal.css';
 
@@ -31,7 +32,7 @@ const Dashboard = props => {
           <ActivityLog />
         </div>
         <div className='col-3'>
-          <LoginCard handleLogin={props.login} />
+          <LoginCard handleLogin={props.login} handleResetState={props.reset} />
           <CharacterSelect />
         </div>
       </div>
@@ -45,5 +46,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, reset }
 )(Dashboard);
