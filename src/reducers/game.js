@@ -32,13 +32,7 @@ export default function(state = initialState, action) {
     case SET_MAP_ID:
       return { ...state, mapId: payload };
     case CLEAR_GAME_DATA:
-      return {
-        csid: null,
-        charId: null,
-        petId: null,
-        currentGameId: null,
-        mapId: DEFAULT_MAP
-      };
+      return initialState;
     default:
       return state;
   }

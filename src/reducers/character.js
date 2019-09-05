@@ -9,7 +9,8 @@ import {
   LOAD_PETS,
   CLEAR_PETS,
   LOAD_SNACKS,
-  CLEAR_SNACKS
+  CLEAR_SNACKS,
+  RESET_CHARACTER_STATE
 } from '../constants/types';
 
 const initialDataState = {
@@ -53,6 +54,8 @@ export default function(state = initialState, action) {
       return { ...state, snacks: payload };
     case CLEAR_SNACKS:
       return { ...state, snacks: [] };
+    case RESET_CHARACTER_STATE:
+      return initialState;
     default:
       return state;
   }
