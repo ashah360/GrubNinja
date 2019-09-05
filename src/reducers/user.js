@@ -27,13 +27,7 @@ export default function(state = initialState, action) {
     case LOAD_CROWNS:
       return { ...state, crowns: payload };
     case CLEAR_USER_DATA:
-      return {
-        characters: [],
-        inventory: [],
-        maps: [],
-        crowns: '0',
-        loading: false
-      };
+      return initialState;
     default:
       return state;
   }
