@@ -12,7 +12,6 @@ import {
   LOAD_MAPS,
   LOAD_CROWNS,
   SET_CSID,
-  RESET_JAR,
   SET_INTERVAL_POINTER
 } from '../constants/types';
 import {
@@ -21,14 +20,9 @@ import {
   PLATFORM,
   TOKEN_REFRESH_RATE
 } from '../constants/minigame';
-import { MAX_RETRIES } from '../constants/config';
 
 export const login = (username, password) => async (dispatch, getState) => {
-  //dispatch({ type: RESET_JAR });
-
-  const uri = LOGIN_MINIGAME;
-
-  let { session, account } = getState();
+  let { account } = getState();
 
   const form = {
     password: password,
@@ -43,8 +37,7 @@ export const login = (username, password) => async (dispatch, getState) => {
 
     const body = await window.request({
       method: 'POST',
-      uri,
-      //jar: session,
+      uri: LOGIN_MINIGAME,
       form
     });
 
