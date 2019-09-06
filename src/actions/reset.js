@@ -1,5 +1,5 @@
 import {
-  RESET_JAR,
+  //RESET_JAR,
   RESET_ACCOUNT_STATE,
   CLEAR_USER_DATA,
   RESET_CHARACTER_STATE,
@@ -9,7 +9,7 @@ import {
 
 // Reset Redux State
 export default () => dispatch => {
-  dispatch({ type: RESET_JAR });
+  //dispatch({ type: RESET_JAR });
   dispatch({ type: RESET_ACCOUNT_STATE });
   dispatch({ type: CLEAR_USER_DATA });
   dispatch({ type: RESET_CHARACTER_STATE });

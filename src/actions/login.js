@@ -1,6 +1,5 @@
 import parser from 'fast-xml-parser';
 import sanitize from '../util/sanitize';
-import headers from '../constants/headers';
 import store from '../store';
 import { LOGIN_MINIGAME } from '../constants/endpoints';
 import {
@@ -13,7 +12,8 @@ import {
   LOAD_MAPS,
   LOAD_CROWNS,
   SET_CSID,
-  RESET_JAR
+  RESET_JAR,
+  SET_INTERVAL_POINTER
 } from '../constants/types';
 import {
   MINIGAME_ID,
@@ -24,7 +24,7 @@ import {
 import { MAX_RETRIES } from '../constants/config';
 
 export const login = (username, password) => async (dispatch, getState) => {
-  dispatch({ type: RESET_JAR });
+  //dispatch({ type: RESET_JAR });
 
   const uri = LOGIN_MINIGAME;
 
@@ -44,8 +44,7 @@ export const login = (username, password) => async (dispatch, getState) => {
     const body = await window.request({
       method: 'POST',
       uri,
-      jar: session,
-      headers,
+      //jar: session,
       form
     });
 
@@ -59,10 +58,12 @@ export const login = (username, password) => async (dispatch, getState) => {
       if (!account.initialFetched) {
         // TODO: Request mapsCompleted
 
-        setInterval(() => {
+        const pointer = setInterval(() => {
           console.log('Token marked as expired. New CSID requested.');
-          dispatch({ type: REQUEST_NEW_TOKEN });
+          dispatch({ type: REQUEST_NEW_TOKEN, payload: pointer });
         }, TOKEN_REFRESH_RATE);
+
+        dispatch({ type: SET_INTERVAL_POINTER, payload: pointer });
       }
 
       // Dispatch reducer for account data

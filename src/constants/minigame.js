@@ -9,7 +9,7 @@ export const GAME_NAME = 'GrubGuardian';
 export const PLAY_RESULT = 'GOLD';
 export const TOKEN_REFRESH_RATE = 120000;
 
-const COMMON_FORM = {
+const commonForm = {
   minigameId: MINIGAME_ID,
   platform: PLATFORM,
   gameTime: GAME_TIME,
@@ -21,4 +21,4 @@ const COMMON_FORM = {
   playResult: PLAY_RESULT
 };
 
-export default COMMON_FORM;
+export default commonForm;

@@ -24,7 +24,7 @@ export const fetchSnacks = () => async (dispatch, getState) => {
     const body = await window.request({
       method: 'POST',
       uri: BUY_SNACK_PACK,
-      jar: session,
+      //jar: session,
       form
     });
 

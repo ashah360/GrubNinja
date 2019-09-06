@@ -4,6 +4,7 @@ import PetCard from './PetCard';
 import PropTypes from 'prop-types';
 import mapLevel from '../../../util/mapLevel';
 import { setPet } from '../../../actions/character';
+import MapSelect from '../../misc/MapSelect';
 
 const PetSelect = ({ petList, setPet }) => {
   return (
@@ -18,9 +19,7 @@ const PetSelect = ({ petList, setPet }) => {
                 </h5>
               </div>
               <div className='col text-right'>
-                <a href='#!' className='btn btn-sm btn-primary'>
-                  Map Selection
-                </a>
+                <MapSelect />
               </div>
             </div>
           </div>
