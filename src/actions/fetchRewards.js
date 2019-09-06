@@ -31,8 +31,8 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
     console.log(rewardData);
 
     if (rewardData.Status.Msg === 'Success') {
-      store.dispatch(handlePetRewards(rewardData));
-      return Promise.resolve(rewardData);
+      //store.dispatch(handlePetRewards(rewardData));
+      return Promise.resolve(rewardData.AttrGains.Exp);
     } else {
       let errorMessage = `${rewardData.Status.Msg} - ${rewardData.Status.Content}`;
       console.error(errorMessage);
@@ -41,7 +41,7 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
   } catch (error) {
     console.error(error);
     setTimeout(() => {
-      return Promise.resolve(store.dispatch(fetchPetRewards()), 5000);
+      return Promise.resolve(store.dispatch(fetchPetRewards()), 2000);
     });
   }
 

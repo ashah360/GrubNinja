@@ -22,7 +22,7 @@ export const feedSnack = snackId => async (dispatch, getState) => {
       console.log(gameData);
       store.dispatch(handlePetRewards(gameData));
       store.dispatch(fetchSnacks());
-      return Promise.resolve(gameData);
+      return Promise.resolve(gameData.AttrGains.Exp);
     } else {
       let errorMessage = `${gameData.Status.Msg} - ${gameData.Status.Content}`;
       console.error(errorMessage);
