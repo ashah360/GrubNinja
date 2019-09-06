@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PetCard from './PetCard';
 import PropTypes from 'prop-types';
-import mapLevel from '../../../util/mapLevel';
 import { setPet } from '../../../actions/character';
 import MapSelect from '../../misc/MapSelect';
 
@@ -37,7 +36,7 @@ const PetSelect = ({ petList, setPet }) => {
                         name={pet.PetName}
                         type={pet.DisplayName}
                         school={pet.PetClass}
-                        level={mapLevel(pet.PetLevel)}
+                        level={pet.PetLevel}
                         petId={pet.PetId}
                         key={pet.PetId}
                         onClick={() => setPet(pet.PetId)}

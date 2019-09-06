@@ -6,7 +6,10 @@ import expIcon from '../../../assets/icon-xp.png';
 
 const Snack = props => {
   return (
-    <div className='pet-snack'>
+    <div
+      className={`pet-snack ${props.isActive ? 'active-snack' : ''}`}
+      onClick={props.onClick}
+    >
       <span className='badge badge-danger snack-qty'>{props.quantity}</span>
       <div className='snack-name'>{props.name}</div>
       <div className='snack-body'>

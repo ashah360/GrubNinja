@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import Rodal from 'rodal';
 import StatRow from './subcomponents/StatRow.jsx';
