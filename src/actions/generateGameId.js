@@ -2,6 +2,7 @@ import parser from 'fast-xml-parser';
 import store from '../store';
 import { START_MINIGAME } from '../constants/endpoints';
 import commonForm from '../constants/minigame';
+import { fetchPetRewards } from './fetchRewards';
 import { SET_GAME_ID } from '../constants/types';
 
 // Generate game session with current game state from redux store
@@ -19,12 +20,13 @@ export const generateGameId = () => async (dispatch, getState) => {
       parseNodeValue: false
     }).StartMinigameResponse;
 
-    if (gameData.Status.Msg == 'Success') {
+    if (gameData.Status.Msg === 'Success') {
       dispatch({
         type: SET_GAME_ID,
         payload: gameData.CurrentGameId
       });
 
+      //store.dispatch(fetchPetRewards());
       return Promise.resolve();
     } else {
       let errorMessage = `${gameData.Status.Msg} - ${gameData.Status.Content}`;
