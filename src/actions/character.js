@@ -3,6 +3,7 @@ import sanitize from '../util/sanitize';
 import headers from '../constants/headers';
 import store from '../store';
 import { fetchSnacks } from './fetchSnacks';
+import { generateGameId } from './generateGameId';
 import { GET_PET_LIST } from '../constants/endpoints';
 import { MINIGAME_ID } from '../constants/minigame';
 import {
@@ -10,7 +11,8 @@ import {
   LOAD_PETS,
   SET_ACTIVE_PET,
   SET_CHAR_ID,
-  SET_JAR
+  SET_JAR,
+  SET_PET_ID
 } from '../constants/types';
 
 /**
@@ -44,6 +46,11 @@ export const setPet = id => (dispatch, getState) => {
     character: { pets }
   } = getState();
 
+  dispatch({
+    type: SET_PET_ID,
+    payload: id
+  });
+
   const payload = pets.find(pet => pet.PetId === id) || {};
 
   // fallback in case talent object not attached
@@ -57,12 +64,14 @@ export const setPet = id => (dispatch, getState) => {
     type: SET_ACTIVE_PET,
     payload
   });
+
+  store.dispatch(generateGameId());
 };
 
 export const getPetList = () => async (dispatch, getState) => {
   const { session, character, game } = getState();
 
-  let jar = session;
+  //let jar = session;
 
   let form = {
     charId: character.data.CharId,
@@ -74,14 +83,14 @@ export const getPetList = () => async (dispatch, getState) => {
     let body = await window.request({
       method: 'POST',
       uri: GET_PET_LIST,
-      jar,
+      //jar,
       form
     });
 
-    dispatch({
+    /*dispatch({
       type: SET_JAR,
       payload: jar
-    });
+    });*/
 
     let petData = parser.parse(body, {
       parseNodeValue: false

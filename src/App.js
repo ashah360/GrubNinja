@@ -4,13 +4,14 @@ import Main from './components/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
 import Trainer from './components/trainer/Trainer';
 import Footer from './components/layout/Footer';
+import MapSelect from './components/misc/MapSelect';
 import { DASHBOARD, TRAINER } from './constants/path';
 
 import { Provider } from 'react-redux';
 import store from './store';
 
-//import './styles/argon.css';
-//import './styles/App.css';
+import './styles/argon.css';
+import './styles/App.css';
 
 const App = () => {
   const [activePath, setActivePath] = useState(DASHBOARD);
