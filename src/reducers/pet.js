@@ -1,4 +1,8 @@
-import { SET_ACTIVE_PET, CLEAR_ACTIVE_PET } from '../constants/types';
+import {
+  SET_ACTIVE_PET,
+  CLEAR_ACTIVE_PET,
+  UPDATE_ACTIVE_PET
+} from '../constants/types';
 
 const initialState = {
   PetId: '0',
@@ -27,6 +31,8 @@ export default function(state = initialState, action) {
       return payload;
     case CLEAR_ACTIVE_PET:
       return initialState;
+    case UPDATE_ACTIVE_PET:
+      return { ...state, ...payload };
     default:
       return state;
   }

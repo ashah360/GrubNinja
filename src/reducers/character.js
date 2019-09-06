@@ -5,7 +5,8 @@ import {
   CLEAR_PETS,
   LOAD_SNACKS,
   CLEAR_SNACKS,
-  RESET_CHARACTER_STATE
+  RESET_CHARACTER_STATE,
+  UPDATE_PET
 } from '../constants/types';
 
 const initialDataState = {
@@ -45,6 +46,17 @@ export default function(state = initialState, action) {
       return { ...state, pets: payload };
     case CLEAR_PETS:
       return { ...state, pets: [] };
+    case UPDATE_PET: // new Object payload
+      // returns old pet object with the new values
+      const currentState = state.pets;
+      const index = currentState.findIndex(pet => pet.PetId === payload.PetId);
+      const petObj = currentState[index];
+      const newPetObj = { ...petObj, ...payload };
+      currentState[index] = newPetObj;
+      return { ...state, pets: currentState };
+    //{ ...state.pets.find((pet) => pet.PetId === payload.PetId), ...payload }
+    //return [...state.pets.filter((pet) => pet.PetId !== payload.PetId)]
+
     case LOAD_SNACKS:
       return { ...state, snacks: payload };
     case CLEAR_SNACKS:
