@@ -629,19 +629,30 @@ h5 img {
 /* END MODAL STYLING */
 
 /* COGO TOAST STYLING */
-.ct-toast {
-  background: var(--light-grey);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  color: white;
+.notyf__wrapper {
+  font-size: 0.875rem;
+  font-family: 'ProximaNova', sans-serif;
 }
 
-.ct-text {
-  font-size: 11px;
+.notyf {
+  position: absolute;
+  right: 2.25rem;
+  top: 50px;
+  bottom: auto;
+  color: #fff !important;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.ct-heading {
-  font-size: 12px;
-  margin-bottom: 3px;
+.notyf__icon i {
+  color: white !important;
+  font-size: 16px;
+}
+
+.notyf__icon {
+  width: 18px;
 }
 
 /* END COGO TOAST STYLING */
