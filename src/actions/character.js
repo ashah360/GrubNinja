@@ -11,16 +11,8 @@ import {
   LOAD_PETS,
   SET_ACTIVE_PET,
   SET_CHAR_ID,
-  SET_JAR,
   SET_PET_ID
 } from '../constants/types';
-
-/**
- * @function setCharacter
- * @function getPetList
- * @function getSnacks
- * @function buyEnergy
- */
 
 // set data for the specified character in the character.data state
 export const setCharacter = id => (dispatch, getState) => {
@@ -71,8 +63,6 @@ export const setPet = id => (dispatch, getState) => {
 export const getPetList = () => async (dispatch, getState) => {
   const { session, character, game } = getState();
 
-  //let jar = session;
-
   let form = {
     charId: character.data.CharId,
     minigameId: MINIGAME_ID,
@@ -83,15 +73,8 @@ export const getPetList = () => async (dispatch, getState) => {
     let body = await window.request({
       method: 'POST',
       uri: GET_PET_LIST,
-      //jar,
       form
     });
-
-    /*dispatch({
-      type: SET_JAR,
-      payload: jar
-    });*/
-
     let petData = parser.parse(body, {
       parseNodeValue: false
     }).GetPetListResponse;

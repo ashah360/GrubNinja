@@ -1,8 +1,3 @@
-/**
- * character.js
- * Root level state for character data only
- */
-
 import {
   LOAD_CHARACTER_DATA,
   CLEAR_CHARACTER_DATA,
