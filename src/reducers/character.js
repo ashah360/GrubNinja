@@ -48,14 +48,13 @@ export default function(state = initialState, action) {
       return { ...state, pets: [] };
     case UPDATE_PET: // new Object payload
       // returns old pet object with the new values
-      const currentState = state.pets;
+      const currentState = [];
+      Object.assign(currentState, state.pets);
       const index = currentState.findIndex(pet => pet.PetId === payload.PetId);
       const petObj = currentState[index];
       const newPetObj = { ...petObj, ...payload };
       currentState[index] = newPetObj;
       return { ...state, pets: currentState };
-    //{ ...state.pets.find((pet) => pet.PetId === payload.PetId), ...payload }
-    //return [...state.pets.filter((pet) => pet.PetId !== payload.PetId)]
 
     case LOAD_SNACKS:
       return { ...state, snacks: payload };
