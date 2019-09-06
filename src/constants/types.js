@@ -15,6 +15,7 @@ export const LOAD_CHARACTERS = 'LOAD_CHARACTERS';
 export const LOAD_INVENTORY = 'LOAD_INVENTORY';
 export const LOAD_MAPS = 'LOAD_MAPS';
 export const LOAD_CROWNS = 'LOAD_CROWNS';
+export const UPDATE_PET = 'UPDATE_PET';
 export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 
 // Character
@@ -29,6 +30,7 @@ export const RESET_CHARACTER_STATE = 'RESET_CHARACTER_STATE';
 // Pet
 export const SET_ACTIVE_PET = 'SET_ACTIVE_PET';
 export const CLEAR_ACTIVE_PET = 'CLEAR_ACTIVE_PET';
+export const UPDATE_ACTIVE_PET = 'UPDATE_ACTIVE_PET';
 
 // Game
 export const SET_CSID = 'SET_CSID';
