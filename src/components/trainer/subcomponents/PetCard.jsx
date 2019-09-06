@@ -1,7 +1,9 @@
 import React from 'react';
+import mapLevel from '../../../util/mapLevel';
 import PropTypes from 'prop-types';
 
 const PetCard = props => {
+  const petLevel = mapLevel(props.level);
   return (
     <div className='pet-card' onClick={props.onClick}>
       <img
@@ -12,8 +14,8 @@ const PetCard = props => {
         {props.name} ({props.type})
       </div>
 
-      <div className={`pet-card-level ${props.level.toLowerCase()}`}>
-        {props.level}
+      <div className={`pet-card-level ${petLevel.toLowerCase()}`}>
+        {petLevel}
       </div>
     </div>
   );
