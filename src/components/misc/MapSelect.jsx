@@ -5,33 +5,37 @@ import Select from 'react-select';
 import { coreMaps, premiumMaps } from '../../constants/maps';
 import setMap from '../../actions/setMap';
 
-const customStyles = {
+const background = '#1f1f22';
+const foreground = '#2c2c2f';
+const lightGrey = '#282830';
+const mutedGrey = '#6c757d';
+const carminePink = '#ff5252';
+
+const styles = {
   container: provided => ({
     ...provided,
     fontSize: '11px',
-    outline: 'none !important',
-    boxShadow: 'none !important',
     borderRadius: '4px'
   }),
   control: provided => ({
     ...provided,
-    backgroundColor: '#1f1f22',
-    borderColor: '#2c2c2f',
+    backgroundColor: background,
+    borderColor: foreground,
     borderRadius: '4px',
     boxShadow: 'none',
     cursor: 'pointer',
     ':hover': {
       ...provided[':hover'],
-      borderColor: '#2c2c2f'
+      borderColor: foreground
     }
   }),
   indicatorSeparator: provided => ({
     ...provided,
-    backgroundColor: '#2c2c2f'
+    backgroundColor: foreground
   }),
   indicatorsContainer: provided => ({
     ...provided,
-    color: '#2c2c2f'
+    color: foreground
   }),
   valueContainer: provided => ({
     ...provided,
@@ -39,18 +43,23 @@ const customStyles = {
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: '#282830',
+    backgroundColor: lightGrey,
     textAlign: 'left',
-    cursor: state.isDisabled ? 'not-allowed' : 'pointer',
-    color: state.isDisabled ? '#ff5252' : '#6c757d',
+    cursor: state.isDisabled ? 'not-allowed' : 'default',
+    color: state.isDisabled ? carminePink : mutedGrey,
     ':active': {
       ...provided[':active'],
-      backgroundColor: '#282830'
+      backgroundColor: lightGrey,
+      color: 'white'
+    },
+    ':hover': {
+      ...provided[':hover'],
+      color: 'white'
     }
   }),
   menu: (provided, state) => ({
     ...provided,
-    backgroundColor: '#282830'
+    backgroundColor: lightGrey
   })
 };
 
@@ -71,7 +80,7 @@ const MapSelect = ({ currentMap, setMap, mapPacks }) => {
     <Select
       className='GrubSelect'
       classNamePrefix='GrubSelectPre'
-      styles={customStyles}
+      styles={styles}
       value={currentMap}
       onChange={handleChange}
       options={ownedMaps}
