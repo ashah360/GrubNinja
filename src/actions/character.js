@@ -3,6 +3,7 @@ import sanitize from '../util/sanitize';
 import store from '../store';
 import { fetchSnacks } from './fetchSnacks';
 import { generateGameId } from './generateGameId';
+import { fetchPetRewards } from './fetchRewards';
 import { GET_PET_LIST } from '../constants/endpoints';
 import { MINIGAME_ID } from '../constants/minigame';
 import {
@@ -56,7 +57,7 @@ export const setPet = id => (dispatch, getState) => {
     payload
   });
 
-  store.dispatch(generateGameId());
+  //store.dispatch(generateGameId());
 };
 
 export const getPetList = () => async (dispatch, getState) => {
