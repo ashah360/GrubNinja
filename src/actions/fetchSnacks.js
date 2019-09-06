@@ -1,6 +1,5 @@
-import parser from 'fast-xml-parser';
+import parse from '../util/parse';
 import sanitize from '../util/sanitize';
-import headers from '../constants/headers';
 import store from '../store';
 import { LOAD_SNACKS } from '../constants/types';
 import { BUY_SNACK_PACK } from '../constants/endpoints';
@@ -8,7 +7,9 @@ import { PLATFORM, MINIGAME_ID } from '../constants/minigame';
 
 // Get current snacks by sending request to buySnackPack with qty of 0
 export const fetchSnacks = () => async (dispatch, getState) => {
-  const { game } = getState();
+  const {
+    game: { charId, csid }
+  } = getState();
 
   const form = {
     saleId: '0',
@@ -16,8 +17,8 @@ export const fetchSnacks = () => async (dispatch, getState) => {
     templateId: '0',
     platform: PLATFORM,
     minigameId: MINIGAME_ID,
-    charId: game.charId,
-    csid: game.csid
+    charId,
+    csid
   };
 
   try {
@@ -27,9 +28,7 @@ export const fetchSnacks = () => async (dispatch, getState) => {
       form
     });
 
-    let data = parser.parse(body, {
-      parseNodeValue: false
-    }).BuyPetSnackPackResponse;
+    let data = parse(body).BuyPetSnackPackResponse;
 
     if (data.SnackData) {
       dispatch({

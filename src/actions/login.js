@@ -1,4 +1,4 @@
-import parser from 'fast-xml-parser';
+import parse from '../util/parse';
 import sanitize from '../util/sanitize';
 import store from '../store';
 import { LOGIN_MINIGAME } from '../constants/endpoints';
@@ -41,9 +41,7 @@ export const login = (username, password) => async (dispatch, getState) => {
       form
     });
 
-    let data = parser.parse(body, {
-      parseNodeValue: false
-    }).LoginMinigameResponse;
+    let data = parse(body).LoginMinigameResponse;
 
     if (data.Status.Msg === 'Success') {
       console.log('Successfully logged in');

@@ -1,6 +1,5 @@
-import parser from 'fast-xml-parser';
+import parse from '../util/parse';
 import sanitize from '../util/sanitize';
-import headers from '../constants/headers';
 import store from '../store';
 import { fetchSnacks } from './fetchSnacks';
 import { generateGameId } from './generateGameId';
@@ -75,9 +74,8 @@ export const getPetList = () => async (dispatch, getState) => {
       uri: GET_PET_LIST,
       form
     });
-    let petData = parser.parse(body, {
-      parseNodeValue: false
-    }).GetPetListResponse;
+
+    let petData = parse(body).GetPetListResponse;
 
     if (petData.Status.Msg === 'Success') {
       dispatch({
