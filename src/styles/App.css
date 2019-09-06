@@ -17,6 +17,7 @@
   --b-grey: rgba(0, 0, 0, 0.1);
   --b-grey-border: rgba(255, 255, 255, 0.06);
   --muted: #6c757d;
+  --half-grey: rgb(34, 34, 39);
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   font-size: 14.4px;
@@ -626,6 +627,24 @@ h5 img {
   border: 2px solid rgba(255, 255, 255, 0.04);
 }
 /* END MODAL STYLING */
+
+/* COGO TOAST STYLING */
+.ct-toast {
+  background: var(--light-grey);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.ct-text {
+  font-size: 11px;
+}
+
+.ct-heading {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+/* END COGO TOAST STYLING */
 
 /* GLOBALS */
 ::-webkit-scrollbar {

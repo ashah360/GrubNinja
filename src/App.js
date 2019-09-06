@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
 import Trainer from './components/trainer/Trainer';
-import Footer from './components/layout/Footer';
-import MapSelect from './components/misc/MapSelect';
 import { DASHBOARD, TRAINER } from './constants/path';
+import cogoToast from 'cogo-toast';
 
 import { Provider } from 'react-redux';
 import store from './store';
