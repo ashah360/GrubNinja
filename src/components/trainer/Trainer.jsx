@@ -23,9 +23,14 @@ const Trainer = props => {
   const handleGameTest = async () => {
     try {
       await props.generateGameId();
-      await props.fetchPetRewards();
-      await props.feedSnack(activeSnackId);
+      const gameExp = await props.fetchPetRewards();
+      const feedExp = await props.feedSnack(activeSnackId);
+      props.triggerToast(
+        `+${parseInt(gameExp) + parseInt(feedExp)} XP`,
+        'trainer'
+      );
     } catch (err) {
+      props.triggerToast(err, 'error');
       console.log(err);
     }
   };
