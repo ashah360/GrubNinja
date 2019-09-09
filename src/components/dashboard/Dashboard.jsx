@@ -7,6 +7,7 @@ import LoginCard from './subcomponents/LoginCard';
 import CharacterSelect from './subcomponents/CharacterSelect';
 import { login } from '../../actions/login';
 import reset from '../../actions/reset';
+import { sendXPResult } from '../../util/notify';
 
 import 'rodal/lib/rodal.css';
 
@@ -18,7 +19,7 @@ const Dashboard = props => {
 
   return (
     <Fragment>
-      <h1 onClick={show}>Dashboard</h1>
+      <h1>Dashboard</h1>
       <Rodal
         width={500}
         height={300}

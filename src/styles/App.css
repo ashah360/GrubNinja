@@ -540,12 +540,27 @@ h1 {
   height: 2rem;
 }
 
+.tester {
+  width: 50vw;
+}
+
+.slick-dots li button::before {
+  color: #fff;
+  opacity: 0.08;
+}
+
+.slick-dots li.slick-active button::before {
+  color: #fff;
+  opacity: 0.3;
+}
+
 .pet-snack {
   background: rgb(34, 34, 39) !important;
   border: 0.0625rem solid rgba(255, 255, 255, 0.04);
   border-radius: 4px;
   flex: 0 0 135px;
   height: 135px;
+  width: 135px;
   position: relative;
   cursor: pointer;
   margin-right: 10px;
@@ -561,21 +576,11 @@ h1 {
 }
 
 #snack-container {
-  display: flex;
-  /* [1] */
-  flex-wrap: wrap;
-  /* [1] */
-  overflow-x: auto;
-  /* [1] */
-  -webkit-overflow-scrolling: touch;
-  /* [4] */
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  /* [5] */
-
   padding: 5px 0;
-  margin-right: -10px;
-  height: calc(100vh - 39.15rem);
-  -webkit-overflow-scrolling: touch;
+  width: 50vw;
+  margin: 0 auto;
+  margin-top: 0.9rem;
+  height: calc(100vh - 40rem);
 }
 
 /* [6] */
@@ -675,30 +680,37 @@ h5 img {
 /* END MODAL STYLING */
 
 /* COGO TOAST STYLING */
-.notyf__wrapper {
-  font-size: 0.875rem;
-  font-family: 'ProximaNova', sans-serif;
+
+.notification-item .notification-message {
+  color: #fff;
+  max-width: 350px;
+  font-size: 12px;
+  line-height: 150%;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
-.notyf {
-  position: absolute;
-  right: 2.25rem;
-  top: 50px;
-  bottom: auto;
-  color: #fff !important;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.notification-success,
+.notification-success .timer {
+  background-color: #2dce89;
 }
 
-.notyf__icon i {
-  color: white !important;
-  font-size: 16px;
+.notification-success {
+  border-left: 8px solid #29a56f;
 }
 
-.notyf__icon {
-  width: 18px;
+.notification-default,
+.notification-default .timer {
+  background-color: #9083eb;
+}
+
+.notification-default {
+  border-left: 8px solid hsl(248, 37%, 57%);
+}
+
+.notification-danger,
+.notification-danger .timer {
+  background-color: #f5365c;
 }
 
 /* END COGO TOAST STYLING */

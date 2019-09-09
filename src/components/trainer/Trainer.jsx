@@ -5,6 +5,7 @@ import PetSelect from './subcomponents/PetSelect';
 import TrainingCard from './subcomponents/TrainingCard';
 import PetSnacks from './subcomponents/PetSnacks';
 import PropTypes from 'prop-types';
+import { sendNotification, sendXPResult } from '../../util/notify';
 
 // actions for testing
 import { generateGameId } from '../../actions/generateGameId';
@@ -25,12 +26,9 @@ const Trainer = props => {
       await props.generateGameId();
       const gameExp = await props.fetchPetRewards();
       const feedExp = await props.feedSnack(activeSnackId);
-      props.triggerToast(
-        `+${parseInt(gameExp) + parseInt(feedExp)} XP`,
-        'trainer'
-      );
+      sendXPResult(parseInt(gameExp) + parseInt(feedExp) || gameExp);
     } catch (err) {
-      props.triggerToast(err, 'error');
+      sendNotification(err, 'danger');
       console.log(err);
     }
   };

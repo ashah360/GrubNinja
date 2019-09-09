@@ -2,6 +2,7 @@ import parse from '../util/parse';
 import sanitize from '../util/sanitize';
 import store from '../store';
 import { LOGIN_MINIGAME } from '../constants/endpoints';
+
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -98,6 +99,10 @@ export const login = (username, password) => async (dispatch, getState) => {
       dispatch({
         type: LOGIN_FAIL
       });
+      if (data.Status.Msg.toLowerCase().indexOf('quarantined') > -1)
+        return Promise.reject(
+          'Please complete a captcha on the Wizard101 site before continuing.'
+        );
       return Promise.reject(data.Status.Msg + ' - ' + data.Status.Content);
     }
   } catch (error) {
