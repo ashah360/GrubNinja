@@ -7,7 +7,7 @@ export const WAVE = '0';
 export const IS_COMPLETE = '1';
 export const GAME_NAME = 'GrubGuardian';
 export const PLAY_RESULT = 'GOLD';
-export const TOKEN_REFRESH_RATE = 120000;
+export const TOKEN_REFRESH_RATE = 10000;
 
 const commonForm = {
   minigameId: MINIGAME_ID,

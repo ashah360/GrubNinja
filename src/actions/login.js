@@ -2,6 +2,7 @@ import parse from '../util/parse';
 import sanitize from '../util/sanitize';
 import store from '../store';
 import { LOGIN_MINIGAME } from '../constants/endpoints';
+import { validateSession } from './validateSession';
 
 import {
   LOGIN_SUCCESS,
@@ -45,14 +46,20 @@ export const login = (username, password) => async (dispatch, getState) => {
     let data = parse(body).LoginMinigameResponse;
 
     if (data.Status.Msg === 'Success') {
-      console.log('Successfully logged in');
+      console.log('Successfully logged in ');
 
       if (!account.initialFetched) {
         // TODO: Request mapsCompleted
+        // MapsCompleted on initial login will ensure that all core maps are unlocked
 
-        const pointer = setInterval(() => {
-          console.log('Token marked as expired. New CSID requested.');
-          dispatch({ type: REQUEST_NEW_TOKEN, payload: pointer });
+        const pointer = setInterval(async () => {
+          //console.log('Token marked as expired. New CSID requested.');
+          //dispatch({ type: REQUEST_NEW_TOKEN, payload: pointer });
+          try {
+            await store.dispatch(validateSession());
+          } catch (error) {
+            console.log(error);
+          }
         }, TOKEN_REFRESH_RATE);
 
         dispatch({ type: SET_INTERVAL_POINTER, payload: pointer });
@@ -84,7 +91,7 @@ export const login = (username, password) => async (dispatch, getState) => {
         type: LOAD_MAPS,
         payload: sanitize(data.Inventory.Item)
           .filter(item => item.ItemType === 'MAP_PACK')
-          .map(mapPack => mapPack.Sku)
+          .map(maps => maps.Sku)
       });
 
       dispatch({

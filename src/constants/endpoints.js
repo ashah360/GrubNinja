@@ -8,3 +8,4 @@ export const START_MINIGAME = REST_URI + 'startMinigame';
 export const GET_PET_TRAINING_REWARDS = REST_URI + 'getPetTrainingRewards';
 export const PROCESS_HIGH_SCORE = REST_URI + 'processHighScoreAndReward';
 export const USE_PET_SNACK = REST_URI + 'usePetSnack';
+export const IS_SESSION_VALID = REST_URI + 'isSessionValid';

@@ -9,6 +9,7 @@
     "concurrently": "^4.1.2",
     "fast-xml-parser": "^3.12.20",
     "notyf": "^3.0.4",
+    "p-retry": "^4.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-horizontal-scrolling-menu": "^0.7.3",
