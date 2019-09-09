@@ -1,5 +1,5 @@
 import React from 'react';
-import { DASHBOARD, TRAINER } from '../../../constants/path';
+import { DASHBOARD, TRAINER, GENERATOR } from '../../../constants/path';
 
 const NavMenu = ({ activePath, setActivePath }) => {
   return (
@@ -20,7 +20,11 @@ const NavMenu = ({ activePath, setActivePath }) => {
         <i className='fas fa-paw'></i>
         <span>Trainer</span>
       </a>
-      <a href='#!' className='nav-menu-item'>
+      <a
+        href='#!'
+        className={`nav-menu-item ${activePath === GENERATOR && 'menu-active'}`}
+        onClick={() => setActivePath(GENERATOR)}
+      >
         <i className='fas fa-unlock'></i>
         <span>Generator</span>
       </a>

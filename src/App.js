@@ -3,7 +3,8 @@ import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
 import Trainer from './components/trainer/Trainer';
-import { DASHBOARD, TRAINER } from './constants/path';
+import Generator from './components/generator/Generator';
+import { DASHBOARD, TRAINER, GENERATOR } from './constants/path';
 import NotyfContext from './context/NotyfContext';
 
 import { Provider } from 'react-redux';
@@ -31,6 +32,8 @@ const App = () => {
         return <Dashboard />;
       case TRAINER:
         return <Trainer triggerToast={triggerToast} />;
+      case GENERATOR:
+        return <Generator />;
       default:
         return <Dashboard />;
     }

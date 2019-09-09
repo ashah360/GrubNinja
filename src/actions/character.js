@@ -1,9 +1,8 @@
 import parse from '../util/parse';
 import sanitize from '../util/sanitize';
 import store from '../store';
+import { login } from './login';
 import { fetchSnacks } from './fetchSnacks';
-import { generateGameId } from './generateGameId';
-import { fetchPetRewards } from './fetchRewards';
 import { GET_PET_LIST } from '../constants/endpoints';
 import { MINIGAME_ID } from '../constants/minigame';
 import {

@@ -20,6 +20,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1120,
     height: 750,
+    backgroundColor: '#1B1B1D',
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,

@@ -25,6 +25,7 @@
 
 body {
   margin: 0;
+  background-color: var(--dark-grey);
 }
 
 #root {
@@ -270,6 +271,17 @@ h1 {
   border-bottom: 1px solid var(--b-grey-border);
 }
 
+.gen-table-header {
+  display: grid;
+  grid-template-columns: auto 100px;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'ProximaNovaBold';
+  border-bottom: 1px solid var(--b-grey-border);
+}
+
 .card-header {
   border-bottom: 1px solid var(--b-grey-border) !important;
 }
@@ -304,7 +316,27 @@ h1 {
   cursor: pointer;
 }
 
+.gen-history-card {
+  display: grid;
+  grid-template-columns: 1.25rem auto 100px;
+  grid-gap: 0.75rem;
+  font-size: 0.8125rem;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--b-grey-border);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.gen-history-card-timestamp {
+  text-align: left;
+}
+
 .pet-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.gen-history-card:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -335,6 +367,11 @@ h1 {
   overflow: scroll;
 }
 
+.gen-table-rows {
+  height: calc(100vh - 29rem);
+  overflow: scroll;
+}
+
 .char-table-rows {
   height: calc(100vh - 36.55rem);
   overflow: scroll;
@@ -349,6 +386,10 @@ h1 {
 }
 
 .character-card img {
+  height: 1.25rem;
+}
+
+.gen-history-card img {
   height: 1.25rem;
 }
 
