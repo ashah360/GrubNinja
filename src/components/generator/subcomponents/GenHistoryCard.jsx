@@ -1,6 +1,7 @@
 import React from 'react';
-import mapLevel from '../../../util/mapLevel';
 import PropTypes from 'prop-types';
+import TimeAgo from 'react-timeago';
+import { allMaps } from '../../../constants/maps';
 
 // Icons
 import giftIcon from '../../../assets/Button_Gift.png';
@@ -12,33 +13,40 @@ import housingIcon from '../../../assets/Art_Housing.png';
 import snackIcon from '../../../assets/Art_Snack.png';
 import petIcon from '../../../assets/pet-icon.png';
 
+const mapTypeToIcon = type => {
+  switch (type) {
+    case 'elixir':
+      return elixirIcon;
+    case 'gold':
+      return goldIcon;
+    case 'pack':
+      return packIcon;
+    case 'reagent':
+      return reagentIcon;
+    case 'housing':
+      return housingIcon;
+    case 'snack':
+      return snackIcon;
+    case 'pet':
+      return petIcon;
+    default:
+      return giftIcon;
+  }
+};
+
+const convertMapId = mapId =>
+  allMaps.find(map => map.value === mapId).label || 'Unknown Map';
+
 const GenHistoryCard = props => {
-  const mapTypeToIcon = type => {
-    switch (type) {
-      case 'elixir':
-        return elixirIcon;
-      case 'gold':
-        return goldIcon;
-      case 'pack':
-        return packIcon;
-      case 'reagent':
-        return reagentIcon;
-      case 'housingItem':
-        return housingIcon;
-      case 'snack':
-        return snackIcon;
-      case 'pet':
-        return petIcon;
-      default:
-        return giftIcon;
-    }
-  };
   return (
     <div className='gen-history-card'>
       <img src={mapTypeToIcon(props.type.toLowerCase())} alt={props.type} />
       <div className='gen-history-card-name'>{props.name}</div>
-
-      <div className={'gen-history-card-timestamp'}>{props.time}</div>
+      <div className='gen-history-card-score'>{props.score}</div>
+      <div className='gen-history-card-map'>{convertMapId(props.map)}</div>
+      <div className={'gen-history-card-timestamp'}>
+        <TimeAgo date={Date.now()} />
+      </div>
     </div>
   );
 };

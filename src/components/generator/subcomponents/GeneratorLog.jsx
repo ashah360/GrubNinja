@@ -16,27 +16,85 @@ const GeneratorLog = props => {
               </div>
             </div>
           </div>
-          <div className='row gen-table'>
-            <div className='col'>
+          <div className='row'>
+            <div className='col gen-table'>
               <div className='gen-table-header text-muted'>
                 <span>Reward</span>
+                <span></span>
+                <span>Score</span>
+                <span>Map</span>
                 <span>Timestamp</span>
               </div>
               <div className='gen-table-rows'>
                 <GenHistoryCard
-                  type='elixir'
-                  name='Energy Elixir'
-                  time='6 minutes ago'
-                />
-                <GenHistoryCard
-                  type='pack'
-                  name='Ninja Lore Pack'
-                  time='48 minutes ago'
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 500}
                 />
                 <GenHistoryCard
                   type='gold'
                   name='W101 Gold (600)'
-                  time='16 hours ago'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 500}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
+                />
+                <GenHistoryCard
+                  type='gold'
+                  name='W101 Gold (600)'
+                  map='MAP-PA-003'
+                  score='2945'
+                  time={Date.now() + 5}
                 />
               </div>
             </div>

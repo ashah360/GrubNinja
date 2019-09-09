@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import GeneratorStatRow from './subcomponents/GeneratorStatRow';
 import GeneratorLog from './subcomponents/GeneratorLog';
+import GeneratorControl from './subcomponents/GeneratorControl';
 import PropTypes from 'prop-types';
 
 const Generator = props => {
@@ -13,10 +14,12 @@ const Generator = props => {
         </div>
       </div>
       <div className='row'>
-        <div className='col-6'>
+        <div className='col-8'>
           <GeneratorLog />
         </div>
-        <div className='col'>controls</div>
+        <div className='col'>
+          <GeneratorControl />
+        </div>
       </div>
     </Fragment>
   );

@@ -249,7 +249,11 @@ h1 {
 }
 
 .activity-log {
-  height: calc(100vh - 26.4063rem);
+  height: calc(100vh - 27.5rem);
+}
+
+.gen-control {
+  height: calc(100vh - 27.5rem);
 }
 
 .info-card {
@@ -273,7 +277,8 @@ h1 {
 
 .gen-table-header {
   display: grid;
-  grid-template-columns: auto 100px;
+  grid-template-columns: auto 1.25rem 12% 28% 14%;
+  grid-gap: 1rem;
   padding: 0;
   text-transform: uppercase;
   font-size: 0.6875rem;
@@ -318,8 +323,8 @@ h1 {
 
 .gen-history-card {
   display: grid;
-  grid-template-columns: 1.25rem auto 100px;
-  grid-gap: 0.75rem;
+  grid-template-columns: 1.25rem auto 12% 28% 14%;
+  grid-gap: 1rem;
   font-size: 0.8125rem;
   align-items: center;
   padding: 0.75rem 1.25rem;
@@ -390,7 +395,7 @@ h1 {
 }
 
 .gen-history-card img {
-  height: 1.25rem;
+  height: 1.5rem;
 }
 
 .pet-snack-school {
