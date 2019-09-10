@@ -3,6 +3,7 @@ import parse from '../util/parse';
 import store from '../store';
 import commonForm from '../constants/minigame';
 import { GET_PET_TRAINING_REWARDS } from '../constants/endpoints';
+import { LOAD_SNACKS } from '../constants/types';
 
 export const fetchPetRewards = () => async (dispatch, getState) => {
   const { game } = getState();
@@ -24,6 +25,10 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
     const rewardData = parse(body).GetPetTrainingRewardsResponse;
 
     if (rewardData.Status.Msg === 'Success') {
+      // Update snack data in state
+      if (rewardData.SnackData)
+        dispatch({ type: LOAD_SNACKS, payload: rewardData.SnackData });
+
       return Promise.resolve(rewardData.AttrGains.Exp);
     } else {
       let errorMessage = `${rewardData.Status.Msg} - ${rewardData.Status.Content}`;

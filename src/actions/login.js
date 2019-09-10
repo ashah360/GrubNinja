@@ -1,6 +1,8 @@
 import parse from '../util/parse';
+import retry from 'p-retry';
 import sanitize from '../util/sanitize';
 import store from '../store';
+import { unlockMaps } from '../util/unlockMaps';
 import { LOGIN_MINIGAME } from '../constants/endpoints';
 import { validateSession } from './validateSession';
 
@@ -49,8 +51,13 @@ export const login = (username, password) => async (dispatch, getState) => {
       console.log('Successfully logged in ');
 
       if (!account.initialFetched) {
-        // TODO: Request mapsCompleted
         // MapsCompleted on initial login will ensure that all core maps are unlocked
+        try {
+          await unlockMaps();
+          console.log('MapsCompleted check succeeded');
+        } catch (error) {
+          console.error('MapsCompleted failed');
+        }
 
         const pointer = setInterval(async () => {
           //console.log('Token marked as expired. New CSID requested.');
@@ -108,7 +115,7 @@ export const login = (username, password) => async (dispatch, getState) => {
       });
       if (data.Status.Msg.toLowerCase().indexOf('quarantined') > -1)
         return Promise.reject(
-          'Please complete a captcha on the Wizard101 site before continuing.'
+          'Please complete a captcha on the Wizard101 site before continuing'
         );
       return Promise.reject(data.Status.Msg + ' - ' + data.Status.Content);
     }
@@ -117,6 +124,8 @@ export const login = (username, password) => async (dispatch, getState) => {
       type: LOGIN_FAIL
     });
     console.log(error);
-    return Promise.resolve(store.dispatch(login(username, password)));
+    return Promise.resolve(async () => {
+      await retry(store.dispatch(login(username, password)), { retries: 5 });
+    });
   }
 };

@@ -187,6 +187,7 @@ main {
   height: calc(100vh - 100px);
   padding: 1rem 2.25rem;
   box-sizing: border-box;
+  position: relative;
 }
 
 h1 {
@@ -250,6 +251,10 @@ h1 {
 
 .activity-log {
   height: calc(100vh - 27.5rem);
+}
+
+.trainer-control .custom-control {
+  text-align: left;
 }
 
 .gen-control {
@@ -540,39 +545,12 @@ h1 {
   height: 2rem;
 }
 
-.tester {
-  width: 50vw;
-}
-
-.slick-dots li button::before {
-  color: #fff;
-  opacity: 0.08;
-}
-
-.slick-dots li.slick-active button::before {
-  color: #fff;
-  opacity: 0.3;
-}
-
-.pet-snack {
-  background: rgb(34, 34, 39) !important;
-  border: 0.0625rem solid rgba(255, 255, 255, 0.04);
-  border-radius: 4px;
-  flex: 0 0 135px;
-  height: 135px;
-  width: 135px;
-  position: relative;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.pet-snack:hover {
-  box-shadow: 0px 0px 0px 1px #3498db inset;
-}
-
 .active-snack {
   box-shadow: 0px 0px 0px 1px #3498db inset;
+}
+
+.pet-snack-container {
+  position: relative;
 }
 
 #snack-container {
@@ -583,8 +561,37 @@ h1 {
   height: calc(100vh - 40rem);
 }
 
+.pet-snack-card {
+  height: 40px;
+  font-size: 0.75rem;
+  padding: 0px 1rem;
+  display: grid;
+  grid-template-columns: min-content auto min-content 3rem;
+  align-items: center;
+  grid-gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0s;
+}
+
+.pet-snack-card:hover {
+  transform: translateY(1px);
+}
+
+.exp-icon {
+  height: 1.25rem;
+}
+
+.pet-snack-exp {
+  font-size: 0.75rem;
+}
+
+#pet-snack-container {
+  height: calc(100vh - 39rem);
+  overflow: scroll;
+}
+
 /* [6] */
-#snack-container::-webkit-scrollbar {
+#pet-snack-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -596,7 +603,7 @@ h5 img {
 .snack-qty {
   position: absolute;
   top: -2.5px;
-  right: -2.5px;
+  right: 0px;
 }
 
 .snack-name {
@@ -608,6 +615,8 @@ h5 img {
 
 .snack-xp-container {
   font-size: 10px;
+  display: grid;
+  grid-template-columns: min-content auto;
 }
 
 .snack-xp-container img {
@@ -621,15 +630,7 @@ h5 img {
 }
 
 .snack-school-wrapper img {
-  height: 20px;
-}
-
-.snack-school-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  height: 1.25rem;
 }
 
 .snack-xp-container {

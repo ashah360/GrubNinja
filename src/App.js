@@ -40,9 +40,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <Fragment>
-        <ReactNotification />
         <Header setActivePath={setActivePath} activePath={activePath} />
-        <Main>{getActivePath()}</Main>
+        <Main>
+          <ReactNotification />
+          {getActivePath()}
+        </Main>
       </Fragment>
     </Provider>
   );

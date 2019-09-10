@@ -4,6 +4,7 @@ import {
   LOAD_PETS,
   CLEAR_PETS,
   LOAD_SNACKS,
+  SUBTRACT_SNACK,
   CLEAR_SNACKS,
   RESET_CHARACTER_STATE,
   UPDATE_PET
@@ -30,9 +31,6 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    /**
-     * @payload CharacterData object
-     */
     case LOAD_CHARACTER_DATA:
       return { ...state, data: { ...state.data, ...payload } };
     case CLEAR_CHARACTER_DATA:
@@ -60,6 +58,10 @@ export default function(state = initialState, action) {
       return { ...state, snacks: payload };
     case CLEAR_SNACKS:
       return { ...state, snacks: [] };
+    case SUBTRACT_SNACK:
+      const snacks = [...state.snacks];
+      snacks.find(snack => snack.TemplateId === payload).Qty -= 1;
+      return { ...state, snacks };
     case RESET_CHARACTER_STATE:
       return initialState;
     default:

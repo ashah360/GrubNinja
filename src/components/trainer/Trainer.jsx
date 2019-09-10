@@ -4,6 +4,7 @@ import TrainerStatCards from './subcomponents/TrainerStatCards';
 import PetSelect from './subcomponents/PetSelect';
 import TrainingCard from './subcomponents/TrainingCard';
 import PetSnacks from './subcomponents/PetSnacks';
+import TrainerControl from './subcomponents/TrainerControl';
 import PropTypes from 'prop-types';
 import { sendNotification, sendXPResult } from '../../util/notify';
 
@@ -17,7 +18,6 @@ const Trainer = props => {
   const [activeSnackId, setActiveSnackId] = useState('');
 
   const handleChangeSnack = id => {
-    console.log('handle change snack');
     setActiveSnackId(id);
   };
 
@@ -43,11 +43,19 @@ const Trainer = props => {
         </div>
         <div className='col'>
           <TrainingCard />
-          <PetSnacks
-            activeSnackId={activeSnackId}
-            setActiveSnackId={handleChangeSnack}
-            currentSnacks={props.snacks}
-          />
+          <div class='row'>
+            <div class='col-7'>
+              <PetSnacks
+                activeSnackId={activeSnackId}
+                setActiveSnackId={handleChangeSnack}
+                currentSnacks={props.snacks}
+              />
+            </div>
+            <div class='col'>
+              <TrainerControl />
+            </div>
+          </div>
+
           <div
             className='btn btn-block btn-primary feed-btn mt-4'
             onClick={handleGameTest}

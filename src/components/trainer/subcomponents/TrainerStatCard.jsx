@@ -25,7 +25,11 @@ const TrainerStatCard = props => {
           </div>
           {props.energy ? (
             <p className='mt-3 mb-0 text-muted text-sm card-button'>
-              <button type='button' className='btn btn-primary btn-sm'>
+              <button
+                type='button'
+                className='btn btn-primary btn-sm'
+                onClick={props.handleBuyEnergy}
+              >
                 Buy Elixir
               </button>
             </p>

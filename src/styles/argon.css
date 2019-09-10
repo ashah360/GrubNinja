@@ -27,7 +27,7 @@
     --primary: #9083eb;
     --secondary: #f7fafc;
     --success: #2dce89;
-    --info: #11cdef;
+    --info: #17a2b8;
     --warning: #fb6340;
     --danger: #f5365c;
     --light: #adb5bd;
@@ -6630,7 +6630,7 @@
   }
   
   .bg-info {
-    background-color: #5bc0de !important;
+    background-color: #17a2b8 !important;
   }
   
   a.bg-info:hover,
