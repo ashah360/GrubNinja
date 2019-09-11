@@ -686,10 +686,6 @@ h5 img {
 
 /* COGO TOAST STYLING */
 
-.notification-item {
-  margin-top: 25px;
-}
-
 .notification-item .notification-message {
   color: #fff;
   max-width: 350px;

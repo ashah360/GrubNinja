@@ -33,6 +33,7 @@
     "rodal": "^1.6.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2",
+    "unescape": "^1.0.1",
     "uuid": "^3.3.3"
   },
   "scripts": {
