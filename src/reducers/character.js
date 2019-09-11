@@ -61,7 +61,7 @@ export default function(state = initialState, action) {
     case SUBTRACT_SNACK:
       const snacks = [...state.snacks];
       snacks.find(snack => snack.TemplateId === payload).Qty -= 1;
-      return { ...state, snacks };
+      return { ...state, snacks: snacks.filter(snack => snack.Qty != 0) };
     case RESET_CHARACTER_STATE:
       return initialState;
     default:

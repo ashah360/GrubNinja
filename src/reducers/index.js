@@ -5,7 +5,7 @@ import user from './user';
 import character from './character';
 import pet from './pet';
 import game from './game';
-import log from './log';
+import generator from './generator';
 
 const rootReducer = combineReducers({
   session,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   character,
   pet,
   game,
-  log
+  generator
 });
 
 export default rootReducer;
