@@ -50,17 +50,10 @@ export const setPet = id => (dispatch, getState) => {
   }
 
   payload.Talent = sanitize(payload.Talent);
-
-  dispatch({
-    type: SET_ACTIVE_PET,
-    payload
-  });
-
-  //store.dispatch(generateGameId());
 };
 
 export const getPetList = () => async (dispatch, getState) => {
-  const { session, character, game } = getState();
+  const { character, game } = getState();
 
   let form = {
     charId: character.data.CharId,
