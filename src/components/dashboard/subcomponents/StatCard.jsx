@@ -22,7 +22,7 @@ const StatCard = props => {
           <span className='text-success mr-2'>
             <i className='fa fa-arrow-up'></i> {props.trend}
           </span>
-          <span className='text-nowrap'>Since today</span>
+          <span className='text-nowrap'>Since this session</span>
         </p>
       </div>
     </div>
