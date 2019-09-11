@@ -18,11 +18,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './styles/argon.css';
 import './styles/App.css';
 
-const App = () => {
-  useEffect(() => {
-    window.ipcRenderer.send('request-metrics');
-  }, []);
-
+const App = props => {
   const [activePath, setActivePath] = useState(DASHBOARD);
 
   const getActivePath = () => {
