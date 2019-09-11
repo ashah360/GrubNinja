@@ -20,20 +20,18 @@ export const handlePetRewards = data => dispatch => {
   // Only dispatch reducers if game actually caused any updates to pet data
   if (data.AttrGains && data.AttrGains.Exp > 0) {
     // fallback in case talent object not attached
-    if (typeof petData.Talent === 'undefined') {
-      petData.Talent = [];
+
+    if (!(typeof petData === 'string')) {
+      if (typeof petData.Talent === 'undefined') {
+        petData.Talent = [];
+      }
+
+      petData.Talent = sanitize(petData.Talent);
+
+      dispatch({
+        type: UPDATE_PET,
+        payload: petData
+      });
     }
-
-    petData.Talent = sanitize(petData.Talent);
-
-    dispatch({
-      type: UPDATE_PET,
-      payload: petData
-    });
-
-    dispatch({
-      type: UPDATE_ACTIVE_PET,
-      payload: petData
-    });
   }
 };
