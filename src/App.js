@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
@@ -19,8 +19,9 @@ import './styles/argon.css';
 import './styles/App.css';
 
 const App = () => {
-  // Implement toasts for simple things like showing XP each time the game runthrough action is called
-  // Impelement modals for error messages, and talent reveals
+  useEffect(() => {
+    window.ipcRenderer.send('request-metrics');
+  }, []);
 
   const [activePath, setActivePath] = useState(DASHBOARD);
 
