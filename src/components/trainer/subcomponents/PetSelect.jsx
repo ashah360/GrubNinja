@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import PetCard from './PetCard';
 import PropTypes from 'prop-types';
 import { setPet } from '../../../actions/character';
+import Loading from '../../misc/Loading';
 import MapSelect from '../../misc/MapSelect';
 
-const PetSelect = ({ petList, setPet }) => {
+const PetSelect = ({ petList, setPet, trainerActive }) => {
   return (
     <div className='row mt-4'>
       <div className='col'>
         <div className='card choose-pet'>
+          {trainerActive && <Loading />}
           <div className='card-header border-0'>
             <div className='row align-items-center'>
               <div className='col'>

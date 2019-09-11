@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Talent from './Talent';
 import AttributeStat from './AttributeStat';
 import PetExpBar from './PetExpBar';
+import Loading from '../../misc/Loading';
 import mapLevel from '../../../util/mapLevel';
+import { selectPetById } from '../../../selectors/petSelectors';
 
 import PropTypes from 'prop-types';
 
@@ -84,7 +86,7 @@ const TrainingCard = ({ pet }) => {
 TrainingCard.propTypes = {};
 
 const mapStateToProps = state => ({
-  pet: state.pet
+  pet: selectPetById(state)
 });
 
 export default connect(mapStateToProps)(TrainingCard);
