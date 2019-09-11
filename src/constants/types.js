@@ -44,3 +44,7 @@ export const CLEAR_GAME_DATA = 'CLEAR_GAME_DATA';
 // Log
 export const LOG_MESSAGE = 'LOG_MESSAGE';
 export const CLEAR_LOG = 'CLEAR_LOG';
+
+// Generator
+export const LOAD_GENERATOR_ITEMS = 'LOAD_GENERATOR_ITEMS';
+export const ADD_GENERATOR_ITEM = 'ADD_GENERATOR_ITEM';
