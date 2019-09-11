@@ -45,6 +45,9 @@ export const CLEAR_GAME_DATA = 'CLEAR_GAME_DATA';
 export const LOG_MESSAGE = 'LOG_MESSAGE';
 export const CLEAR_LOG = 'CLEAR_LOG';
 
-// Generator
+// Metrics
 export const LOAD_GENERATOR_ITEMS = 'LOAD_GENERATOR_ITEMS';
 export const ADD_GENERATOR_ITEM = 'ADD_GENERATOR_ITEM';
+export const ADD_XP = 'ADD_XP';
+export const ADD_PET_LEVEL = 'ADD_PET_LEVEL';
+export const LOAD_INITIAL_METRICS = 'LOAD_INITIAL_METRICS';
