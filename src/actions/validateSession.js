@@ -1,5 +1,4 @@
 import parse from '../util/parse';
-import retry from 'p-retry';
 import store from '../store';
 import { REQUEST_NEW_TOKEN } from '../constants/types';
 import { IS_SESSION_VALID } from '../constants/endpoints';
