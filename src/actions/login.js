@@ -124,8 +124,6 @@ export const login = (username, password) => async (dispatch, getState) => {
       type: LOGIN_FAIL
     });
     console.log(error);
-    return Promise.resolve(async () => {
-      await retry(store.dispatch(login(username, password)), { retries: 5 });
-    });
+    return Promise.resolve(store.dispatch(login(username, password)));
   }
 };
