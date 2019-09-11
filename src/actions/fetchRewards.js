@@ -2,6 +2,7 @@ import validateScore from '../util/validateScore';
 import parse from '../util/parse';
 import store from '../store';
 import sanitize from '../util/sanitize';
+import { buildRewardObject } from '../util/mapGenObject';
 import commonForm from '../constants/minigame';
 import { LOAD_SNACKS, LOAD_GENERATOR_ITEMS } from '../constants/types';
 import { GAME_NAME } from '../constants/minigame';
@@ -45,7 +46,7 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
   }
 };
 
-export const fetchGeneratorRewards = score => async (dispatch, getState) => {
+export const fetchRewards = score => async (dispatch, getState) => {
   const { game } = getState();
 
   try {
@@ -63,10 +64,13 @@ export const fetchGeneratorRewards = score => async (dispatch, getState) => {
     const rewardData = parse(body).ProcessHighscoreAndRewardResponse;
 
     if (rewardData.Status.Msg === 'Success') {
+      // Build object
+      const payload = sanitize(rewardData.Reward).map(reward =>
+        buildRewardObject(reward, game.mapId, score)
+      );
       // Update rewards in state
-      // TODO: Convert rewards to to custom object format
-      // { item, type, timestamp }
-      //dispatch({ type: LOAD_GENERATOR_ITEMS, payload: null });
+      console.log('Updating rewards in state');
+      dispatch({ type: LOAD_GENERATOR_ITEMS, payload });
     } else {
       let errorMessage = `${rewardData.Status.Msg} - ${rewardData.Status.Content}`;
       console.error(errorMessage);
@@ -75,7 +79,7 @@ export const fetchGeneratorRewards = score => async (dispatch, getState) => {
   } catch (error) {
     console.error(error);
     setTimeout(() => {
-      return Promise.resolve(store.dispatch(fetchPetRewards()));
+      return Promise.resolve(store.dispatch(fetchRewards()));
     });
   }
 };
