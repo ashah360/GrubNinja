@@ -48,15 +48,15 @@ const Trainer = props => {
         </div>
         <div className='col'>
           <TrainingCard />
-          <div class='row'>
-            <div class='col-7'>
+          <div className='row'>
+            <div className='col-7'>
               <PetSnacks
                 activeSnackId={activeSnackId}
                 setActiveSnackId={handleChangeSnack}
                 currentSnacks={props.snacks}
               />
             </div>
-            <div class='col'>
+            <div className='col'>
               <TrainerControl />
             </div>
           </div>
