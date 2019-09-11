@@ -22,7 +22,7 @@ const GeneratorStatCard = props => {
           <span className='text-success mr-2'>
             <i className='fa fa-arrow-up'></i> {props.trend}
           </span>
-          <span className='text-nowrap'>Since today</span>
+          <span className='text-nowrap'>Current session</span>
         </p>
       </div>
     </div>

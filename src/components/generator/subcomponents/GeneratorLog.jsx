@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import GenHistoryCard from './GenHistoryCard';
 import PropTypes from 'prop-types';
 
@@ -26,76 +27,27 @@ const GeneratorLog = props => {
                 <span>Timestamp</span>
               </div>
               <div className='gen-table-rows'>
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 500}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 500}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
-                <GenHistoryCard
-                  type='gold'
-                  name='W101 Gold (600)'
-                  map='MAP-PA-003'
-                  score='2945'
-                  time={Date.now() + 5}
-                />
+                {props.generatorItems.length ? (
+                  props.generatorItems.map((item, index) => {
+                    return (
+                      <GenHistoryCard
+                        type={item.type}
+                        name={item.name}
+                        score={item.score}
+                        map={item.map}
+                        timestamp={item.timestamp}
+                        key={index}
+                      />
+                    );
+                  })
+                ) : (
+                  <p
+                    style={{ textAlign: 'center', fontSize: '0.875rem' }}
+                    className='mt-4'
+                  >
+                    No reward data recorded.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -105,6 +57,12 @@ const GeneratorLog = props => {
   );
 };
 
-GeneratorLog.propTypes = {};
+GeneratorLog.propTypes = {
+  generatorItems: PropTypes.array.isRequired
+};
 
-export default GeneratorLog;
+const mapStateToProps = state => ({
+  generatorItems: state.metrics.items
+});
+
+export default connect(mapStateToProps)(GeneratorLog);

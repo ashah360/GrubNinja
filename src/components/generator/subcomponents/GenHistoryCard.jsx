@@ -15,19 +15,19 @@ import petIcon from '../../../assets/pet-icon.png';
 
 const mapTypeToIcon = type => {
   switch (type) {
-    case 'elixir':
+    case 'Elixir':
       return elixirIcon;
-    case 'gold':
+    case 'Gold':
       return goldIcon;
-    case 'pack':
+    case 'Pack':
       return packIcon;
-    case 'reagent':
+    case 'Reagent':
       return reagentIcon;
-    case 'housing':
+    case 'Housing':
       return housingIcon;
-    case 'snack':
+    case 'Snack':
       return snackIcon;
-    case 'pet':
+    case 'Pet':
       return petIcon;
     default:
       return giftIcon;
@@ -40,12 +40,12 @@ const convertMapId = mapId =>
 const GenHistoryCard = props => {
   return (
     <div className='gen-history-card'>
-      <img src={mapTypeToIcon(props.type.toLowerCase())} alt={props.type} />
+      <img src={mapTypeToIcon(props.type)} alt={props.type} />
       <div className='gen-history-card-name'>{props.name}</div>
       <div className='gen-history-card-score'>{props.score}</div>
       <div className='gen-history-card-map'>{convertMapId(props.map)}</div>
       <div className={'gen-history-card-timestamp'}>
-        <TimeAgo date={Date.now()} />
+        <TimeAgo date={props.timestamp} />
       </div>
     </div>
   );

@@ -1,8 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import MapSelect from '../../misc/MapSelect';
 import PropTypes from 'prop-types';
+import { sendNotification } from '../../../util/notify';
+
+import { fetchRewards } from '../../../actions/fetchRewards';
 
 const GeneratorControl = props => {
+  const testGenerate = async score => {
+    try {
+      await props.fetchRewards(score);
+      sendNotification('Success!', 'success');
+    } catch (error) {
+      sendNotification(error, 'danger');
+    }
+  };
+
   return (
     <div className='row'>
       <div className='col'>
@@ -17,14 +30,21 @@ const GeneratorControl = props => {
             </div>
             <div className='row'>
               <div className='col gen-control'>
-                <div class='row mb-3'>
-                  <div class='col'>
+                <div className='row mb-3'>
+                  <div className='col'>
                     <MapSelect />
                   </div>
                 </div>
-                <div class='row'>
-                  <div class='col'>
-                    <button class='btn btn-primary btn-block'>Generate</button>
+                <div className='row'>
+                  <div className='col'>
+                    <button
+                      className='btn btn-primary btn-block'
+                      onClick={() => {
+                        testGenerate('3995');
+                      }}
+                    >
+                      Generate
+                    </button>
                   </div>
                 </div>
               </div>
@@ -36,6 +56,16 @@ const GeneratorControl = props => {
   );
 };
 
-GeneratorControl.propTypes = {};
+GeneratorControl.propTypes = {
+  currentMapId: PropTypes.string.isRequired,
+  fetchRewards: PropTypes.func.isRequired
+};
 
-export default GeneratorControl;
+const mapStateToProps = state => ({
+  currentMapId: state.game.mapId
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchRewards }
+)(GeneratorControl);

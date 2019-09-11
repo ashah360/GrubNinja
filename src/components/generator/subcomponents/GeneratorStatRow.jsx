@@ -1,12 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import GeneratorStatCard from './GeneratorStatCard';
+import {
+  getTotalQuantities,
+  getTotalRewardCount
+} from '../../../selectors/metricSelectors';
 
 import goldIcon from '../../../assets/Art_Gold.png';
 import elixirIcon from '../../../assets/Art_Quest_Elixir.png';
 import packIcon from '../../../assets/Art_Pack.png';
-import housingIcon from '../../../assets/Art_Housing.png';
-import reagentIcon from '../../../assets/Icon_Reagent.png';
-import petIcon from '../../../assets/pet-icon.png';
+//import housingIcon from '../../../assets/Art_Housing.png';
+//import reagentIcon from '../../../assets/Icon_Reagent.png';
+//import petIcon from '../../../assets/pet-icon.png';
 import giftIcon from '../../../assets/Button_Gift.png';
 
 const GeneratorStatRow = props => {
@@ -15,18 +20,23 @@ const GeneratorStatRow = props => {
       <div className='col'>
         <GeneratorStatCard
           title='Gold'
-          value='42,500'
+          value={props.metrics.Gold}
           img={goldIcon}
           trend='500'
         />
       </div>
       <div className='col'>
-        <GeneratorStatCard title='Packs' value='32' img={packIcon} trend='2' />
+        <GeneratorStatCard
+          title='Packs'
+          value={props.metrics.Packs}
+          img={packIcon}
+          trend='2'
+        />
       </div>
       <div className='col'>
         <GeneratorStatCard
           title='Elixirs'
-          value='72'
+          value={props.metrics.Elixirs}
           img={elixirIcon}
           trend='5'
         />
@@ -34,7 +44,7 @@ const GeneratorStatRow = props => {
       <div className='col'>
         <GeneratorStatCard
           title='Total Rewards'
-          value='239'
+          value={props.totalRewardCount}
           img={giftIcon}
           trend='29'
         />
@@ -43,4 +53,9 @@ const GeneratorStatRow = props => {
   );
 };
 
-export default GeneratorStatRow;
+const mapStateToProps = state => ({
+  metrics: getTotalQuantities(state),
+  totalRewardCount: getTotalRewardCount(state)
+});
+
+export default connect(mapStateToProps)(GeneratorStatRow);
