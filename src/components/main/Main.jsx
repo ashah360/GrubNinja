@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { loadMetrics } from '../../actions/loadMetrics';
 
 const Main = props => {
+  useEffect(() => {
+    window.ipcRenderer.send('request-metrics');
+  }, []);
+
+  // On metrics event, update our state
+  window.ipcRenderer.on('load-metrics', (e, payload) => {
+    props.loadMetrics(payload);
+  });
+
   return (
     <main>
       <section className='view-container'>{props.children}</section>
@@ -8,4 +19,7 @@ const Main = props => {
   );
 };
 
-export default Main;
+export default connect(
+  null,
+  { loadMetrics }
+)(Main);
