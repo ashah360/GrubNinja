@@ -380,12 +380,13 @@ h1 {
 }
 
 .gen-table-rows {
-  height: calc(100vh - 29rem);
+  height: calc(100vh - 28.65rem);
   overflow: scroll;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0s;
 }
 
 .char-table-rows {
-  height: calc(100vh - 36.55rem);
+  height: calc(100vh - 37.625rem);
   overflow: scroll;
 }
 
@@ -403,6 +404,7 @@ h1 {
 
 .gen-history-card img {
   height: 1.5rem;
+  transform: translateY(2px);
 }
 
 .pet-snack-school {
