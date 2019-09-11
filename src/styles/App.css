@@ -328,6 +328,8 @@ h1 {
 
 .gen-history-card {
   display: grid;
+
+  border-bottom-left-radius: 4px;
   grid-template-columns: 1.25rem auto 12% 28% 14%;
   grid-gap: 1rem;
   font-size: 0.8125rem;
@@ -682,6 +684,10 @@ h5 img {
 
 /* COGO TOAST STYLING */
 
+.notification-item {
+  margin-top: 25px;
+}
+
 .notification-item .notification-message {
   color: #fff;
   max-width: 350px;
@@ -719,4 +725,15 @@ h5 img {
 /* GLOBALS */
 ::-webkit-scrollbar {
   display: none;
+}
+
+.load-overlay {
+  position: absolute;
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  cursor: not-allowed;
+  z-index: 99999;
 }
