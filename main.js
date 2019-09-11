@@ -50,12 +50,22 @@ function createWindow() {
     mainWindow.show();
     if ((process.env.NODE_ENV = 'dev'))
       mainWindow.webContents.openDevTools({ mode: 'detach' });
+  });
 
-    // Load metrics
+  ipcMain.on('request-metrics', () => {
+    const expTrained = store.get('expTrained', 0);
+    const petsLeveled = store.get('petsLeveled', 0);
+    const items = store.get('generatedItems', []);
 
-    //const expTrained = store.get('expTrained', 0);
-    //const petsLeveled = store.get('petsLeveled', 0);
-    //const generatedItems = store.get('generatedItems', []);
+    mainWindow.webContents.send('load-metrics', {
+      expTrained,
+      petsLeveled,
+      items: items
+    });
+  });
+
+  ipcMain.on('save-gen-metric', (event, payload) => {
+    store.set('generatedItems', payload);
   });
 
   ipcMain.on('closeApp', e => {
