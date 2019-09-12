@@ -71,12 +71,14 @@ export const getPetList = () => async (dispatch, getState) => {
     let petData = parse(body).GetPetListResponse;
 
     if (petData.Status.Msg === 'Success') {
-      dispatch({
-        type: LOAD_PETS,
-        payload: sanitize(petData.PetData)
-      });
+      if (petData.PetData) {
+        dispatch({
+          type: LOAD_PETS,
+          payload: sanitize(petData.PetData)
+        });
 
-      return Promise.resolve(petData.PetData);
+        return Promise.resolve(petData.PetData);
+      }
     } else {
       return Promise.reject(
         petData.Status.Msg + ' - ' + petData.Status.Content
