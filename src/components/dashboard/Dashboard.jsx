@@ -7,6 +7,7 @@ import LoginCard from './subcomponents/LoginCard';
 import CharacterSelect from './subcomponents/CharacterSelect';
 import { login } from '../../actions/login';
 import reset from '../../actions/reset';
+import { logMessage } from '../../actions/logMessage';
 import { sendXPResult } from '../../util/notify';
 
 import 'rodal/lib/rodal.css';
@@ -20,20 +21,17 @@ const Dashboard = props => {
   return (
     <Fragment>
       <h1>Dashboard</h1>
-      <Rodal
-        width={500}
-        height={300}
-        duration={300}
-        visible={modalState.visible}
-        onClose={hide}
-      ></Rodal>
       <div className='row'>
         <div className='col-9'>
           <StatRow />
-          <ActivityLog />
+          <ActivityLog log={props.log} />
         </div>
         <div className='col-3'>
-          <LoginCard handleLogin={props.login} handleResetState={props.reset} />
+          <LoginCard
+            handleLogin={props.login}
+            handleResetState={props.reset}
+            logMessage={props.logMessage}
+          />
           <CharacterSelect />
         </div>
       </div>
@@ -47,5 +45,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login, reset }
+  { login, reset, logMessage }
 )(Dashboard);

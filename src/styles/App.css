@@ -788,3 +788,50 @@ input[type='range']::-webkit-slider-thumb:active {
   cursor: not-allowed;
   z-index: 99999;
 }
+
+.user-dropdown {
+  position: absolute;
+  top: 0;
+  right: 1.8rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 10px;
+  color: #6c757d;
+  left: 2.25rem;
+  right: 2.25rem;
+  bottom: 0.7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.authenticated {
+  color: #2dce89;
+}
+
+/* LOG */
+.log-item {
+  font-family: var(--font-family-monospace);
+  color: #6c757d;
+}
+
+.log-success {
+  color: #2dce89;
+}
+
+.log-danger {
+  color: #f5365c;
+}
+
+.log-warning {
+  color: #ffd600;
+}
+
+.log-info {
+  color: #17a2b8;
+}
+
+/* END LOG */

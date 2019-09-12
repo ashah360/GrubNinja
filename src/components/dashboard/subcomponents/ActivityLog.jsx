@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Log from './Log';
 
 const ActivityLog = props => {
   return (
@@ -14,7 +16,19 @@ const ActivityLog = props => {
               </div>
             </div>
             <div className='row'>
-              <div className='col activity-log'></div>
+              <div className='col activity-log'>
+                {props.log.length > 0 &&
+                  props.log.map((line, i) => {
+                    return (
+                      <Log
+                        type={line.type}
+                        msg={line.msg}
+                        timestamp={line.timestamp}
+                        key={i}
+                      />
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
@@ -23,4 +37,8 @@ const ActivityLog = props => {
   );
 };
 
-export default ActivityLog;
+const mapStateToProps = state => ({
+  log: state.log
+});
+
+export default connect(mapStateToProps)(ActivityLog);

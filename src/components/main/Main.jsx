@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import UserDropdown from '../misc/UserDropdown';
 import { loadMetrics } from '../../actions/loadMetrics';
 
 const Main = props => {

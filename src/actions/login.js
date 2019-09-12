@@ -89,7 +89,7 @@ export const login = (username, password) => async (dispatch, getState) => {
         payload: sanitize(data.CharacterData)
       });
 
-      dispatch({
+      /* dispatch({
         type: LOAD_INVENTORY,
         payload: sanitize(data.Inventory.Item)
       });
@@ -104,7 +104,7 @@ export const login = (username, password) => async (dispatch, getState) => {
       dispatch({
         type: LOAD_CROWNS,
         payload: data.Inventory.Crowns
-      });
+      });*/
 
       dispatch({ type: ACKNOWLEDGE_TOKEN });
 
