@@ -20,6 +20,7 @@ import './styles/App.css';
 
 const App = props => {
   const [activePath, setActivePath] = useState(DASHBOARD);
+  const [score, setScore] = useState(500);
 
   const getActivePath = () => {
     switch (activePath) {
@@ -28,7 +29,7 @@ const App = props => {
       case TRAINER:
         return <Trainer />;
       case GENERATOR:
-        return <Generator />;
+        return <Generator score={score} setScore={setScore} />;
       default:
         return <Dashboard />;
     }

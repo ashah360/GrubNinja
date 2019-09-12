@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import { coreMaps, premiumMaps } from '../../constants/maps';
+import { coreMaps, premiumMaps, allMaps } from '../../constants/maps';
 import setMap from '../../actions/setMap';
 
 const background = '#1f1f22';
@@ -15,13 +15,13 @@ const styles = {
   container: provided => ({
     ...provided,
     fontSize: '11px',
-    borderRadius: '4px'
+    borderRadius: '0.375rem'
   }),
   control: provided => ({
     ...provided,
     backgroundColor: background,
     borderColor: foreground,
-    borderRadius: '4px',
+    borderRadius: '0.375rem',
     boxShadow: 'none',
     cursor: 'pointer',
     ':hover': {
@@ -35,7 +35,7 @@ const styles = {
   }),
   indicatorsContainer: provided => ({
     ...provided,
-    color: foreground
+    color: 'grey'
   }),
   valueContainer: provided => ({
     ...provided,
@@ -46,7 +46,7 @@ const styles = {
     backgroundColor: lightGrey,
     textAlign: 'left',
     cursor: state.isDisabled ? 'not-allowed' : 'default',
-    color: state.isDisabled ? carminePink : mutedGrey,
+    color: state.isDisabled ? carminePink : '#6c757d',
     ':active': {
       ...provided[':active'],
       backgroundColor: lightGrey,
@@ -64,12 +64,12 @@ const styles = {
 };
 
 const MapSelect = ({ currentMap, setMap, mapPacks }) => {
-  let ownedMaps = coreMaps; // User owns core maps by default
+  //let ownedMaps = coreMaps; // User owns core maps by default
 
   // Allow user to select premium maps if they own them
-  mapPacks.forEach(pack => {
+  /*mapPacks.forEach(pack => {
     ownedMaps = [...ownedMaps, ...premiumMaps[pack]];
-  });
+  });*/
 
   const handleChange = selectedOption => {
     setMap(selectedOption.value);
@@ -83,8 +83,8 @@ const MapSelect = ({ currentMap, setMap, mapPacks }) => {
       styles={styles}
       value={currentMap}
       onChange={handleChange}
-      options={ownedMaps}
-      placeholder={ownedMaps.find(map => map.value === currentMap).label}
+      options={allMaps}
+      placeholder={allMaps.find(map => map.value === currentMap).label}
     />
   );
 };

@@ -37,6 +37,7 @@ const GeneratorLog = props => {
                         map={item.map}
                         timestamp={item.timestamp}
                         key={index}
+                        onClick={() => props.loadPreset(item.score, item.map)}
                       />
                     );
                   })

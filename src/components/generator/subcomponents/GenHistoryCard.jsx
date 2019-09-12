@@ -39,12 +39,12 @@ const convertMapId = mapId =>
 
 const GenHistoryCard = props => {
   return (
-    <div className='gen-history-card'>
+    <div className='gen-history-card cell' onClick={props.onClick}>
       <img src={mapTypeToIcon(props.type)} alt={props.type} />
-      <div className='gen-history-card-name'>{props.name}</div>
-      <div className='gen-history-card-score'>{props.score}</div>
-      <div className='gen-history-card-map'>{convertMapId(props.map)}</div>
-      <div className={'gen-history-card-timestamp'}>
+      <div className='gen-history-card-name cell'>{props.name}</div>
+      <div className='gen-history-card-score cell'>{props.score}</div>
+      <div className='gen-history-card-map cell'>{convertMapId(props.map)}</div>
+      <div className={'gen-history-card-timestamp cell'}>
         <TimeAgo date={props.timestamp} />
       </div>
     </div>
