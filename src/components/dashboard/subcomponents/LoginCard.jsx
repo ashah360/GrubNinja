@@ -7,10 +7,18 @@ const LoginCard = props => {
     username: '',
     password: ''
   });
-
+  const [saveAccount, setSaveAccount] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
-
   const { username, password } = formData;
+
+  // Load saved account
+  window.ipcRenderer.on('load-saved-account', (e, payload) => {
+    setFormData({ username: payload.username, password: payload.password });
+  });
+
+  const handleSave = e => {
+    setSaveAccount(e.target.checked);
+  };
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,6 +38,8 @@ const LoginCard = props => {
       );
       setLoginLoading(false);
       sendNotification(`Logged in as ${username}`, 'info');
+      if (saveAccount)
+        window.ipcRenderer.send('save-account-details', formData);
     } catch (error) {
       // let the user know that there was a login error
       props.logMessage(error.toString(), 'danger');
@@ -86,6 +96,7 @@ const LoginCard = props => {
                     className='remember-me custom-control-input'
                     type='checkbox'
                     id='remember-account'
+                    onChange={handleSave}
                   />
                   <label
                     className='custom-control-label'

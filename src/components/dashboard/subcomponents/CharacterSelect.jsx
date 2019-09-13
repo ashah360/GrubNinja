@@ -63,7 +63,7 @@ const CharacterSelect = ({
                     style={{ textAlign: 'center', fontSize: '0.875rem' }}
                     className='mt-4'
                   >
-                    No Characters Loaded :(
+                    No Characters Loaded
                   </p>
                 )}
               </div>

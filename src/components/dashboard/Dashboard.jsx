@@ -32,7 +32,7 @@ const Dashboard = props => {
             handleResetState={props.reset}
             logMessage={props.logMessage}
           />
-          <CharacterSelect />
+          <CharacterSelect logMessage={props.logMessage} />
         </div>
       </div>
     </Fragment>
