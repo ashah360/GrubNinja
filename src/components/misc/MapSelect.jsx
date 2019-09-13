@@ -73,7 +73,7 @@ const MapSelect = ({ currentMap, setMap, mapPacks }) => {
 
   const handleChange = selectedOption => {
     setMap(selectedOption.value);
-    console.log(`Option selected:`, selectedOption);
+    console.log(`Option selected: `, selectedOption);
   };
 
   return (
