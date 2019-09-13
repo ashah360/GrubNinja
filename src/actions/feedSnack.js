@@ -3,7 +3,7 @@ import parse from '../util/parse';
 import { handlePetRewards } from './handlePetRewards';
 import commonForm from '../constants/minigame';
 import { USE_PET_SNACK } from '../constants/endpoints';
-import { SUBTRACT_SNACK } from '../constants/types';
+import { SUBTRACT_SNACK, ADD_XP } from '../constants/types';
 
 /*
  * IMPORTANT:
@@ -26,8 +26,9 @@ export const feedSnack = snackId => async (dispatch, getState) => {
     if (gameData.Status.Msg === 'Success') {
       store.dispatch(handlePetRewards(gameData));
 
-      if (snackId) dispatch({ type: SUBTRACT_SNACK, payload: snackId });
+      dispatch({ type: ADD_XP, payload: gameData.AttrGains.Exp });
 
+      if (snackId) dispatch({ type: SUBTRACT_SNACK, payload: snackId });
       return Promise.resolve(gameData.AttrGains.Exp);
     } else {
       let errorMessage = `${gameData.Status.Msg} - ${gameData.Status.Content}`;
