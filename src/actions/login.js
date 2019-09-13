@@ -1,5 +1,4 @@
 import parse from '../util/parse';
-import retry from 'p-retry';
 import sanitize from '../util/sanitize';
 import store from '../store';
 import { unlockMaps } from '../util/unlockMaps';
@@ -9,7 +8,6 @@ import { validateSession } from './validateSession';
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  REQUEST_NEW_TOKEN,
   ACKNOWLEDGE_TOKEN,
   LOAD_CHARACTERS,
   LOAD_INVENTORY,
@@ -25,7 +23,12 @@ import {
   TOKEN_REFRESH_RATE
 } from '../constants/minigame';
 
+let attempts = 1;
+const MAX_ATTEMPTS = 5;
+
 export const login = (username, password) => async (dispatch, getState) => {
+  console.log(attempts);
+  console.log(MAX_ATTEMPTS);
   let { account } = getState();
 
   const form = {
@@ -49,6 +52,8 @@ export const login = (username, password) => async (dispatch, getState) => {
 
     if (data.Status.Msg === 'Success') {
       console.log('Successfully logged in ');
+
+      attempts = 0;
 
       if (!account.initialFetched) {
         // MapsCompleted on initial login will ensure that all core maps are unlocked
@@ -84,27 +89,35 @@ export const login = (username, password) => async (dispatch, getState) => {
         payload: data.CSID
       });
 
-      dispatch({
-        type: LOAD_CHARACTERS,
-        payload: sanitize(data.CharacterData)
-      });
+      if (data.CharacterData) {
+        dispatch({
+          type: LOAD_CHARACTERS,
+          payload: sanitize(data.CharacterData)
+        });
+      }
 
-      /* dispatch({
-        type: LOAD_INVENTORY,
-        payload: sanitize(data.Inventory.Item)
-      });
+      if (data.Inventory) {
+        dispatch({
+          type: LOAD_INVENTORY,
+          payload: sanitize(data.Inventory.Item)
+        });
 
-      dispatch({
-        type: LOAD_MAPS,
-        payload: sanitize(data.Inventory.Item)
-          .filter(item => item.ItemType === 'MAP_PACK')
-          .map(maps => maps.Sku)
-      });
+        dispatch({
+          type: LOAD_CROWNS,
+          payload: data.Inventory.Crowns
+        });
+      }
 
-      dispatch({
-        type: LOAD_CROWNS,
-        payload: data.Inventory.Crowns
-      });*/
+      try {
+        dispatch({
+          type: LOAD_MAPS,
+          payload: sanitize(data.Inventory.Item)
+            .filter(item => item.ItemType === 'MAP_PACK')
+            .map(maps => maps.Sku)
+        });
+      } catch (error) {
+        console.log('User does not have any map packs');
+      }
 
       dispatch({ type: ACKNOWLEDGE_TOKEN });
 
@@ -124,6 +137,12 @@ export const login = (username, password) => async (dispatch, getState) => {
       type: LOGIN_FAIL
     });
     console.log(error);
-    return Promise.resolve(store.dispatch(login(username, password)));
+    if (attempts < MAX_ATTEMPTS) {
+      attempts++;
+      return Promise.resolve(store.dispatch(login(username, password)));
+    } else {
+      attempts = 0;
+      return Promise.reject('Error reaching login server');
+    }
   }
 };

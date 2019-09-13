@@ -3,7 +3,6 @@ import parse from '../util/parse';
 import { handlePetRewards } from './handlePetRewards';
 import commonForm from '../constants/minigame';
 import { USE_PET_SNACK } from '../constants/endpoints';
-import { fetchSnacks } from '../actions/fetchSnacks';
 import { SUBTRACT_SNACK } from '../constants/types';
 
 /*

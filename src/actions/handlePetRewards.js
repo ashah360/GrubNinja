@@ -1,9 +1,5 @@
 import sanitize from '../util/sanitize';
-import {
-  LOAD_CHARACTER_DATA,
-  UPDATE_PET,
-  UPDATE_ACTIVE_PET
-} from '../constants/types';
+import { LOAD_CHARACTER_DATA, UPDATE_PET } from '../constants/types';
 
 export const handlePetRewards = data => dispatch => {
   dispatch({

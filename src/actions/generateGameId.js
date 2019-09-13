@@ -4,12 +4,19 @@ import { START_MINIGAME } from '../constants/endpoints';
 import commonForm from '../constants/minigame';
 import { fetchPetRewards } from './fetchRewards';
 import { SET_GAME_ID } from '../constants/types';
+import { login } from './login';
+
+let attempts = 1;
+const MAX_ATTEMPTS = 5;
 
 // Generate game session with current game state from redux store
 export const generateGameId = () => async (dispatch, getState) => {
-  const { game } = getState();
+  const { account, game } = getState();
 
   try {
+    if (account.tokenRefreshRequired)
+      await login(account.username, account.password);
+
     let body = await window.request({
       method: 'POST',
       uri: START_MINIGAME,
@@ -21,6 +28,7 @@ export const generateGameId = () => async (dispatch, getState) => {
     }).StartMinigameResponse;
 
     if (gameData.Status.Msg === 'Success') {
+      attempts = 0;
       dispatch({
         type: SET_GAME_ID,
         payload: gameData.CurrentGameId
@@ -35,6 +43,15 @@ export const generateGameId = () => async (dispatch, getState) => {
     }
   } catch (error) {
     console.error(error);
-    return Promise.resolve(store.dispatch(generateGameId()));
+    if (attempts < MAX_ATTEMPTS) {
+      attempts++;
+      return Promise.resolve(store.dispatch(generateGameId()));
+    } else {
+      attempts = 0;
+      return Promise.reject(
+        'Could not generate game session. ',
+        error.toString()
+      );
+    }
   }
 };
