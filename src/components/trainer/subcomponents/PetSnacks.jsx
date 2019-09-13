@@ -16,27 +16,39 @@ const settings = {
 
 const PetSnacks = props => {
   return (
-    <div className='row snack-card mt-4'>
+    <div className='row mt-4'>
       <div className='col'>
-        <div id='pet-snack-container'>
-          {props.currentSnacks.length ? (
-            props.currentSnacks.map(snack => (
-              <SnackCard
-                isActive={props.activeSnackId === snack.TemplateId}
-                name={snack.Name}
-                quantity={snack.Qty}
-                school={snack.School}
-                id={snack.TemplateId}
-                key={snack.TemplateId}
-                onClick={() => props.setActiveSnackId(snack.TemplateId)}
-                {...snack.AttrGains}
-              />
-            ))
-          ) : (
-            <p className='mt-3' style={{ textAlign: 'center' }}>
-              No snacks loaded
-            </p>
-          )}
+        <div className='card snack-card'>
+          <div className='row pet-table'>
+            <div className='col'>
+              <div className='snack-table-header text-muted'>
+                <span>Select a Snack</span>
+              </div>
+              <div className='pet-snack-rows'>
+                {props.currentSnacks.length ? (
+                  props.currentSnacks.map(snack => (
+                    <SnackCard
+                      isActive={props.activeSnackId === snack.TemplateId}
+                      name={snack.Name}
+                      quantity={snack.Qty}
+                      school={snack.School}
+                      id={snack.TemplateId}
+                      key={snack.TemplateId}
+                      onClick={() => props.setActiveSnackId(snack.TemplateId)}
+                      {...snack.AttrGains}
+                    />
+                  ))
+                ) : (
+                  <p
+                    className='mt-4'
+                    style={{ textAlign: 'center', fontSize: '0.875rem' }}
+                  >
+                    You don't have any snacks.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
