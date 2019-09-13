@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import BlockUi from 'react-block-ui';
 import TrainerStatCards from './subcomponents/TrainerStatCards';
 import PetSelect from './subcomponents/PetSelect';
 import TrainingCard from './subcomponents/TrainingCard';
@@ -27,17 +26,20 @@ const Trainer = props => {
   const handleGameTest = async () => {
     try {
       setTrainerActive(true);
-      logMessage('Generating game session');
+      props.logMessage('Generating game session');
       const session = await props.generateGameId();
-      logMessage('Generated valid game session (' + session + ')', 'info');
+      props.logMessage(
+        'Generated valid game session (' + session + ')',
+        'info'
+      );
       const gameExp = await props.fetchPetRewards();
       const feedExp = await props.feedSnack(activeSnackId);
-      logMessage('Successfullyd trained pet', 'success');
+      props.logMessage('Successfully trained pet', 'success');
       setTrainerActive(false);
       sendXPResult(parseInt(gameExp) + parseInt(feedExp) || gameExp);
     } catch (err) {
       sendNotification(err, 'danger');
-      logMessage(err, 'danger');
+      props.logMessage(err, 'danger');
       setTrainerActive(false);
       console.log(err);
     }
@@ -73,7 +75,7 @@ const Trainer = props => {
           <button
             className='btn btn-block btn-primary feed-btn mt-4'
             onClick={handleGameTest}
-            disabled={trainerActive || !props.charId}
+            disabled={trainerActive || !props.charId || !props.petId}
           >
             Feed Pet
           </button>
@@ -89,7 +91,8 @@ Trainer.propTypes = {
 
 const mapStateToProps = state => ({
   snacks: state.character.snacks,
-  charId: state.character.charId
+  charId: state.character.data.CharId,
+  petId: state.game.petId
 });
 
 export default connect(

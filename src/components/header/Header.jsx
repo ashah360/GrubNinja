@@ -6,7 +6,7 @@ import logo from '../../assets/ninja_grey.png';
 const Header = props => {
   return (
     <header>
-      <Nav />
+      <Nav setNotifState={props.setNotifState} />
       <NavMenu
         setActivePath={props.setActivePath}
         activePath={props.activePath}
