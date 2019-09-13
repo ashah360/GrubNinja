@@ -1,7 +1,9 @@
 import React from 'react';
 import { DASHBOARD, TRAINER, GENERATOR } from '../../../constants/path';
 
-const NavMenu = ({ activePath, setActivePath }) => {
+const discordInvite = 'https://discord.gg/AJJcbMu';
+
+const NavMenu = ({ activePath, setActivePath, setSettingsState }) => {
   return (
     <section className='navigation-menu'>
       <a
@@ -28,11 +30,19 @@ const NavMenu = ({ activePath, setActivePath }) => {
         <i className='fas fa-unlock'></i>
         <span>Generator</span>
       </a>
-      <a href='#!' className='nav-menu-item'>
+      <a
+        href='#!'
+        className='nav-menu-item'
+        onClick={() => setSettingsState(true)}
+      >
         <i className='fas fa-cog'></i>
         <span>Settings</span>
       </a>
-      <a href='#!' className='nav-menu-item'>
+      <a
+        href='#!'
+        className='nav-menu-item'
+        onClick={() => window.ipcRenderer.send('openUrl', discordInvite)}
+      >
         <i className='fab fa-discord'></i>
         <span>Discord</span>
       </a>

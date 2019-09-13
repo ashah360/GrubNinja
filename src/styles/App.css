@@ -96,6 +96,10 @@ button {
   font-size: 0.9rem;
 }
 
+.menu-disabled {
+  cursor: not-allowed;
+}
+
 .nav-menu-item span {
   font-weight: 600;
 }
@@ -695,6 +699,27 @@ h5 img {
   background: rgb(34, 34, 39) !important;
   border: 2px solid rgba(255, 255, 255, 0.04);
 }
+
+.modal-body {
+  padding: 10px;
+}
+
+.input-group-text {
+  background: var(--b-grey);
+
+  color: #6c757d;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.alert-primary {
+  text-align: center;
+}
+
+.version-alert {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
 /* END MODAL STYLING */
 
 /* COGO TOAST STYLING */
@@ -816,6 +841,7 @@ footer {
 .log-item {
   font-family: var(--font-family-monospace);
   color: #6c757d;
+  font-size: 12px;
 }
 
 .log-success {

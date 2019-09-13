@@ -1,5 +1,5 @@
 import React from 'react';
-import Rodal from 'Rodal';
+import Rodal from 'rodal';
 import PropTypes from 'prop-types';
 
 const Modal = props => {
