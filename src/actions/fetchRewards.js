@@ -4,7 +4,8 @@ import store from '../store';
 import sanitize from '../util/sanitize';
 import { buildRewardObject } from '../util/mapGenObject';
 import commonForm from '../constants/minigame';
-import { LOAD_SNACKS, LOAD_GENERATOR_ITEMS } from '../constants/types';
+import { handlePetRewards } from './handlePetRewards';
+import { LOAD_SNACKS, LOAD_GENERATOR_ITEMS, ADD_XP } from '../constants/types';
 import { login } from './login';
 import {
   GET_PET_TRAINING_REWARDS,
@@ -32,6 +33,7 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
     const rewardData = parse(body).GetPetTrainingRewardsResponse;
 
     if (rewardData.Status.Msg === 'Success') {
+      store.dispatch(handlePetRewards(rewardData));
       // Update snack data in state
       if (rewardData.SnackData)
         dispatch({
@@ -39,6 +41,7 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
           payload: sanitize(rewardData.SnackData)
         });
       attempts = 0;
+      dispatch({ type: ADD_XP, payload: rewardData.AttrGains.Exp });
       return Promise.resolve(rewardData.AttrGains.Exp);
     } else {
       let errorMessage = `${rewardData.Status.Msg} - ${rewardData.Status.Content}`;
@@ -52,7 +55,7 @@ export const fetchPetRewards = () => async (dispatch, getState) => {
       return Promise.resolve(store.dispatch(fetchPetRewards()));
     } else {
       attempts = 0;
-      return Promise.reject('Could not fetch pet rewards.', error.toString());
+      return Promise.reject(error);
     }
   }
 };
@@ -61,7 +64,7 @@ export const fetchRewards = score => async (dispatch, getState) => {
   const { account, game } = getState();
 
   if (account.tokenRefreshRequired)
-    await login(account.username, account.password);
+    await store.dispatch(login(account.username, account.password));
 
   try {
     const body = await window.request({
@@ -98,7 +101,7 @@ export const fetchRewards = score => async (dispatch, getState) => {
       return Promise.resolve(store.dispatch(fetchRewards()));
     } else {
       attempts = 0;
-      return Promise.reject('Could not generate reward.', error.toString());
+      return Promise.reject(error);
     }
   }
 };

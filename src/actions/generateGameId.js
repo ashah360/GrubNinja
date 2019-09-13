@@ -15,7 +15,7 @@ export const generateGameId = () => async (dispatch, getState) => {
 
   try {
     if (account.tokenRefreshRequired)
-      await login(account.username, account.password);
+      store.dispatch(login(account.username, account.password));
 
     let body = await window.request({
       method: 'POST',
@@ -48,10 +48,7 @@ export const generateGameId = () => async (dispatch, getState) => {
       return Promise.resolve(store.dispatch(generateGameId()));
     } else {
       attempts = 0;
-      return Promise.reject(
-        'Could not generate game session. ',
-        error.toString()
-      );
+      return Promise.reject(error);
     }
   }
 };
