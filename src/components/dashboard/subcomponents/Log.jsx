@@ -3,7 +3,7 @@ import React from 'react';
 const Log = props => {
   return (
     <div class={`log-item log-${props.type}`}>
-      [{props.timestamp}] {props.msg}
+      [{props.timestamp.toString()}] {props.msg}
     </div>
   );
 };
