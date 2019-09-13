@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import Log from './Log';
+import useStayScrolled from 'react-stay-scrolled';
 
 const ActivityLog = props => {
+  const listRef = useRef();
+  const { stayScrolled } = useStayScrolled(listRef);
+
+  useLayoutEffect(() => {
+    stayScrolled();
+  }, [props.log.length, stayScrolled]);
+
   return (
     <div className='row'>
       <div className='col'>
@@ -16,7 +24,7 @@ const ActivityLog = props => {
               </div>
             </div>
             <div className='row'>
-              <div className='col activity-log'>
+              <div className='col activity-log' ref={listRef}>
                 {props.log.length > 0 &&
                   props.log.map((line, i) => {
                     return (
