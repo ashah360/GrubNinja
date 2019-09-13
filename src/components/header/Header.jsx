@@ -10,6 +10,7 @@ const Header = props => {
       <NavMenu
         setActivePath={props.setActivePath}
         activePath={props.activePath}
+        setSettingsState={props.setSettingsState}
       />
       <img src={logo} alt='Ninja' className='logo' />
       <div className='draggable'></div>
