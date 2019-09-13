@@ -5,6 +5,7 @@ import ScoreSlider from './ScoreSlider';
 import MapSelect from '../../misc/MapSelect';
 import PropTypes from 'prop-types';
 import { sendNotification } from '../../../util/notify';
+import { logMessage } from '../../../actions/logMessage';
 
 import { fetchRewards } from '../../../actions/fetchRewards';
 
@@ -21,9 +22,15 @@ export const hoardPackPreset = () => ({
 const GeneratorControl = props => {
   const handleGenerate = async score => {
     try {
+      props.logMessage(`Requesting rewards with map ${props.currentMapId}`);
       await props.fetchRewards(score);
       sendNotification('Success!', 'success');
+      props.logMessage('Reward successfully generated!', 'success');
     } catch (error) {
+      props.logMessage(
+        `Failed to generate reward. ${error.toString}`,
+        'danger'
+      );
       sendNotification(error, 'danger');
     }
   };
@@ -124,6 +131,7 @@ const GeneratorControl = props => {
                   <div className='col'>
                     <button
                       className='btn btn-primary btn-block'
+                      disabled={!props.account.isLoggedIn}
                       onClick={() => {
                         handleGenerate(props.score.toString());
                       }}
@@ -147,10 +155,11 @@ GeneratorControl.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentMapId: state.game.mapId
+  currentMapId: state.game.mapId,
+  account: state.account
 });
 
 export default connect(
   mapStateToProps,
-  { fetchRewards }
+  { fetchRewards, logMessage }
 )(GeneratorControl);

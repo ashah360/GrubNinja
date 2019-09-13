@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import Talent from './Talent';
 import AttributeStat from './AttributeStat';
 import PetExpBar from './PetExpBar';
-import Loading from '../../misc/Loading';
 import mapLevel from '../../../util/mapLevel';
 import { selectPetById } from '../../../selectors/petSelectors';
-
-import PropTypes from 'prop-types';
 
 import petIcon from '../../../assets/pet-icon.png';
 
@@ -82,8 +79,6 @@ const TrainingCard = ({ pet }) => {
     </div>
   );
 };
-
-TrainingCard.propTypes = {};
 
 const mapStateToProps = state => ({
   pet: selectPetById(state)

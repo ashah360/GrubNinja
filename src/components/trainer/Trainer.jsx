@@ -48,7 +48,11 @@ const Trainer = props => {
       <h1>Pet Trainer</h1>
       <div className='row'>
         <div className='col-5'>
-          <TrainerStatCards currentSnacks={props.snacks} />
+          <TrainerStatCards
+            currentSnacks={props.snacks}
+            charId={props.charId}
+            trainerActive={trainerActive}
+          />
           <PetSelect trainerActive={trainerActive} />
         </div>
         <div className='col'>
@@ -69,7 +73,7 @@ const Trainer = props => {
           <button
             className='btn btn-block btn-primary feed-btn mt-4'
             onClick={handleGameTest}
-            disabled={trainerActive}
+            disabled={trainerActive || !props.charId}
           >
             Feed Pet
           </button>
@@ -84,7 +88,8 @@ Trainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  snacks: state.character.snacks
+  snacks: state.character.snacks,
+  charId: state.character.charId
 });
 
 export default connect(

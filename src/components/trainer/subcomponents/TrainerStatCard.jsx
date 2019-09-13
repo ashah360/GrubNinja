@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const TrainerStatCard = props => {
   return (
@@ -19,7 +18,7 @@ const TrainerStatCard = props => {
             </div>
             <div className='col-auto'>
               <div className='rounded-circle'>
-                <img className='dash-img' src={props.img} />
+                <img className='dash-img' src={props.img} alt='dashboard' />
               </div>
             </div>
           </div>
@@ -29,6 +28,7 @@ const TrainerStatCard = props => {
                 type='button'
                 className='btn btn-primary btn-sm'
                 onClick={props.handleBuyEnergy}
+                disabled={props.trainerActive || !props.charId}
               >
                 Buy Elixir
               </button>

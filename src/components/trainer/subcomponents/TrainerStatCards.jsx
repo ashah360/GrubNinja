@@ -11,7 +11,9 @@ const TrainerStatCards = ({
   energyCurrent,
   energyMax,
   currentSnacks,
-  buyEnergy
+  buyEnergy,
+  charId,
+  trainerActive
 }) => {
   const handleBuyEnergy = async () => {
     try {
@@ -52,6 +54,8 @@ const TrainerStatCards = ({
         energy={true}
         img={energyGlobe}
         handleBuyEnergy={handleBuyEnergy}
+        charId={charId}
+        trainerActive={trainerActive}
       />
       <TrainerStatCard
         title='Snacks'
