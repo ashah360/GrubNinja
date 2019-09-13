@@ -142,7 +142,7 @@ export const login = (username, password) => async (dispatch, getState) => {
       return Promise.resolve(store.dispatch(login(username, password)));
     } else {
       attempts = 0;
-      return Promise.reject('Error reaching login server');
+      return Promise.reject(error);
     }
   }
 };
