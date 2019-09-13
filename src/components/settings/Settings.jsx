@@ -2,6 +2,10 @@ import React, { Fragment } from 'react';
 import Rodal from 'rodal';
 import PropTypes from 'prop-types';
 
+const launch = () => {
+  window.ipcRenderer.send('init:launch');
+};
+
 const Settings = props => {
   return (
     <Fragment>
@@ -54,7 +58,9 @@ const Settings = props => {
           </div>
           <div className='form-row'>
             <div className='col'>
-              <button className='btn btn-block btn-primary'>Launch Game</button>
+              <button className='btn btn-block btn-primary' onClick={launch}>
+                Launch Game
+              </button>
             </div>
           </div>
         </div>
