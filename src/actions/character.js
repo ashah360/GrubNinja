@@ -8,9 +8,9 @@ import { MINIGAME_ID } from '../constants/minigame';
 import {
   LOAD_CHARACTER_DATA,
   LOAD_PETS,
-  SET_ACTIVE_PET,
   SET_CHAR_ID,
-  SET_PET_ID
+  SET_PET_ID,
+  SET_ACCOUNT_DETAILS
 } from '../constants/types';
 
 // set data for the specified character in the character.data state
@@ -50,6 +50,10 @@ export const setPet = id => (dispatch, getState) => {
   }
 
   payload.Talent = sanitize(payload.Talent);
+};
+
+export const setAccountDetails = (username, password) => dispatch => {
+  dispatch({ type: SET_ACCOUNT_DETAILS, payload: { username, password } });
 };
 
 export const getPetList = () => async (dispatch, getState) => {
