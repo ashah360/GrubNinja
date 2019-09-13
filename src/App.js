@@ -4,6 +4,7 @@ import Main from './components/main/Main';
 import Dashboard from './components/dashboard/Dashboard';
 import Trainer from './components/trainer/Trainer';
 import Generator from './components/generator/Generator';
+import Settings from './components/settings/Settings';
 import ReactNotification from 'react-notifications-component';
 
 import { DASHBOARD, TRAINER, GENERATOR } from './constants/path';
@@ -21,6 +22,7 @@ import './styles/App.css';
 const App = props => {
   const [activePath, setActivePath] = useState(DASHBOARD);
   const [score, setScore] = useState(500);
+  const [settingsState, setSettingsState] = useState(false);
 
   const getActivePath = () => {
     switch (activePath) {
@@ -38,9 +40,18 @@ const App = props => {
   return (
     <Provider store={store}>
       <Fragment>
-        <Header setActivePath={setActivePath} activePath={activePath} />
+        <Header
+          setActivePath={setActivePath}
+          activePath={activePath}
+          setSettingsState={setSettingsState}
+          settingsState={settingsState}
+        />
         <Main>
           <ReactNotification />
+          <Settings
+            visible={settingsState}
+            setSettingsState={setSettingsState}
+          />
           {getActivePath()}
         </Main>
       </Fragment>
