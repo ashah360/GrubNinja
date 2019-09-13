@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Nav = () => {
+const Nav = props => {
   return (
     <nav>
       Grub<span>Ninja</span>
       <div className='control-bar'>
-        <div className='notifications'>
+        <div
+          className='notifications'
+          onClick={() => props.setNotifState(true)}
+        >
           <i className='far fa-bell'></i>
           <div className='notification-badge'></div>
         </div>

@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import UserDropdown from '../misc/UserDropdown';
 import { loadMetrics } from '../../actions/loadMetrics';
 import { setAccountDetails } from '../../actions/character';
+import { sendNotification } from '../../util/notify';
+
+// Handle receiving notifications from main process
+window.ipcRenderer.on('showNotif', (e, msg, type = 'info') =>
+  sendNotification(msg, type)
+);
 
 const Main = props => {
   useEffect(() => {
@@ -13,11 +18,6 @@ const Main = props => {
   // On metrics event, update our state
   window.ipcRenderer.on('load-metrics', (e, payload) => {
     props.loadMetrics(payload);
-  });
-
-  // Same with username
-  window.ipcRenderer.on('load-saved-account', (e, payload) => {
-    props.setAccountDetails(payload.username, payload.password);
   });
 
   return (
