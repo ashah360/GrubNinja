@@ -22,6 +22,23 @@ export const sendNotification = (
   });
 };
 
+export const sendImportant = (
+  title,
+  message,
+  type = 'info',
+  duration = 4000
+) => {
+  store.addNotification({
+    ...configuration,
+    title,
+    message: message,
+    type,
+    dismiss: {
+      duration
+    }
+  });
+};
+
 export const sendXPResult = amount => {
   store.addNotification({
     ...configuration,
