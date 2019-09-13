@@ -4,7 +4,8 @@ import {
   REQUEST_NEW_TOKEN,
   ACKNOWLEDGE_TOKEN,
   SET_INTERVAL_POINTER,
-  RESET_ACCOUNT_STATE
+  RESET_ACCOUNT_STATE,
+  SET_ACCOUNT_DETAILS
 } from '../constants/types';
 
 const initialState = {
@@ -21,6 +22,11 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case SET_ACCOUNT_DETAILS:
+      return {
+        ...state,
+        ...payload
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
