@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Trainer from './components/trainer/Trainer';
 import Generator from './components/generator/Generator';
 import Settings from './components/settings/Settings';
+import Notifications from './components/notifications/Notifications';
 import ReactNotification from 'react-notifications-component';
 
 import { DASHBOARD, TRAINER, GENERATOR } from './constants/path';
@@ -20,9 +21,11 @@ import './styles/argon.css';
 import './styles/App.css';
 
 const App = props => {
+  // Top level non-redux state
   const [activePath, setActivePath] = useState(DASHBOARD);
   const [score, setScore] = useState(500);
   const [settingsState, setSettingsState] = useState(false);
+  const [notifState, setNotifState] = useState(false);
 
   const getActivePath = () => {
     switch (activePath) {
@@ -45,6 +48,7 @@ const App = props => {
           activePath={activePath}
           setSettingsState={setSettingsState}
           settingsState={settingsState}
+          setNotifState={setNotifState}
         />
         <Main>
           <ReactNotification />
@@ -52,6 +56,7 @@ const App = props => {
             visible={settingsState}
             setSettingsState={setSettingsState}
           />
+          <Notifications visible={notifState} setNotifState={setNotifState} />
           {getActivePath()}
         </Main>
       </Fragment>
