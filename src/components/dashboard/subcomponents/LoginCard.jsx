@@ -17,7 +17,10 @@ const LoginCard = props => {
 
   const login = async (username, password) => {
     try {
-      props.logMessage(`Sending login request with user ${username}`);
+      props.logMessage(
+        `Sending login request with user ${username}`,
+        'default'
+      );
       props.handleResetState();
       setLoginLoading(true);
       await props.handleLogin(username, password);
@@ -29,9 +32,9 @@ const LoginCard = props => {
       sendNotification(`Logged in as ${username}`, 'info');
     } catch (error) {
       // let the user know that there was a login error
-      props.logMessage(error, 'danger');
+      props.logMessage(error.toString(), 'danger');
       setLoginLoading(false);
-      sendNotification(error, 'danger');
+      sendNotification(error.toString(), 'danger');
       console.log(error);
     }
   };
