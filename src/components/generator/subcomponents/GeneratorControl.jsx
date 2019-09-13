@@ -27,10 +27,7 @@ const GeneratorControl = props => {
       sendNotification('Success!', 'success');
       props.logMessage('Reward successfully generated!', 'success');
     } catch (error) {
-      props.logMessage(
-        `Failed to generate reward. ${error.toString}`,
-        'danger'
-      );
+      props.logMessage(error.toString(), 'danger');
       sendNotification(error, 'danger');
     }
   };
