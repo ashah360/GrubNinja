@@ -68,6 +68,24 @@ function createWindow() {
     store.set('generatedItems', payload);
   });
 
+  ipcMain.on('save-account-details', (event, payload) => {
+    store.set('username', payload.username);
+    store.set('password', payload.password);
+  });
+
+  ipcMain.on('request-saved-account', () => {
+    const username = store.get('username', '');
+    const password = store.get('password', '');
+    mainWindow.webContents.send('load-saved-account', { username, password });
+  });
+
+  ipcMain.on('openUrl', (e, url) => {
+    if (url != mainWindow.webContents.getURL()) {
+      e.preventDefault();
+      electron.shell.openExternal(url);
+    }
+  });
+
   ipcMain.on('closeApp', e => {
     console.log('Got called to close the app');
     e.preventDefault();
