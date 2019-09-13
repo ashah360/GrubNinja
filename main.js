@@ -3,11 +3,8 @@ const { app, BrowserWindow, ipcMain } = electron;
 const Store = require('electron-store');
 const path = require('path');
 
-const {
-  default: installExtension,
-  REDUX_DEVTOOLS,
-  REACT_DEVELOPER_TOOLS
-} = require('electron-devtools-installer');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 // Appdata manager
 const store = new Store();
@@ -29,16 +26,6 @@ function createWindow() {
     frame: false,
     show: false
   });
-
-  /*
-  installExtension(REDUX_DEVTOOLS)
-    .then(name => console.log(`Added Extension:  ${name}`))
-    .catch(err => console.log('An error occurred: ', err));
-
-  installExtension(REACT_DEVELOPER_TOOLS)
-    .then(name => console.log(`Added Extension:  ${name}`))
-    .catch(err => console.log('An error occurred: ', err));
-    */
 
   mainWindow.loadURL(
     process.env.NODE_ENV === 'dev'
@@ -68,6 +55,10 @@ function createWindow() {
     store.set('generatedItems', payload);
   });
 
+  ipcMain.on('save-exp-metric', (e, exp) => store.set('expTrained', exp));
+
+  ipcMain.on('save-pets-leveled-metric', (e, n) => store.set('petsLeveled', n));
+
   ipcMain.on('save-account-details', (event, payload) => {
     store.set('username', payload.username);
     store.set('password', payload.password);
@@ -79,10 +70,32 @@ function createWindow() {
     mainWindow.webContents.send('load-saved-account', { username, password });
   });
 
+  ipcMain.on('save-webhook', (event, uri) => store.set('webhook', uri));
+
+  ipcMain.on('request-webhook', () =>
+    mainWindow.webContents.send('receive-webhook', store.get('webhook', ''))
+  );
+
   ipcMain.on('openUrl', (e, url) => {
-    if (url != mainWindow.webContents.getURL()) {
+    if (url !== mainWindow.webContents.getURL()) {
       e.preventDefault();
       electron.shell.openExternal(url);
+    }
+  });
+
+  ipcMain.on('init:launch', () => {
+    switch (process.platform) {
+      case 'win32':
+      case 'win64':
+        launch();
+        mainWindow.webContents.send('showNotif', 'Launching Game', 'info');
+        break;
+      default:
+        mainWindow.webContents.send(
+          'showNotif',
+          'This feature is only supported on Windows',
+          'danger'
+        );
     }
   });
 
@@ -91,6 +104,17 @@ function createWindow() {
     e.preventDefault();
     process.exit();
   });
+}
+
+async function launch() {
+  try {
+    await exec(
+      'cd C:\\ProgramData\\KingsIsle Entertainment\\Wizard101\\Bin && WizardGraphicalClient.exe -L login.us.wizard101.com 12000 -A English && GOTO:EOF && EXIT /B n'
+    );
+  } catch (error) {
+    console.error(error);
+    mainWindow.webContents.send('showNotif', `Failed to launch game`, 'danger');
+  }
 }
 
 app.on('ready', createWindow);
