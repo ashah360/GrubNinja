@@ -1,5 +1,10 @@
 import sanitize from '../util/sanitize';
-import { LOAD_CHARACTER_DATA, UPDATE_PET } from '../constants/types';
+import { sendImportant } from '../util/notify';
+import {
+  LOAD_CHARACTER_DATA,
+  UPDATE_PET,
+  ADD_PET_LEVEL
+} from '../constants/types';
 
 export const handlePetRewards = data => dispatch => {
   dispatch({
@@ -14,15 +19,23 @@ export const handlePetRewards = data => dispatch => {
   delete petData.DisplayName;
 
   // Only dispatch reducers if game actually caused any updates to pet data
-  if (data.AttrGains && data.AttrGains.Exp > 0) {
+  if (!!data.AttrGains && data.AttrGains.Exp > 0) {
     // fallback in case talent object not attached
 
-    if (!(typeof petData === 'string')) {
-      if (typeof petData.Talent === 'undefined') {
+    if (!!petData) {
+      if (!petData.Talent) {
         petData.Talent = [];
       }
 
       petData.Talent = sanitize(petData.Talent);
+
+      // Talent Detection
+      if (data.AttrGains.Level > 0) {
+        const abilities = petData.Talent;
+        const ability = abilities[abilities.length - 1];
+        sendImportant('Ability Unlocked', ability);
+        dispatch({ type: ADD_PET_LEVEL });
+      }
 
       dispatch({
         type: UPDATE_PET,
