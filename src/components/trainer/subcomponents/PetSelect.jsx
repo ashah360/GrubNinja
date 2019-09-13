@@ -50,7 +50,7 @@ const PetSelect = ({ petList, setPet, trainerActive }) => {
                     style={{ textAlign: 'center', fontSize: '0.875rem' }}
                     className='mt-4'
                   >
-                    No Pets to Show :(
+                    No Pets to Show
                   </p>
                 )}
               </div>
