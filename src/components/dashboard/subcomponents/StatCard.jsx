@@ -31,7 +31,6 @@ const StatCard = props => {
 
 StatCard.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired
 };
 

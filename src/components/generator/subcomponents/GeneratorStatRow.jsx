@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import GeneratorStatCard from './GeneratorStatCard';
 import {
   getTotalQuantities,
-  getTotalRewardCount
+  getSessionQuantities,
+  getTotalRewardCount,
+  getSessionRewardCount
 } from '../../../selectors/metricSelectors';
 
 import goldIcon from '../../../assets/Art_Gold.png';
 import elixirIcon from '../../../assets/Art_Quest_Elixir.png';
 import packIcon from '../../../assets/Art_Pack.png';
-//import housingIcon from '../../../assets/Art_Housing.png';
-//import reagentIcon from '../../../assets/Icon_Reagent.png';
-//import petIcon from '../../../assets/pet-icon.png';
 import giftIcon from '../../../assets/Button_Gift.png';
 
 const GeneratorStatRow = props => {
@@ -22,7 +21,7 @@ const GeneratorStatRow = props => {
           title='Gold'
           value={props.metrics.Gold}
           img={goldIcon}
-          trend='500'
+          trend={props.sessionMetrics.Gold}
         />
       </div>
       <div className='col'>
@@ -30,7 +29,7 @@ const GeneratorStatRow = props => {
           title='Packs'
           value={props.metrics.Packs}
           img={packIcon}
-          trend='2'
+          trend={props.sessionMetrics.Packs}
         />
       </div>
       <div className='col'>
@@ -38,7 +37,7 @@ const GeneratorStatRow = props => {
           title='Elixirs'
           value={props.metrics.Elixirs}
           img={elixirIcon}
-          trend='5'
+          trend={props.sessionMetrics.Elixirs}
         />
       </div>
       <div className='col'>
@@ -46,7 +45,7 @@ const GeneratorStatRow = props => {
           title='Total Rewards'
           value={props.totalRewardCount}
           img={giftIcon}
-          trend='29'
+          trend={props.sessionRewardCount}
         />
       </div>
     </div>
@@ -55,7 +54,9 @@ const GeneratorStatRow = props => {
 
 const mapStateToProps = state => ({
   metrics: getTotalQuantities(state),
-  totalRewardCount: getTotalRewardCount(state)
+  totalRewardCount: getTotalRewardCount(state),
+  sessionMetrics: getSessionQuantities(state),
+  sessionRewardCount: getSessionRewardCount(state)
 });
 
 export default connect(mapStateToProps)(GeneratorStatRow);
