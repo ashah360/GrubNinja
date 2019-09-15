@@ -32,7 +32,8 @@ const Settings = props => {
                   <i className='fas fa-info-circle'></i>
                 </span>
                 <span className='alert-inner--text'>
-                  You are currently running <strong>Version 1.0.1</strong>
+                  You are currently running{' '}
+                  <strong>Version {props.version}</strong>
                 </span>
               </div>
             </div>

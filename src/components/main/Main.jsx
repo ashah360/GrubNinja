@@ -13,12 +13,12 @@ const Main = props => {
   useEffect(() => {
     window.ipcRenderer.send('request-metrics');
     window.ipcRenderer.send('request-saved-account');
+    // On metrics event, update our state
+    window.ipcRenderer.on('load-metrics', (e, payload) => {
+      props.loadMetrics(payload);
+    });
+    
   }, []);
-
-  // On metrics event, update our state
-  window.ipcRenderer.on('load-metrics', (e, payload) => {
-    props.loadMetrics(payload);
-  });
 
   return (
     <main>
