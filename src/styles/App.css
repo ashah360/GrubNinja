@@ -257,6 +257,11 @@ h1 {
 .activity-log {
   height: calc(100vh - 27.5rem);
   overflow-y: scroll;
+  font-size: 13px;
+}
+
+.activity-log p {
+  font-size: 13px;
 }
 
 .trainer-control .custom-control {
