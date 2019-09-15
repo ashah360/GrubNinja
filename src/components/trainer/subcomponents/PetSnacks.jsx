@@ -1,5 +1,4 @@
 import React from 'react';
-import Slider from 'react-slick';
 import Snack from './Snack';
 import SnackCard from './SnackCard';
 import PropTypes from 'prop-types';
