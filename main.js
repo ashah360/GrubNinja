@@ -37,6 +37,7 @@ function createWindow() {
     mainWindow.show();
     if ((process.env.NODE_ENV = 'dev'))
       mainWindow.webContents.openDevTools({ mode: 'detach' });
+    mainWindow.webContents.send('version', app.getVersion());
   });
 
   ipcMain.on('request-metrics', () => {

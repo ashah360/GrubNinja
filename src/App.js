@@ -15,8 +15,6 @@ import store from './store';
 
 import 'animate.css';
 import 'react-notifications-component/dist/theme.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import './styles/argon.css';
 import './styles/App.css';
 
@@ -26,6 +24,12 @@ const App = props => {
   const [score, setScore] = useState(500);
   const [settingsState, setSettingsState] = useState(false);
   const [notifState, setNotifState] = useState(false);
+  const [version, setVersion] = useState('0.0.0');
+
+  useEffect(() => {
+    // Set app version
+    window.ipcRenderer.on('version', (e, v) => setVersion(v));
+  }, []);
 
   const getActivePath = () => {
     switch (activePath) {
@@ -55,6 +59,7 @@ const App = props => {
           <Settings
             visible={settingsState}
             setSettingsState={setSettingsState}
+            version={version}
           />
           <Notifications visible={notifState} setNotifState={setNotifState} />
           {getActivePath()}
