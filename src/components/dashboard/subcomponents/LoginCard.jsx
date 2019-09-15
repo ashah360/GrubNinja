@@ -25,24 +25,15 @@ const LoginCard = props => {
 
   const login = async (username, password) => {
     try {
-      props.logMessage(
-        `Sending login request with user ${username}`,
-        'default'
-      );
       props.handleResetState();
       setLoginLoading(true);
       await props.handleLogin(username, password);
-      props.logMessage(
-        `Login successful. currently logged in as ${username}`,
-        'info'
-      );
       setLoginLoading(false);
       sendNotification(`Logged in as ${username}`, 'info');
       if (saveAccount)
         window.ipcRenderer.send('save-account-details', formData);
     } catch (error) {
       // let the user know that there was a login error
-      props.logMessage(error.toString(), 'danger');
       setLoginLoading(false);
       sendNotification(error.toString(), 'danger');
       console.log(error);

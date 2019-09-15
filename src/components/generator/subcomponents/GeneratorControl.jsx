@@ -5,7 +5,6 @@ import ScoreSlider from './ScoreSlider';
 import MapSelect from '../../misc/MapSelect';
 import PropTypes from 'prop-types';
 import { sendNotification } from '../../../util/notify';
-import { logMessage } from '../../../actions/logMessage';
 
 import { fetchRewards } from '../../../actions/fetchRewards';
 
@@ -22,12 +21,9 @@ export const hoardPackPreset = () => ({
 const GeneratorControl = props => {
   const handleGenerate = async score => {
     try {
-      props.logMessage(`Requesting rewards with map ${props.currentMapId}`);
       await props.fetchRewards(score);
       sendNotification('Success!', 'success');
-      props.logMessage('Reward successfully generated!', 'success');
     } catch (error) {
-      props.logMessage(error.toString(), 'danger');
       sendNotification(error, 'danger');
     }
   };
@@ -158,5 +154,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchRewards, logMessage }
+  { fetchRewards }
 )(GeneratorControl);

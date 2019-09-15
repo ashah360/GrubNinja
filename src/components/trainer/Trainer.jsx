@@ -12,7 +12,6 @@ import { sendNotification, sendXPResult } from '../../util/notify';
 import { generateGameId } from '../../actions/generateGameId';
 import { fetchPetRewards } from '../../actions/fetchRewards';
 import { feedSnack } from '../../actions/feedSnack';
-import { logMessage } from '../../actions/logMessage';
 
 const Trainer = props => {
   // For testing
@@ -26,20 +25,13 @@ const Trainer = props => {
   const handleGameTest = async () => {
     try {
       setTrainerActive(true);
-      props.logMessage('Generating game session');
       const session = await props.generateGameId();
-      props.logMessage(
-        'Generated valid game session (' + session + ')',
-        'info'
-      );
       const gameExp = await props.fetchPetRewards();
       const feedExp = await props.feedSnack(activeSnackId);
-      props.logMessage('Successfully trained pet', 'success');
       setTrainerActive(false);
       sendXPResult(parseInt(gameExp) + parseInt(feedExp) || gameExp);
     } catch (err) {
       sendNotification(err, 'danger');
-      props.logMessage(err, 'danger');
       setTrainerActive(false);
       console.log(err);
     }
@@ -97,5 +89,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { generateGameId, fetchPetRewards, feedSnack, logMessage }
+  { generateGameId, fetchPetRewards, feedSnack }
 )(Trainer);
