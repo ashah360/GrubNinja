@@ -1,5 +1,4 @@
 import parse from '../util/parse';
-import store from '../store';
 import { REQUEST_NEW_TOKEN } from '../constants/types';
 import { IS_SESSION_VALID } from '../constants/endpoints';
 import { MINIGAME_ID } from '../constants/minigame';
@@ -27,13 +26,14 @@ export const validateSession = () => async (dispatch, getState) => {
 
     if (response.Status.Msg === 'Success') {
       // Our session is still valid
-      console.log('Session is still valid!');
       return Promise.resolve();
     }
 
     // Our session isn't valid anymore
     dispatch({ type: REQUEST_NEW_TOKEN });
-    console.log('Session is not valid.');
+    console.log(
+      'Session is no longer valid. A new CSID will be generated next.'
+    );
     return Promise.reject();
   } catch (error) {
     dispatch({ type: REQUEST_NEW_TOKEN });

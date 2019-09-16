@@ -26,7 +26,7 @@ export const buyEnergy = () => async (dispatch, getState) => {
         ...ENERGY_ELIXIR_TEMPLATE
       }
     });
-    if (body.indexOf('FAIL=User not Authenticated') > -1) {
+    if (body.includes('FAIL=User not Authenticated')) {
       return Promise.reject('User authentication failed. Please login again.');
     }
 
@@ -35,9 +35,11 @@ export const buyEnergy = () => async (dispatch, getState) => {
     if (response.Status.Msg === 'Success') {
       dispatch({ type: LOAD_CHARACTER_DATA, payload: response.CharacterData });
       return Promise.resolve();
-    }  
+    }
 
-    return Promise.reject(response.Status.Msg);
+    return Promise.reject(
+      response.Status.Msg + ' - ' + response.Status.Content
+    );
   } catch (error) {
     console.error(error);
     return Promise.reject('An error occured. Could not buy Energy Elixir');

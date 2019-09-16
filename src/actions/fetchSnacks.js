@@ -5,7 +5,7 @@ import { LOAD_SNACKS } from '../constants/types';
 import { BUY_SNACK_PACK } from '../constants/endpoints';
 import { PLATFORM, MINIGAME_ID } from '../constants/minigame';
 
-// Get current snacks by sending request to buySnackPack with qty of 0
+// Get current snacks by "fake buying" snack pack
 export const fetchSnacks = () => async (dispatch, getState) => {
   const {
     game: { charId, csid }
@@ -35,10 +35,11 @@ export const fetchSnacks = () => async (dispatch, getState) => {
         type: LOAD_SNACKS,
         payload: sanitize(data.SnackData)
       });
+
+      return Promise.resolve(data);
     }
 
-    console.log(data);
-    return Promise.resolve(data);
+    return Promise.reject('Could not fetch snack data');
   } catch (error) {
     console.error(error);
     return Promise.resolve(store.dispatch(fetchSnacks()));

@@ -5,6 +5,9 @@ import commonForm from '../constants/minigame';
 import { USE_PET_SNACK } from '../constants/endpoints';
 import { SUBTRACT_SNACK, ADD_XP } from '../constants/types';
 
+let attempts = 1;
+const MAX_ATTEMPTS = 5;
+
 /*
  * IMPORTANT:
  * This function should still be invoked even if snackId is undefined or null
@@ -24,6 +27,8 @@ export const feedSnack = snackId => async (dispatch, getState) => {
     const gameData = parse(body).UsePetSnackResponse;
 
     if (gameData.Status.Msg === 'Success') {
+      attempts = 0;
+
       store.dispatch(handlePetRewards(gameData));
 
       dispatch({ type: ADD_XP, payload: gameData.AttrGains.Exp });
@@ -37,8 +42,12 @@ export const feedSnack = snackId => async (dispatch, getState) => {
     }
   } catch (error) {
     console.error(error);
-    setTimeout(() => {
-      return Promise.resolve(store.dispatch(feedSnack()), 5000);
-    });
+    if (attempts < MAX_ATTEMPTS) {
+      attempts++;
+      return Promise.resolve(store.dispatch(feedSnack(snackId)));
+    } else {
+      attempts = 0;
+      return Promise.reject(error);
+    }
   }
 };

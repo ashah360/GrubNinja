@@ -2,7 +2,6 @@ import parser from 'fast-xml-parser';
 import store from '../store';
 import { START_MINIGAME } from '../constants/endpoints';
 import commonForm from '../constants/minigame';
-import { fetchPetRewards } from './fetchRewards';
 import { SET_GAME_ID } from '../constants/types';
 import { login } from './login';
 
