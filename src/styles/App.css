@@ -182,6 +182,7 @@ button {
 .minimize,
 .exit {
   color: var(--light-purple);
+  cursor: pointer;
 }
 
 /* END NAVBAR STYLING */
@@ -255,7 +256,7 @@ h1 {
 }
 
 .activity-log {
-  height: calc(100vh - 27.5rem);
+  height: calc(100vh - 27.1rem);
   overflow-y: scroll;
   font-size: 13px;
 }
@@ -285,7 +286,7 @@ h1 {
 }
 
 .gen-control {
-  height: calc(100vh - 27.5rem);
+  height: calc(100vh - 27.1rem);
 }
 
 .gen-control-container {
@@ -445,13 +446,13 @@ h1 {
 }
 
 .gen-table-rows {
-  height: calc(100vh - 28.65rem);
+  height: calc(100vh - 28.25rem);
   overflow: scroll;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0s;
 }
 
 .char-table-rows {
-  height: calc(100vh - 37.625rem);
+  height: calc(100vh - 36.75rem);
   overflow: scroll;
 }
 
