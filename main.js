@@ -6,7 +6,6 @@ const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-// Appdata manager
 const store = new Store();
 
 let mainWindow;
@@ -100,10 +99,12 @@ function createWindow() {
     }
   });
 
-  ipcMain.on('closeApp', e => {
-    console.log('Got called to close the app');
-    e.preventDefault();
+  ipcMain.on('exit', e => {
     process.exit();
+  });
+
+  ipcMain.on('minimize', e => {
+    mainWindow.minimize();
   });
 }
 
