@@ -2,9 +2,12 @@
   "name": "gn-client",
   "version": "1.0.2",
   "private": true,
+  "license": "MIT",
+  "main": "main.js",
   "dependencies": {
     "animate.css": "^3.7.2",
     "axios": "^0.19.0",
+    "comma-number": "^2.0.1",
     "concurrently": "^4.1.2",
     "electron-store": "^5.0.0",
     "fast-xml-parser": "^3.12.20",
@@ -31,8 +34,9 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
+    "postinstall": "npm link electron && install-app-deps",
     "start": "react-scripts start",
-    "client": "electron main",
+    "client": "electron .",
     "dev": "concurrently \"set BROWSER=none && npm start\" \"wait-on http://localhost:3000 && npm run client\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -55,7 +59,13 @@
   },
   "devDependencies": {
     "electron": "^6.0.7",
+    "electron-builder": "^21.2.0",
+    "electron-builder-squirrel-windows": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^14.0.6",
+    "electron-rebuild": "^1.8.6",
+    "electron-simple-publisher": "^0.6.2",
     "wait-on": "^3.3.0"
   }
 }
