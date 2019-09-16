@@ -1,5 +1,5 @@
 import React from 'react';
-
+import unescape from '../../../util/unescape';
 import expIcon from '../../../assets/icon-xp.png';
 
 const SnackCard = props => {
@@ -15,7 +15,7 @@ const SnackCard = props => {
           alt={props.school}
         />
       </div>
-      <div className='pet-snack-name'>{props.name}</div>
+      <div className='pet-snack-name'>{unescape(props.name)}</div>
       <img className='exp-icon' src={expIcon} alt='snack xp' />
       <div className='pet-snack-exp'>{props.Exp} XP</div>
     </div>
