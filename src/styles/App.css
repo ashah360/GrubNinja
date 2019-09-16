@@ -636,7 +636,6 @@ h1 {
   overflow: scroll;
 }
 
-/* [6] */
 .pet-snack-rows::-webkit-scrollbar {
   display: none;
 }
