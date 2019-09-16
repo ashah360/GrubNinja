@@ -24,7 +24,7 @@ const GeneratorControl = props => {
       await props.fetchRewards(score);
       sendNotification('Success!', 'success');
     } catch (error) {
-      sendNotification(error, 'danger');
+      sendNotification('Could not generate reward', 'danger');
     }
   };
 

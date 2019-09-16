@@ -50,9 +50,11 @@ export default function(state = initialState, action) {
         tokenRefreshRequired: false
       };
     case REQUEST_NEW_TOKEN:
+      clearInterval(state.intervalPointer);
       return {
         ...state,
-        intervalPointer: payload,
+        intervalPointer: null,
+        initialFetched: false,
         tokenRefreshRequired: true
       };
     case SET_INTERVAL_POINTER:

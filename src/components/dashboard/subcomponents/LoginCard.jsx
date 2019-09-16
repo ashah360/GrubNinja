@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { sendNotification } from '../../../util/notify';
 import PropTypes from 'prop-types';
 
@@ -11,10 +11,12 @@ const LoginCard = props => {
   const [loginLoading, setLoginLoading] = useState(false);
   const { username, password } = formData;
 
-  // Load saved account
-  window.ipcRenderer.on('load-saved-account', (e, payload) => {
-    setFormData({ username: payload.username, password: payload.password });
-  });
+  useEffect(() => {
+    // Load saved account
+    window.ipcRenderer.on('load-saved-account', (e, payload) => {
+      setFormData({ username: payload.username, password: payload.password });
+    });
+  }, []);
 
   const handleSave = e => {
     setSaveAccount(e.target.checked);
