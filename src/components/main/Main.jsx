@@ -17,7 +17,7 @@ const Main = props => {
     window.ipcRenderer.on('load-metrics', (e, payload) => {
       props.loadMetrics(payload);
     });
-    
+    // eslint-disable-next-line
   }, []);
 
   return (
