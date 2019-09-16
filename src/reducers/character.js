@@ -46,8 +46,7 @@ export default function(state = initialState, action) {
       return { ...state, pets: [] };
     case UPDATE_PET: // new Object payload
       // returns old pet object with the new values
-      const currentState = [];
-      Object.assign(currentState, state.pets);
+      const currentState = [...state.pets];
       const index = currentState.findIndex(pet => pet.PetId === payload.PetId);
       const petObj = currentState[index];
       const newPetObj = { ...petObj, ...payload };
@@ -60,8 +59,15 @@ export default function(state = initialState, action) {
       return { ...state, snacks: [] };
     case SUBTRACT_SNACK:
       const snacks = [...state.snacks];
-      snacks.find(snack => snack.TemplateId === payload).Qty -= 1;
-      return { ...state, snacks: snacks.filter(snack => snack.Qty != 0) };
+      try {
+        snacks.find(snack => snack.TemplateId === payload).Qty -= 1;
+      } catch (e) {
+        // pass
+      }
+      return {
+        ...state,
+        snacks: snacks.filter(snack => parseInt(snack.Qty) !== 0)
+      };
     case RESET_CHARACTER_STATE:
       return initialState;
     default:
