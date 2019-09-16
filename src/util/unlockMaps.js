@@ -2,7 +2,7 @@ import parse from '../util/parse';
 import { GAME_LEVELS, MINIGAME_ID } from '../constants/minigame';
 import { MAPS_COMPLETED } from '../constants/endpoints';
 
-// No need to make this a redux action because it only relies on cookeis
+// No need to make this a redux action because it only relies on session
 export const unlockMaps = async () => {
   try {
     const body = await window.request({
