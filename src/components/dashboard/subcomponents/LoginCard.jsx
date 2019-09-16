@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { sendNotification } from '../../../util/notify';
-import PropTypes from 'prop-types';
 
 const LoginCard = props => {
   const [formData, setFormData] = useState({
@@ -35,7 +34,6 @@ const LoginCard = props => {
       if (saveAccount)
         window.ipcRenderer.send('save-account-details', formData);
     } catch (error) {
-      // let the user know that there was a login error
       setLoginLoading(false);
       sendNotification(error.toString(), 'danger');
       console.log(error);

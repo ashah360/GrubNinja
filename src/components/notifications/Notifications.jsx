@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import Rodal from 'rodal';
-import PropTypes from 'prop-types';
 
 const Notifications = props => {
   return (
@@ -19,7 +18,5 @@ const Notifications = props => {
     </Fragment>
   );
 };
-
-Notifications.propTypes = {};
 
 export default Notifications;

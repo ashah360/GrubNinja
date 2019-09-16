@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const AttributeStat = ({ name, current, max }) => {
   let ratio = Math.round((current / max) * 100).toString();

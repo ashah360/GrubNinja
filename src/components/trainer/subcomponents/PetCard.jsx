@@ -1,6 +1,5 @@
 import React from 'react';
 import mapLevel from '../../../util/mapLevel';
-import PropTypes from 'prop-types';
 
 const PetCard = props => {
   const petLevel = mapLevel(props.level);

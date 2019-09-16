@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import { coreMaps, premiumMaps, allMaps } from '../../constants/maps';
+import { allMaps } from '../../constants/maps';
 import setMap from '../../actions/setMap';
 
 const background = '#1f1f22';
 const foreground = '#2c2c2f';
 const lightGrey = '#282830';
-const mutedGrey = '#6c757d';
 const carminePink = '#ff5252';
 
 const styles = {
@@ -64,12 +63,13 @@ const styles = {
 };
 
 const MapSelect = ({ currentMap, setMap, mapPacks }) => {
-  //let ownedMaps = coreMaps; // User owns core maps by default
+  /*
+  let ownedMaps = coreMaps; 
 
-  // Allow user to select premium maps if they own them
-  /*mapPacks.forEach(pack => {
+  mapPacks.forEach(pack => {
     ownedMaps = [...ownedMaps, ...premiumMaps[pack]];
-  });*/
+  });
+  */
 
   const handleChange = selectedOption => {
     setMap(selectedOption.value);

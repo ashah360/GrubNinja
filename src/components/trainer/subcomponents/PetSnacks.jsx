@@ -1,17 +1,6 @@
 import React from 'react';
-import Snack from './Snack';
 import SnackCard from './SnackCard';
 import PropTypes from 'prop-types';
-
-const settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  dots: false,
-  variableWidth: true,
-  slidesToScroll: 4,
-  initialSlide: 0
-};
 
 const PetSnacks = props => {
   return (
@@ -24,19 +13,25 @@ const PetSnacks = props => {
                 <span>Select a Snack</span>
               </div>
               <div className='pet-snack-rows'>
-                {props.currentSnacks.length ? (
-                  props.currentSnacks.map(snack => (
-                    <SnackCard
-                      isActive={props.activeSnackId === snack.TemplateId}
-                      name={snack.Name}
-                      quantity={snack.Qty}
-                      school={snack.School}
-                      id={snack.TemplateId}
-                      key={snack.TemplateId}
-                      onClick={() => props.setActiveSnackId(snack.TemplateId)}
-                      {...snack.AttrGains}
-                    />
-                  ))
+                {props.currentSnacks.length > 0 ? (
+                  props.currentSnacks
+                    .sort(
+                      (a, b) =>
+                        parseFloat(b.AttrGains.Exp) -
+                        parseFloat(a.AttrGains.Exp)
+                    )
+                    .map(snack => (
+                      <SnackCard
+                        isActive={props.activeSnackId === snack.TemplateId}
+                        name={snack.Name}
+                        quantity={snack.Qty}
+                        school={snack.School}
+                        id={snack.TemplateId}
+                        key={snack.TemplateId}
+                        onClick={() => props.setActiveSnackId(snack.TemplateId)}
+                        {...snack.AttrGains}
+                      />
+                    ))
                 ) : (
                   <p
                     className='mt-4'

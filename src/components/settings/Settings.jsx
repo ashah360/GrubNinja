@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import Rodal from 'rodal';
-import PropTypes from 'prop-types';
 
 const launch = () => {
   window.ipcRenderer.send('init:launch');
