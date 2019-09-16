@@ -8,13 +8,11 @@ import TrainerControl from './subcomponents/TrainerControl';
 import PropTypes from 'prop-types';
 import { sendNotification, sendXPResult } from '../../util/notify';
 
-// actions for testing
 import { generateGameId } from '../../actions/generateGameId';
 import { fetchPetRewards } from '../../actions/fetchRewards';
 import { feedSnack } from '../../actions/feedSnack';
 
 const Trainer = props => {
-  // For testing
   const [activeSnackId, setActiveSnackId] = useState('');
   const [trainerActive, setTrainerActive] = useState(false);
 
@@ -22,10 +20,10 @@ const Trainer = props => {
     setActiveSnackId(id);
   };
 
-  const handleGameTest = async () => {
+  const handleGame = async () => {
     try {
       setTrainerActive(true);
-      const session = await props.generateGameId();
+      await props.generateGameId();
       const gameExp = await props.fetchPetRewards();
       const feedExp = await props.feedSnack(activeSnackId);
       setTrainerActive(false);
@@ -66,7 +64,7 @@ const Trainer = props => {
 
           <button
             className='btn btn-block btn-primary feed-btn mt-4'
-            onClick={handleGameTest}
+            onClick={handleGame}
             disabled={trainerActive || !props.charId || !props.petId}
           >
             Feed Pet
