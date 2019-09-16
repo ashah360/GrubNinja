@@ -21,25 +21,22 @@ const TrainerStatCards = ({
       sendNotification('Successfully refilled energy!', 'success');
     } catch (error) {
       console.error(error);
-      sendNotification('check console for errors', 'danger');
+      sendNotification(error, 'danger');
     }
   };
 
   const getSnackCount = () => {
-    if (currentSnacks.length > 0) {
-      return currentSnacks.reduce(
-        (acc, current) => acc + parseInt(current.Qty),
-        0
-      );
-    }
-    return 0;
+    return currentSnacks.reduce(
+      (acc, current) => acc + parseInt(current.Qty),
+      0
+    );
   };
 
   const getMegaSnackCount = () => {
     if (currentSnacks.length > 0) {
       return currentSnacks.reduce(
         (acc, current) =>
-          acc + (current.AttrGains.Exp > 17 ? parseInt(current.Qty) : 0),
+          acc + (current.AttrGains.Exp >= 10 ? parseInt(current.Qty) : 0),
         0
       );
     }
