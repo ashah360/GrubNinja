@@ -16,6 +16,7 @@ const htmlEntities = {
 };
 
 export default function unescape(str) {
+  // eslint-disable-next-line
   return str.replace(/\&([^;]+);/g, function(entity, entityCode) {
     let match;
 
