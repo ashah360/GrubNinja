@@ -1,4 +1,5 @@
 import React from 'react';
+import commaNumber from 'comma-number';
 import PropTypes from 'prop-types';
 
 const StatCard = props => {
@@ -10,7 +11,9 @@ const StatCard = props => {
             <h5 className='card-title text-uppercase text-muted mb-0'>
               {props.title}
             </h5>
-            <span className='h2 font-weight-bold mb-0'>{props.value}</span>
+            <span className='h2 font-weight-bold mb-0'>
+              {commaNumber(props.value)}
+            </span>
           </div>
           <div className='col-auto'>
             <div className='rounded-circle shadow'>
