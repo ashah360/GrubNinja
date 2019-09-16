@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const ScoreSlider = ({ score, setScore }) => {
   const handleSetScore = e => setScore(e.target.value);
 
   return (
-    <div class='slider-wrapper'>
+    <div className='slider-wrapper'>
       <input
         type='text'
-        class='form-control'
+        className='form-control'
         value={score}
         placeholder='Score'
         onChange={handleSetScore}
@@ -19,7 +18,7 @@ const ScoreSlider = ({ score, setScore }) => {
         max='10000'
         value={score}
         step='1'
-        class='val'
+        className='val'
         id='r1'
         onChange={handleSetScore}
       />

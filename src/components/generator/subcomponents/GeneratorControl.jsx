@@ -45,14 +45,14 @@ const GeneratorControl = props => {
                 <div className='row mb-2'>
                   <div className='col'>
                     <div
-                      class='alert'
+                      className='alert'
                       style={{
                         textAlign: 'center',
                         border: '1px solid rgba(255, 255, 255, 0.06)'
                       }}
                       role='alert'
                     >
-                      <span class='alert-inner--text'>
+                      <span className='alert-inner--text'>
                         All premium maps are unlocked
                       </span>
                     </div>
@@ -73,22 +73,25 @@ const GeneratorControl = props => {
                 </div>
                 <div className='form-row mb-3 preset-group form'>
                   <div className='col'>
-                    <div class='custom-control custom-radio mb-3 mt-3'>
+                    <div className='custom-control custom-radio mb-3 mt-3'>
                       <input
                         name='preset-group'
-                        class='custom-control-input preset-group'
+                        className='custom-control-input preset-group'
                         id='no-preset'
                         type='radio'
                         defaultChecked={true}
                       />
-                      <label class='custom-control-label' htmlFor='no-preset'>
+                      <label
+                        className='custom-control-label'
+                        htmlFor='no-preset'
+                      >
                         No Preset
                       </label>
                     </div>
-                    <div class='custom-control custom-radio mb-3'>
+                    <div className='custom-control custom-radio mb-3'>
                       <input
                         name='preset-group'
-                        class='custom-control-input preset-group'
+                        className='custom-control-input preset-group'
                         id='ee-preset'
                         type='radio'
                         onClick={() =>
@@ -97,14 +100,17 @@ const GeneratorControl = props => {
                           )
                         }
                       />
-                      <label class='custom-control-label' htmlFor='ee-preset'>
+                      <label
+                        className='custom-control-label'
+                        htmlFor='ee-preset'
+                      >
                         Energy Elixir Preset
                       </label>
                     </div>
-                    <div class='custom-control custom-radio mb-3'>
+                    <div className='custom-control custom-radio mb-3'>
                       <input
                         name='preset-group'
-                        class='custom-control-input preset-group'
+                        className='custom-control-input preset-group'
                         id='hoard-preset'
                         type='radio'
                         onClick={() =>
@@ -112,7 +118,7 @@ const GeneratorControl = props => {
                         }
                       />
                       <label
-                        class='custom-control-label'
+                        className='custom-control-label'
                         htmlFor='hoard-preset'
                       >
                         Hoard & Lore Pack Preset
