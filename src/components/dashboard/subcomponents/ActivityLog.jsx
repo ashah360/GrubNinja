@@ -18,11 +18,12 @@ const ActivityLog = props => {
             </div>
             <div className='row activity-log'>
               <div className='col'>
-                {changelog.map(log => (
+                {changelog.map((log, i) => (
                   <Log
                     title={log.title}
                     content={log.content}
                     timestamp={log.timestamp}
+                    key={i}
                   />
                 ))}
               </div>

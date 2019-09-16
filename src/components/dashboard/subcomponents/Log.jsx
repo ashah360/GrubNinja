@@ -5,7 +5,7 @@ const Log = props => {
   return (
     <div className='log'>
       <div className='log-title'>{props.title}</div>
-      <div className='log-ts'>
+      <div className='log-ts mb-2' style={{ color: 'grey' }}>
         <TimeAgo date={props.timestamp} />
       </div>
       <div className='log-content'>{props.content}</div>
