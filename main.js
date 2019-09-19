@@ -10,7 +10,7 @@ const store = new Store();
 
 let mainWindow;
 
-process.env.NODE_ENV = 'dev';
+process.env.NODE_ENV = 'prod';
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -29,7 +29,7 @@ function createWindow() {
   mainWindow.loadURL(
     process.env.NODE_ENV === 'dev'
       ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
+      : `file://${path.join(__dirname, '/build/index.html')}`
   );
 
   mainWindow.on('ready-to-show', () => {
