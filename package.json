@@ -56,8 +56,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "prep:macos": "cp node_modules/app-builder-lib/out/electron/electronMac.js prod-mac/electronMac.original.js",
-        "pack:macos": "CSC_LINK=./prod-mac/all-certs.p12 electron-builder"
+        "pack:all": "CSC_LINK=./prod-mac/all-certs.p12 electron-builder -mw --publish always"
     },
     "eslintConfig": {
         "extends": "react-app"
