@@ -1,0 +1,21 @@
+extends: null
+directories:
+  output: release
+appId: com.grubninja.client
+productName: GrubNinja
+files:
+  - '*.js'
+  - '!afterSign.js'
+  - 'package.json'
+  - 'build/'
+mac:
+  category: public.app-category.games
+  entitlements: prod-mac/entitlements.mac.plist
+  provisioningProfile: embedded.provisionprofile
+  hardenedRuntime: true
+  icon: public/app.icns
+  target:
+    - pkg
+    - dmg
+    - zip
+afterSign: afterSign.js

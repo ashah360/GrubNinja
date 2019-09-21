@@ -6,13 +6,19 @@ const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
+const updater = require(path.join(__dirname, 'auto-updater.js'));
+
 const store = new Store();
 
 let mainWindow;
 
-process.env.NODE_ENV = 'prod';
+process.env.NODE_ENV = 'production';
 
-function createWindow() {
+function init() {
+  console.info(`App version: ${app.getVersion()}`);
+
+  updater.init();
+
   mainWindow = new BrowserWindow({
     width: 1120,
     height: 750,
@@ -20,7 +26,7 @@ function createWindow() {
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
-      preload: __dirname + '/preload.js'
+      preload: path.join(__dirname, 'preload.js')
     },
     frame: false,
     show: false
@@ -34,8 +40,10 @@ function createWindow() {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
-    if ((process.env.NODE_ENV = 'dev'))
+
+    if ((process.env.NODE_ENV !== 'production'))
       mainWindow.webContents.openDevTools({ mode: 'detach' });
+
     mainWindow.webContents.send('version', app.getVersion());
   });
 
@@ -67,6 +75,7 @@ function createWindow() {
   ipcMain.on('request-saved-account', () => {
     const username = store.get('username', '');
     const password = store.get('password', '');
+    
     mainWindow.webContents.send('load-saved-account', { username, password });
   });
 
@@ -79,6 +88,7 @@ function createWindow() {
   ipcMain.on('openUrl', (e, url) => {
     if (url !== mainWindow.webContents.getURL()) {
       e.preventDefault();
+
       electron.shell.openExternal(url);
     }
   });
@@ -90,6 +100,7 @@ function createWindow() {
         launch();
         mainWindow.webContents.send('showNotif', 'Launching Game', 'info');
         break;
+
       default:
         mainWindow.webContents.send(
           'showNotif',
@@ -115,8 +126,9 @@ async function launch() {
     );
   } catch (error) {
     console.error(error);
+
     mainWindow.webContents.send('showNotif', `Failed to launch game`, 'danger');
   }
 }
 
-app.on('ready', createWindow);
+app.on('ready', init);
