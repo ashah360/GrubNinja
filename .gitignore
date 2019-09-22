@@ -12,6 +12,7 @@
 /build
 /prod-*
 /release
+.env
 
 # misc
 .DS_Store
