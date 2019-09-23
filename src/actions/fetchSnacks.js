@@ -5,6 +5,9 @@ import { LOAD_SNACKS } from '../constants/types';
 import { BUY_SNACK_PACK } from '../constants/endpoints';
 import { PLATFORM, MINIGAME_ID } from '../constants/minigame';
 
+let attempts = 1;
+const MAX_ATTEMPTS = 5;
+
 // Get current snacks by "fake buying" snack pack
 export const fetchSnacks = () => async (dispatch, getState) => {
   const {
