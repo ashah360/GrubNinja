@@ -8,6 +8,27 @@ import { PLATFORM, MINIGAME_ID } from '../constants/minigame';
 let attempts = 1;
 const MAX_ATTEMPTS = 5;
 
+const makeSnackRequest = async (options, maxAttempts, attempts = 0) => {
+  if (attempts >= maxAttempts) {
+    throw new Error('Max attempts reached');
+  }
+
+  try {
+    const body = await window.request(options);
+
+    let data = parse(body).BuyPetSnackPackResponse;
+
+    if (data.SnackData) {
+      return sanitize(data.SnackData);
+    }
+  }
+  catch (err) {
+    console.error(err);
+  }
+
+  return makeSnackRequest(options, maxAttempts, attempts++);
+};
+
 // Get current snacks by "fake buying" snack pack
 export const fetchSnacks = () => async (dispatch, getState) => {
   const {
@@ -25,26 +46,20 @@ export const fetchSnacks = () => async (dispatch, getState) => {
   };
 
   try {
-    const body = await window.request({
+    const snackData = makeSnackRequest({
       method: 'POST',
       uri: BUY_SNACK_PACK,
       form
-    });
+    }, MAX_ATTEMPTS);
 
-    let data = parse(body).BuyPetSnackPackResponse;
-
-    if (data.SnackData) {
+    if (snackData) {
       dispatch({
         type: LOAD_SNACKS,
-        payload: sanitize(data.SnackData)
+        payload: snackData
       });
-
-      return Promise.resolve(data);
     }
-
-    return Promise.reject('Could not fetch snack data');
-  } catch (error) {
-    console.error(error);
-    return Promise.resolve(store.dispatch(fetchSnacks()));
+  }
+  catch (err) {
+    console.error(err);
   }
 };
