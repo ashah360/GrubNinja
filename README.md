@@ -19,4 +19,4 @@ You can download the binaries for GrubNinja [here](https://github.com/ashah360/G
 
 If you have any questions, feel free to message me on discord (Tides#2470).
 
-Official Discord Server: https://discord.gg/PVr7UYS
+**[Click here to join the official Discord server](https://discord.gg/PVr7UYS)**
