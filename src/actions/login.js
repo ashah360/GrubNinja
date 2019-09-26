@@ -27,8 +27,6 @@ let attempts = 1;
 const MAX_ATTEMPTS = 5;
 
 export const login = (username, password) => async (dispatch, getState) => {
-  console.log(attempts);
-  console.log(MAX_ATTEMPTS);
   let { account } = getState();
 
   const form = {
@@ -59,14 +57,11 @@ export const login = (username, password) => async (dispatch, getState) => {
         // MapsCompleted on initial login will ensure that all core maps are unlocked
         try {
           await unlockMaps();
-          console.log('MapsCompleted check succeeded');
         } catch (error) {
-          console.error('MapsCompleted failed');
+          console.error('Failed to authenticate maps');
         }
 
         const pointer = setInterval(async () => {
-          //console.log('Token marked as expired. New CSID requested.');
-          //dispatch({ type: REQUEST_NEW_TOKEN, payload: pointer });
           try {
             await store.dispatch(validateSession());
           } catch (error) {
