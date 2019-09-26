@@ -4,19 +4,19 @@ import unescape from './unescape';
 // Don't do this in a prod setting kids
 const determineType = name => {
   name = name.toLowerCase();
-  if (name.indexOf('elixir') > -1) {
+  if (name.includes('elixir')) {
     return 'Elixir';
-  } else if (name.indexOf('housing') > -1 || name.indexOf('decoration') > -1) {
+  } else if (name.includes('housing') || name.includes('decoration')) {
     return 'Housing';
-  } else if (name.indexOf('pack') > -1) {
+  } else if (name.includes('pack')) {
     return 'Pack';
-  } else if (name.indexOf('gold') > -1) {
+  } else if (name.includes('gold')) {
     return 'Gold';
-  } else if (name.indexOf('snack') > -1) {
+  } else if (name.includes('snack')) {
     return 'Snack';
-  } else if (name.indexOf('reagent') > -1) {
+  } else if (name.includes('reagent')) {
     return 'Reagent';
-  } else if (name.indexOf('pet') > -1) {
+  } else if (name.includes('pet')) {
     return 'Pet';
   } else {
     return 'default';
