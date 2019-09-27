@@ -37,9 +37,13 @@ const TrainingCard = ({ pet }) => {
                       {pet.Talent.map(talent => {
                         return <Talent name={talent} key={talent} />;
                       })}
-                      {new Array(5 - pet.Talent.length).fill(0).map((t, i) => (
-                        <Talent key={i} />
-                      ))}
+                      {new Array(
+                        5 - (pet.Talent.length < 6 ? pet.Talent.length : 5)
+                      )
+                        .fill(0)
+                        .map((t, i) => (
+                          <Talent key={i} />
+                        ))}
                     </div>
                   </div>
                 </div>
