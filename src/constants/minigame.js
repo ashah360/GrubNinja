@@ -1,6 +1,9 @@
 // Minigame form constants
 export const MINIGAME_ID = 'GrubGuardian';
-export const PLATFORM = 'web';
+export const PLATFORM =
+  process.env.CLIENT_MODE === 'web'
+    ? 'web'
+    : 'iPhone OS 13.3.1 iPhone10,4_Adobe iOS_app';
 export const GAME_TIME = '172622';
 export const VERSION = '4';
 export const UDID = '';

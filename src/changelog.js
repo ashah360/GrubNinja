@@ -1,5 +1,11 @@
 const changelog = [
   {
+    title: 'Version 1.1.4',
+    timestamp: 1583571455600,
+    content:
+      'Requests now rely on mobile user-agents to circumvent the service block on the web client.'
+  },
+  {
     title: 'Version 1.0.2',
     timestamp: 1568523414553,
     content:

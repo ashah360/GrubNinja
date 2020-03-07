@@ -862,6 +862,14 @@ footer {
 }
 
 /* LOG */
+.log {
+  margin-top: 16px;
+}
+
+.log:nth-child(1) {
+  margin-top: 0;
+}
+
 .log-item {
   font-family: var(--font-family-monospace);
   color: #6c757d;
