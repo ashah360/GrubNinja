@@ -9,7 +9,7 @@
   "homepage": ".",
   "devDependencies": {
     "electron": "^6.0.7",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^22.2.0",
     "electron-builder-squirrel-windows": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-installer-dmg": "^3.0.0",
