@@ -10,18 +10,21 @@ let initialized = false;
 
 const platform = os.platform();
 const updateURL = `https://updater.grubninja.now.sh/update/${platform}/${appVersion}`;
-const updateCheckInterval = 10 * 60 * 1000 // Every 10 minutes
+const updateCheckInterval = 10 * 60 * 1000; // Every 10 minutes
 
 function init() {
+  // Temporarily disable auto update
+  return;
+
   console.info('Updater initialized');
-  console.info('Using feed URL:',  updateURL);
+  console.info('Using feed URL:', updateURL);
   console.info('NODE_ENV:', process.env.NODE_ENV);
 
   if (initialized || process.env.NODE_ENV !== 'production') return;
 
   initialized = true;
 
-  autoUpdater.setFeedURL( updateURL);
+  autoUpdater.setFeedURL(updateURL);
 
   autoUpdater.on('error', (ev, err) => {
     console.error(err);
@@ -37,7 +40,7 @@ function init() {
     const options = {
       type: 'info',
       title: 'Update Downloading',
-      message: 'A new update is available and is currently being downloaded.',
+      message: 'A new update is available and is currently being downloaded.'
     };
 
     dialog.showMessageBox(null, options, () => {});
@@ -53,10 +56,11 @@ function init() {
       buttons: ['Yes', 'No'],
       defaultId: 0,
       title: 'Update Downloaded',
-      message: 'A new update has been downloaded. Would you like to quit and install it?',
+      message:
+        'A new update has been downloaded. Would you like to quit and install it?'
     };
 
-    dialog.showMessageBox(null, options, (response) => {
+    dialog.showMessageBox(null, options, response => {
       if (response === 0) {
         autoUpdater.quitAndInstall();
       }
@@ -65,6 +69,6 @@ function init() {
 
   autoUpdater.checkForUpdates(); // so it fires the first time and doesn't wait
   setInterval(() => autoUpdater.checkForUpdates(), updateCheckInterval);
-};
+}
 
 module.exports.init = init;
