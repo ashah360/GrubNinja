@@ -5,16 +5,11 @@ appId: com.grubninja.client
 productName: GrubNinja
 files:
   - '*.js'
-  - '!afterSign.js'
   - 'package.json'
   - 'build/'
 
 mac:
   artifactName: ${productName}-v${version}-${os}_${arch}.${ext}
-  category: public.app-category.games
-  entitlements: prod-mac/entitlements.mac.plist
-  provisioningProfile: embedded.provisionprofile
-  hardenedRuntime: true
   icon: public/app.icns
   target:
     - pkg
@@ -28,7 +23,6 @@ dmg:
       y: 220
       type: link
       path: /Applications
-afterSign: afterSign.js
 
 win:
   artifactName: ${productName}-v${version}-${os}_${arch}.${ext}
