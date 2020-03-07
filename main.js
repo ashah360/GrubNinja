@@ -6,18 +6,19 @@ const path = require('path');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-const updater = require(path.join(__dirname, 'auto-updater.js'));
+//const updater = require(path.join(__dirname, 'auto-updater.js'));
 
 const store = new Store();
 
 let mainWindow;
 
 process.env.NODE_ENV = 'production';
+process.env.CLIENT_MODE = 'mobile'; // web/mobile headers and payloads
 
 function init() {
   console.info(`App version: ${app.getVersion()}`);
 
-  updater.init();
+  //updater.init();
 
   mainWindow = new BrowserWindow({
     width: 1120,
@@ -41,7 +42,7 @@ function init() {
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
 
-    if ((process.env.NODE_ENV !== 'production'))
+    if (process.env.NODE_ENV !== 'production')
       mainWindow.webContents.openDevTools({ mode: 'detach' });
 
     mainWindow.webContents.send('version', app.getVersion());
@@ -75,7 +76,7 @@ function init() {
   ipcMain.on('request-saved-account', () => {
     const username = store.get('username', '');
     const password = store.get('password', '');
-    
+
     mainWindow.webContents.send('load-saved-account', { username, password });
   });
 
