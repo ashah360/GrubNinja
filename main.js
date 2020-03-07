@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const electron = require('electron');
 const { app, BrowserWindow, ipcMain } = electron;
 const Store = require('electron-store');
