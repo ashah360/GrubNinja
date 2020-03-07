@@ -1,6 +1,8 @@
 
 // See: https://medium.com/@TwitterArchiveEraser/notarize-electron-apps-7a5f988406db
 
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 var electronNotarize = require('electron-notarize');
