@@ -8,7 +8,7 @@
   "main": "main.js",
   "homepage": ".",
   "devDependencies": {
-    "electron": "^6.0.7",
+    "electron": "^11.5.0",
     "electron-builder": "^22.2.0",
     "electron-builder-squirrel-windows": "^21.2.0",
     "electron-devtools-installer": "^2.2.4",
