@@ -16,8 +16,7 @@ export const validateSession = () => async (dispatch, getState) => {
       form: { csid, minigameId: MINIGAME_ID }
     });
 
-    // 200 http status codes are thrown for everything. KI mad retarded
-    if (body.toLowerCase().indexOf('not authenticated') > -1) {
+]    if (body.toLowerCase().indexOf('not authenticated') > -1) {
       dispatch({ type: REQUEST_NEW_TOKEN });
       return Promise.reject();
     }
